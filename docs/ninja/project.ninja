@@ -1,0 +1,4515 @@
+{
+  "name": "Mutibo",
+  "description": null,
+  "contentType": "json",
+  "fileVersion": 3,
+  "type": "AndroidProject",
+  "theme": "napkin",
+  "contents": {
+    "id": 1127696,
+    "pages": [
+      {
+        "version": 1,
+        "id": "18c77848-f97d-0580-cfb3-544932411e54",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "Game",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "f451c43d-cbb7-e604-8ca1-3281481b21de",
+            "properties": {
+              "width": 3130,
+              "height": 2320
+            },
+            "children": [
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "ef19e213-921f-feeb-0976-5a8b41e6932f",
+                "properties": {
+                  "width": 406,
+                  "height": 26,
+                  "left": 17,
+                  "top": 50,
+                  "text": "Which movie doesn't fit in with the others ?",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "79bf5cfd-9735-fe2c-7868-efb7ec3fd812",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "95f5885d-6009-95d9-cc04-586cea76802f",
+                "properties": {
+                  "width": 330,
+                  "height": 6,
+                  "left": 25,
+                  "top": 693,
+                  "backgroundBrush.value": "rgba(242,210,65,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush"
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "e8cb0824-baca-73f1-67a5-6da42c34cec9",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "7a41c165-4821-f2ef-f476-cec159888497",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "aed1df10-680a-914c-fe7d-3c6e03265e17",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "038bbe92-df05-daf7-c1e0-4d2d31b1c2d4",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "32e52306-ce1b-5cb6-b838-aa4944a62823",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "e0cb1f81-7163-4eb1-18a1-19301c3ecfa2",
+                "properties": {
+                  "width": 190,
+                  "height": 281,
+                  "left": 16,
+                  "top": 83,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.common.Image",
+                    "version": 6,
+                    "id": "edcbe176-1e7e-9c93-fcf6-d2613d0dcc2f",
+                    "properties": {
+                      "width": 190,
+                      "height": 250,
+                      "left": 0,
+                      "top": 0,
+                      "source.__type__": "sketch.framework.ImageSourceNone",
+                      "clipSelf": true
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.common.Label",
+                    "version": 3,
+                    "id": "68cfc7a7-adc3-ccbf-2185-7288682c8602",
+                    "properties": {
+                      "width": 187,
+                      "height": 26,
+                      "left": 3,
+                      "top": 255,
+                      "text": "<movie title>",
+                      "textAlign": "center",
+                      "font.__type__": "sketch.framework.Font"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "bce7ea57-961c-6c8e-a1c9-5f17779009f8",
+                "properties": {
+                  "width": 190,
+                  "height": 281,
+                  "left": 232,
+                  "top": 83,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.common.Image",
+                    "version": 6,
+                    "id": "f9428468-d873-06f6-f42b-75b973d7c5f0",
+                    "properties": {
+                      "width": 190,
+                      "height": 250,
+                      "left": 0,
+                      "top": 0,
+                      "source.__type__": "sketch.framework.ImageSourceNone",
+                      "clipSelf": true
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.common.Label",
+                    "version": 3,
+                    "id": "794daea6-c3b8-66c7-b7db-19dbc139250b",
+                    "properties": {
+                      "width": 187,
+                      "height": 26,
+                      "left": 2,
+                      "top": 255,
+                      "text": "<movie title>",
+                      "textAlign": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "54676dd8-15f6-58de-40c6-a8be69f8a3df",
+                "properties": {
+                  "width": 191,
+                  "height": 276,
+                  "left": 16,
+                  "top": 372,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.common.Image",
+                    "version": 6,
+                    "id": "631e5282-3052-a560-a9d9-9a5f64fed303",
+                    "properties": {
+                      "width": 190,
+                      "height": 250,
+                      "left": 0,
+                      "top": 0,
+                      "source.__type__": "sketch.framework.ImageSourceNone",
+                      "clipSelf": true
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.common.Label",
+                    "version": 3,
+                    "id": "39ffe02a-26e4-ca2e-2f61-9073b0e95c56",
+                    "properties": {
+                      "width": 187,
+                      "height": 26,
+                      "left": 4,
+                      "top": 250,
+                      "text": "<movie title>",
+                      "textAlign": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "55ec3e46-3845-48d1-a642-9c95ec28febf",
+                "properties": {
+                  "width": 190,
+                  "height": 276,
+                  "left": 232,
+                  "top": 372,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.common.Image",
+                    "version": 6,
+                    "id": "e8ad89b6-7bb4-b2a3-0670-de0831c80ffe",
+                    "properties": {
+                      "width": 190,
+                      "height": 250,
+                      "left": 0,
+                      "top": 0,
+                      "source.__type__": "sketch.framework.ImageSourceNone",
+                      "clipSelf": true
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.common.Label",
+                    "version": 3,
+                    "id": "3369c3e8-732e-c55c-cb89-cc20c34a8c5c",
+                    "properties": {
+                      "width": 187,
+                      "height": 26,
+                      "left": 2,
+                      "top": 250,
+                      "text": "<movie title>",
+                      "textAlign": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "621bcfba-8766-b770-9872-47b02a661dea",
+                "properties": {
+                  "width": 406,
+                  "height": 26,
+                  "left": 17,
+                  "top": 11,
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "text": "   Your total score : <x>",
+                  "textAlign": "left",
+                  "textVerticalAlign": "middle",
+                  "font.family": "Impact",
+                  "font.__type__": "sketch.framework.Font",
+                  "font.size": 20
+                }
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "e8b665f9-a563-77c9-11fb-4c1737d93bee",
+                "properties": {
+                  "width": 86,
+                  "height": 25,
+                  "left": 335,
+                  "top": 12,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "a917adb8-12b1-4d29-476e-5dd3b711a129",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [cedc5d34-9452-8ea3-f983-ad8ebbc7f6e6]",
+                      "left": 0,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "ec191e25-4273-512f-9533-09550a325a9b",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [aaa2ac0b-dd9d-958d-913f-4674a90eaed2]",
+                      "left": 30,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "7db32a55-2516-fa91-b581-6def43a2d0f6",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [76d0b31b-779a-378b-c61b-4cd9c56bf75e]",
+                      "left": 61,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "6e5751a5-d198-c0c2-b0a6-11ab7ab7a8ab",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "1e80bf72-de81-e2fd-f34a-e3d2eee5e20d",
+                "properties": {
+                  "width": 406,
+                  "height": 26,
+                  "left": 16,
+                  "top": 656,
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "text": "<Difficulty> : <n> Points",
+                  "textAlign": "center",
+                  "textVerticalAlign": "middle",
+                  "font.family": "Impact",
+                  "font.__type__": "sketch.framework.Font"
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "8cfe4089-8179-a168-89f3-c11a6557d1d5",
+                "properties": {
+                  "name": "Asset [322c93a3-c094-fd4b-60a7-dbf606943435]",
+                  "left": 265,
+                  "top": 735,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "showIcon": false,
+                  "text": "Let me out !",
+                  "width": 156,
+                  "height": 50
+                }
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "a8a46bad-9a8e-fcd1-ab4e-4211704dad86",
+              "properties": {
+                "width": 450,
+                "height": 801,
+                "left": 1340,
+                "top": 760,
+                "clipSelf": true
+              }
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1
+      },
+      {
+        "version": 1,
+        "id": "23085e05-7aa4-c237-cc70-b45cbc197ade",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "GameL",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "1efd36e0-0a6e-7940-13bd-cf929444606d",
+            "properties": {
+              "width": 3480,
+              "height": 2000,
+              "orientation": "landscape"
+            },
+            "children": [
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "9dbb472e-ac2d-8d8b-384a-1163116a076c",
+                "properties": {
+                  "width": 779,
+                  "height": 281,
+                  "left": 13,
+                  "top": 44,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.framework.GroupContainer",
+                    "version": 1,
+                    "id": "08c14d27-d646-5f60-09be-1a7b7830ea19",
+                    "properties": {
+                      "width": 190,
+                      "height": 281,
+                      "left": 0,
+                      "top": 0,
+                      "enableGroupLocking": true
+                    },
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Image",
+                        "version": 6,
+                        "id": "fb8f2320-a94a-49d1-b974-f7be464da7be",
+                        "properties": {
+                          "width": 190,
+                          "height": 250,
+                          "left": 0,
+                          "top": 0,
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "e546f1e7-8164-b07f-1d0a-76a930c09304",
+                        "properties": {
+                          "width": 187,
+                          "height": 26,
+                          "left": 3,
+                          "top": 255,
+                          "text": "<movie title>",
+                          "textAlign": "center"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.framework.GroupContainer",
+                    "version": 1,
+                    "id": "229a6688-9297-8092-324f-036dcaf90626",
+                    "properties": {
+                      "width": 190,
+                      "height": 281,
+                      "left": 196,
+                      "top": 0,
+                      "enableGroupLocking": true
+                    },
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Image",
+                        "version": 6,
+                        "id": "7301dfee-d878-148a-e6aa-c7507ff018dd",
+                        "properties": {
+                          "width": 190,
+                          "height": 250,
+                          "left": 0,
+                          "top": 0,
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "3c1acbdd-ebbe-00a5-bec4-c28911109994",
+                        "properties": {
+                          "width": 187,
+                          "height": 26,
+                          "left": 3,
+                          "top": 255,
+                          "text": "<movie title>",
+                          "textAlign": "center"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.framework.GroupContainer",
+                    "version": 1,
+                    "id": "cca174e5-2aae-47e5-a6f5-95ce2237b9e1",
+                    "properties": {
+                      "width": 190,
+                      "height": 281,
+                      "left": 394,
+                      "top": 0,
+                      "enableGroupLocking": true
+                    },
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Image",
+                        "version": 6,
+                        "id": "2edb3175-a6e4-9dc8-4350-39b81295d969",
+                        "properties": {
+                          "width": 190,
+                          "height": 250,
+                          "left": 0,
+                          "top": 0,
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "afaeda2c-e090-6aca-0956-bd2b613f4a3a",
+                        "properties": {
+                          "width": 187,
+                          "height": 26,
+                          "left": 3,
+                          "top": 255,
+                          "text": "<movie title>",
+                          "textAlign": "center"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.framework.GroupContainer",
+                    "version": 1,
+                    "id": "3c40fb0d-692e-1821-8467-2e909cc86e1e",
+                    "properties": {
+                      "width": 190,
+                      "height": 281,
+                      "left": 589,
+                      "top": 0,
+                      "enableGroupLocking": true
+                    },
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Image",
+                        "version": 6,
+                        "id": "15117a27-cbec-95e4-0180-fd5ced028b94",
+                        "properties": {
+                          "width": 190,
+                          "height": 250,
+                          "left": 0,
+                          "top": 0,
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "57493a6d-3729-80c1-a198-d38b4c496783",
+                        "properties": {
+                          "width": 187,
+                          "height": 26,
+                          "left": 3,
+                          "top": 255,
+                          "text": "<movie title>",
+                          "textAlign": "center"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "0a745e52-7147-6a08-2271-8ae1e9bb72b4",
+                "properties": {
+                  "width": 406,
+                  "height": 26,
+                  "left": 11,
+                  "top": 13,
+                  "text": "Which movie doesn't fit in with the others ?",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "efe7d1d9-d699-44ea-957f-6e4696c33f09",
+                "properties": {
+                  "width": 348,
+                  "height": 26,
+                  "left": 444,
+                  "top": 13,
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "text": "   Your total score : <x>",
+                  "textVerticalAlign": "middle",
+                  "font.family": "Impact",
+                  "font.size": 20,
+                  "font.__type__": "sketch.framework.Font"
+                }
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "ed7df965-3007-5617-193a-16214878a744",
+                "properties": {
+                  "width": 86,
+                  "height": 25,
+                  "left": 697,
+                  "top": 14,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "f6ed8c0b-4054-9da7-60d5-1296565d72ea",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [cedc5d34-9452-8ea3-f983-ad8ebbc7f6e6]",
+                      "left": 0,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "0827e8fc-94b7-561d-eb91-a84b0669ae39",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [aaa2ac0b-dd9d-958d-913f-4674a90eaed2]",
+                      "left": 30,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "9ced7829-d568-35bb-b486-ceea833ff108",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [76d0b31b-779a-378b-c61b-4cd9c56bf75e]",
+                      "left": 61,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "37f5d312-3fbd-e6cb-f86c-53a707a1b9e5",
+                "properties": {
+                  "width": 779,
+                  "height": 26,
+                  "left": 13,
+                  "top": 333,
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "text": "<Difficulty> : <n> Points",
+                  "textAlign": "center",
+                  "textVerticalAlign": "middle",
+                  "font.family": "Impact",
+                  "font.__type__": "sketch.framework.Font"
+                }
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "62164da5-cc1f-225c-e788-c6c97911b618",
+                "properties": {
+                  "width": 776,
+                  "height": 19,
+                  "left": 16,
+                  "top": 365,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.framework.Rectangle",
+                    "version": 3,
+                    "id": "d15c3fc8-07a6-4255-0875-1a44a02269df",
+                    "properties": {
+                      "width": 330,
+                      "height": 6,
+                      "left": 7,
+                      "top": 6,
+                      "backgroundBrush.value": "rgba(242,210,65,1)",
+                      "backgroundBrush.type": "color",
+                      "backgroundBrush.__type__": "sketch.framework.Brush"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "be27baaf-d1fe-2640-c694-06881ef9b440",
+                "properties": {
+                  "width": 156,
+                  "name": "Asset [322c93a3-c094-fd4b-60a7-dbf606943435]",
+                  "left": 620,
+                  "top": 391,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Let me out !",
+                  "showIcon": false,
+                  "height": 50
+                }
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "b3283f9b-6276-003f-369f-7df1e18922ae",
+              "properties": {
+                "width": 800,
+                "height": 450,
+                "left": 1340,
+                "top": 775,
+                "clipSelf": true
+              }
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1
+      },
+      {
+        "version": 1,
+        "id": "33d3d8c0-593e-05c8-df20-63da3049f05a",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "GameDoneL",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "a71ad34b-e08c-fb26-aa8a-6cc45e34b8a9",
+            "properties": {
+              "width": 3480,
+              "height": 2000,
+              "orientation": "landscape"
+            },
+            "children": [
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "f293500f-2dfd-2102-0322-2338dfcb7792",
+                "properties": {
+                  "width": 779,
+                  "height": 281,
+                  "left": 13,
+                  "top": 44,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.framework.GroupContainer",
+                    "version": 1,
+                    "id": "6a408a95-a52e-9da5-d6d6-574597e49123",
+                    "properties": {
+                      "width": 190,
+                      "height": 281,
+                      "left": 0,
+                      "top": 0,
+                      "enableGroupLocking": true
+                    },
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Image",
+                        "version": 6,
+                        "id": "0065c125-8db7-6d07-3013-172defef48d2",
+                        "properties": {
+                          "width": 190,
+                          "height": 250,
+                          "left": 0,
+                          "top": 0,
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "83bc1881-03d0-11ba-79d7-664c6e07563e",
+                        "properties": {
+                          "width": 187,
+                          "height": 26,
+                          "left": 3,
+                          "top": 255,
+                          "text": "<movie title>",
+                          "textAlign": "center"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.framework.GroupContainer",
+                    "version": 1,
+                    "id": "c63ce56f-dc31-fbd9-9195-f4f0b088b7be",
+                    "properties": {
+                      "width": 190,
+                      "height": 281,
+                      "left": 196,
+                      "top": 0,
+                      "enableGroupLocking": true
+                    },
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Image",
+                        "version": 6,
+                        "id": "38d8b24f-f522-3c46-dd53-de18ee146877",
+                        "properties": {
+                          "width": 190,
+                          "height": 250,
+                          "left": 0,
+                          "top": 0,
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "074d7e0a-0494-fc2b-0c4b-8cedd5664f78",
+                        "properties": {
+                          "width": 187,
+                          "height": 26,
+                          "left": 3,
+                          "top": 255,
+                          "text": "<movie title>",
+                          "textAlign": "center"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.framework.GroupContainer",
+                    "version": 1,
+                    "id": "15424730-9e8e-1d84-d759-19edbf075246",
+                    "properties": {
+                      "width": 190,
+                      "height": 281,
+                      "left": 394,
+                      "top": 0,
+                      "enableGroupLocking": true
+                    },
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Image",
+                        "version": 6,
+                        "id": "20acc8c2-20a4-1367-1a24-c62b7b599c8a",
+                        "properties": {
+                          "width": 190,
+                          "height": 250,
+                          "left": 0,
+                          "top": 0,
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "4f154826-de58-9f9c-2958-70f4d54e493a",
+                        "properties": {
+                          "width": 187,
+                          "height": 26,
+                          "left": 3,
+                          "top": 255,
+                          "text": "<movie title>",
+                          "textAlign": "center"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.framework.GroupContainer",
+                    "version": 1,
+                    "id": "de0f97d0-85a6-64c8-72ce-30f152c147c1",
+                    "properties": {
+                      "width": 190,
+                      "height": 281,
+                      "left": 589,
+                      "top": 0,
+                      "enableGroupLocking": true
+                    },
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Image",
+                        "version": 6,
+                        "id": "e888a991-323c-2991-d1bc-88824ed7c517",
+                        "properties": {
+                          "width": 190,
+                          "height": 250,
+                          "left": 0,
+                          "top": 0,
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "3f3b9046-5a85-4738-e452-2def7f5dc775",
+                        "properties": {
+                          "width": 187,
+                          "height": 26,
+                          "left": 3,
+                          "top": 255,
+                          "text": "<movie title>",
+                          "textAlign": "center"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "e1dbcb73-e5e7-868f-8ee6-bcfae6873efb",
+                "properties": {
+                  "width": 406,
+                  "height": 26,
+                  "left": 11,
+                  "top": 13,
+                  "text": "Which movie doesn't fit in with the others ?",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "595a4705-52a0-ed32-95ae-df931a5b4d60",
+                "properties": {
+                  "width": 348,
+                  "height": 26,
+                  "left": 444,
+                  "top": 13,
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "text": "   Your total score : <x>",
+                  "textVerticalAlign": "middle",
+                  "font.family": "Impact",
+                  "font.size": 20,
+                  "font.__type__": "sketch.framework.Font"
+                }
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "e7962cbd-f55d-f195-6261-8dbb443fee21",
+                "properties": {
+                  "width": 86,
+                  "height": 25,
+                  "left": 697,
+                  "top": 14,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "ea827ff3-9b56-4a9a-90ae-3807d245d68d",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [cedc5d34-9452-8ea3-f983-ad8ebbc7f6e6]",
+                      "left": 0,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "f5426f2e-0db0-bd39-9e1e-53760f1adf5a",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [aaa2ac0b-dd9d-958d-913f-4674a90eaed2]",
+                      "left": 30,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "3ef114cc-016d-bcf6-4203-bfa6dde387b4",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [76d0b31b-779a-378b-c61b-4cd9c56bf75e]",
+                      "left": 61,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "61439d5b-39cc-3849-1534-144483a2873c",
+                "properties": {
+                  "width": 156,
+                  "name": "Asset [322c93a3-c094-fd4b-60a7-dbf606943435]",
+                  "left": 620,
+                  "top": 391,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Let me out !",
+                  "showIcon": false
+                }
+              },
+              {
+                "type": "sketch.ui.common.TextBlock",
+                "version": 2,
+                "id": "ce5029f2-e5a1-d9e1-77e3-694df5be009f",
+                "properties": {
+                  "width": 780,
+                  "height": 57,
+                  "left": 12,
+                  "top": 325,
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "borderBrush.value": "rgba(229,229,229,1)",
+                  "borderBrush.type": "color",
+                  "borderBrush.__type__": "sketch.framework.Brush",
+                  "text": "<Indication of succes or failure>\n<Explanation of the odd one out>",
+                  "textAlign": "center",
+                  "textVerticalAlign": "middle",
+                  "font.lineHeight": 0.9,
+                  "font.__type__": "sketch.framework.Font",
+                  "multiLine": true,
+                  "clipSelf": true
+                },
+                "tags": "Primitive,P"
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "4676990d-e1d3-db0c-337b-bd675ad1e194",
+                "properties": {
+                  "width": 173,
+                  "height": 26,
+                  "left": 22,
+                  "top": 403,
+                  "text": "Please rate this set",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "f1d31274-1eb7-f299-b520-d0f7f11356c8",
+                "properties": {
+                  "width": 183,
+                  "height": 30,
+                  "left": 214,
+                  "top": 401,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.framework.Star",
+                    "version": 2,
+                    "id": "582aecaf-fc15-3618-489a-caab04b36392",
+                    "properties": {
+                      "width": 30,
+                      "height": 30,
+                      "left": 0,
+                      "top": 0
+                    }
+                  },
+                  {
+                    "type": "sketch.framework.Star",
+                    "version": 2,
+                    "id": "5c180c0c-1a58-5730-4b59-208b0037c02c",
+                    "properties": {
+                      "width": 30,
+                      "height": 30,
+                      "left": 38,
+                      "top": 0
+                    }
+                  },
+                  {
+                    "type": "sketch.framework.Star",
+                    "version": 2,
+                    "id": "84182aa4-d224-1e03-2aa2-da712965b392",
+                    "properties": {
+                      "width": 30,
+                      "height": 30,
+                      "left": 76,
+                      "top": 0
+                    }
+                  },
+                  {
+                    "type": "sketch.framework.Star",
+                    "version": 2,
+                    "id": "d7ecb73f-11e7-3a5d-bb65-ed9e9bdc36d1",
+                    "properties": {
+                      "width": 30,
+                      "height": 30,
+                      "left": 114,
+                      "top": 0
+                    }
+                  },
+                  {
+                    "type": "sketch.framework.Star",
+                    "version": 2,
+                    "id": "9f1030a0-2e45-780f-63f2-d4840923eb54",
+                    "properties": {
+                      "width": 30,
+                      "height": 30,
+                      "left": 153,
+                      "top": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "b3283f9b-6276-003f-369f-7df1e18922ae",
+              "properties": {
+                "width": 800,
+                "height": 450,
+                "left": 1340,
+                "top": 775,
+                "clipSelf": true
+              }
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1
+      },
+      {
+        "version": 1,
+        "id": "5d52ebae-8b97-a058-6cbd-4e5c616d3748",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "Game End",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "a8d8a821-7863-46db-e2dc-97380bd04357",
+            "properties": {
+              "width": 3130,
+              "height": 2320
+            },
+            "children": [
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "991615f7-ef4d-c618-55d4-f9d9857844c9",
+                "properties": {
+                  "width": 308,
+                  "height": 78,
+                  "left": 71,
+                  "top": 139,
+                  "text": "Game over !",
+                  "font.size": 89,
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "b708d940-b8ea-acc1-3292-de4a7b007719",
+                "properties": {
+                  "width": 379,
+                  "height": 248,
+                  "left": 36,
+                  "top": 230,
+                  "text": "\nCongratulations! \nYou got <n> questions correct and earned <99> points",
+                  "textAlign": "center",
+                  "font.size": 36,
+                  "font.lineHeight": 1,
+                  "font.__type__": "sketch.framework.Font",
+                  "multiLine": true
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "4ba98725-ff4f-183b-3a4d-853395f03c83",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "829722ef-09f9-6967-779c-9b281773a183",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "11568c80-8ab7-89ad-e72c-e84554edd4d7",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "4b1df91c-4cad-f7c2-a664-9dbb81bccb49",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "3a0a3e1d-6c78-e179-0dc2-c26062b8db8a",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "b2d608a8-74dc-30cc-56e1-8fc939189da4",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "d8d52c58-e5be-a0b3-da65-bc55e393881a",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "ed334e75-cc80-e6b1-b959-29ae03ccad71",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "4bfb9102-da4c-7144-1ed1-33e9c37f0d9c",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "2f1df129-815b-51e3-7fde-09bae08a56b8",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "88a4ae5b-e73f-3358-ec27-e969074402b1",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "1b565f7a-8d11-46b3-164c-0e258c44083b",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.ui.common.Image",
+                "version": 6,
+                "id": "51ffb159-d4a0-dd9e-0537-829abfddf3d8",
+                "properties": {
+                  "width": 430,
+                  "height": 83,
+                  "left": 10,
+                  "top": 14,
+                  "source.__type__": "sketch.framework.ImageSourceNone",
+                  "clipSelf": true
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "3c6a91db-cf81-cdcc-9609-d2fac065821d",
+                "properties": {
+                  "name": "Asset [5d7c885b-0cc2-0057-37ca-89d489a82789]",
+                  "left": 30,
+                  "top": 428,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "showIcon": false,
+                  "width": 385,
+                  "height": 50,
+                  "text": "Play another game !"
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "a373d7e8-85eb-404e-79e0-b5dab1ea224a",
+                "properties": {
+                  "width": 385,
+                  "name": "Asset [5d7c885b-0cc2-0057-37ca-89d489a82789]",
+                  "left": 30,
+                  "top": 516,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "What's my ranking?",
+                  "showIcon": false,
+                  "height": 50
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "f1f962cd-d22e-8b47-1b66-1d53472580da",
+                "properties": {
+                  "width": 385,
+                  "name": "Asset [5d7c885b-0cc2-0057-37ca-89d489a82789]",
+                  "left": 30,
+                  "top": 640,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Return to menu",
+                  "showIcon": false,
+                  "height": 50
+                }
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "99a95589-6ce0-b094-0f97-b9bba4003dcd",
+              "properties": {
+                "width": 450,
+                "height": 800,
+                "left": 1340,
+                "top": 760,
+                "clipSelf": true
+              }
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1
+      },
+      {
+        "version": 1,
+        "id": "73325a27-42f1-e6f8-4c9f-25ffda7908dd",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "Duel",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "ea814385-d61e-1c8a-f6e3-baa085345fb2",
+            "properties": {
+              "width": 3130,
+              "height": 2320
+            },
+            "children": [
+              {
+                "type": "sketch.ui.android.TabBar",
+                "version": 1,
+                "id": "9f22e07c-ae27-39dd-25a2-e20cfe9a848b",
+                "properties": {
+                  "name": "Asset [f992398b-100d-03f5-a246-b1383993ba1d]",
+                  "left": 0,
+                  "top": 149,
+                  "backgroundBrush.lineWidth": 0,
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "borderBrush.value": "rgba(0,0,0,1)",
+                  "borderBrush.type": "color",
+                  "borderBrush.__type__": "sketch.framework.Brush",
+                  "dropPositioning": "horizontal",
+                  "enableGroupLocking": true,
+                  "templateId": "ui.android.templates.TabBarTemplate",
+                  "width": 450,
+                  "height": 48
+                },
+                "tags": "Bar",
+                "children": [
+                  {
+                    "type": "sketch.ui.android.TabBarItem",
+                    "version": 1,
+                    "id": "c4c54628-9a5f-4082-9b7b-5dc0cbcf9cde",
+                    "properties": {
+                      "name": "Asset [0f7e6646-5742-bc1a-90fc-0665230c3768]",
+                      "left": 0,
+                      "top": 1,
+                      "verticalAlignment": "center",
+                      "dropPositioning": "vertical",
+                      "templateId": "ui.android.templates.TabBarItemTemplate",
+                      "selected": false,
+                      "text": "All Friends"
+                    },
+                    "tags": "TabBarItem"
+                  },
+                  {
+                    "type": "sketch.ui.android.TabBarItem",
+                    "version": 1,
+                    "id": "5cbdb632-690c-6e60-4c0c-01634d532bfb",
+                    "properties": {
+                      "name": "Asset [3a98ef40-226c-80cb-a156-3bdd415f1eca]",
+                      "left": 138,
+                      "top": 1,
+                      "verticalAlignment": "center",
+                      "dropPositioning": "vertical",
+                      "templateId": "ui.android.templates.TabBarItemTemplate",
+                      "text": "Online",
+                      "selected": false
+                    },
+                    "tags": "TabBarItem"
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.android.List",
+                "version": 1,
+                "id": "3b8f8e41-c6a5-9d05-cb8f-959f80c49592",
+                "properties": {
+                  "name": "List [1426]",
+                  "left": 0,
+                  "top": 197,
+                  "dropPositioning": "vertical",
+                  "enableGroupLocking": true,
+                  "templateId": "ui.android.templates.ListTemplate",
+                  "width": 450,
+                  "height": 519
+                },
+                "tags": "List",
+                "children": [
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "4ab9cbf1-e1f0-3643-d7c4-945e4132187d",
+                    "properties": {
+                      "name": "List item [343]",
+                      "left": 0,
+                      "top": 65,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate",
+                      "width": 450,
+                      "height": 64
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Icon",
+                        "version": 6,
+                        "id": "9531ef67-3e6a-37d3-93ad-81378f94b97f",
+                        "properties": {
+                          "width": 64,
+                          "height": 64,
+                          "name": "Icon [405]",
+                          "backgroundBrush.value": "default.text",
+                          "backgroundBrush.type": "resource",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "2b0e5a11-314a-4e43-ddb4-f5fbd1ee96a8",
+                        "properties": {
+                          "width": 180,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 80,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Friend name> + <online status>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "0c8da4b5-e902-cf2f-486f-4283d49c2764",
+                        "properties": {
+                          "width": 176,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 84,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "Ranking and information",
+                          "font.size": 20,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "516f8f72-23f4-71b4-fa58-33c9da7ccce0",
+                    "properties": {
+                      "name": "List item [343]",
+                      "left": 0,
+                      "top": 65,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Icon",
+                        "version": 6,
+                        "id": "b5d86ca6-1f3e-c0aa-e973-5eb5d485336b",
+                        "properties": {
+                          "width": 64,
+                          "height": 64,
+                          "name": "Icon [405]",
+                          "backgroundBrush.value": "default.text",
+                          "backgroundBrush.type": "resource",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "f8ebaa15-d31a-4a02-1ab4-133536870059",
+                        "properties": {
+                          "width": 180,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 80,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Friend name> + <online status>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "d7f4d182-b75a-b909-28b3-c03973c2e2bf",
+                        "properties": {
+                          "width": 176,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 84,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "Ranking and information",
+                          "font.size": 20,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "5d6ca83f-5080-e8d5-2939-ddab1136d22f",
+                    "properties": {
+                      "name": "List item [343]",
+                      "left": 0,
+                      "top": 65,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Icon",
+                        "version": 6,
+                        "id": "198f3afd-e86b-890e-3bd0-b495976b97d0",
+                        "properties": {
+                          "width": 64,
+                          "height": 64,
+                          "name": "Icon [405]",
+                          "backgroundBrush.value": "default.text",
+                          "backgroundBrush.type": "resource",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "3cc3cdbe-07aa-f65a-33ea-2e84ca342574",
+                        "properties": {
+                          "width": 180,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 80,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Friend name> + <online status>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "bf60a0e4-9a63-5774-4d7f-2a4fb49e2d6d",
+                        "properties": {
+                          "width": 176,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 84,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "Ranking and information",
+                          "font.size": 20,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "98edc37f-d8c3-6c03-34e7-7c22b8367954",
+                    "properties": {
+                      "name": "List item [343]",
+                      "left": 0,
+                      "top": 65,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Icon",
+                        "version": 6,
+                        "id": "ac48c04c-2d86-071d-c73d-dab78714a8fc",
+                        "properties": {
+                          "width": 64,
+                          "height": 64,
+                          "name": "Icon [405]",
+                          "backgroundBrush.value": "default.text",
+                          "backgroundBrush.type": "resource",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "26a6f3df-579f-55eb-cb95-26431ac460d2",
+                        "properties": {
+                          "width": 180,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 80,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Friend name> + <online status>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "2ed9f86a-9b2b-4c34-49ed-0d0d7cb97ab5",
+                        "properties": {
+                          "width": 176,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 84,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "Ranking and information",
+                          "font.size": 20,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "cf04a385-d3e0-cc5e-cd32-5c39008bf0a3",
+                    "properties": {
+                      "name": "List item [343]",
+                      "left": 0,
+                      "top": 65,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Icon",
+                        "version": 6,
+                        "id": "e3490b6e-9ea3-db2d-6f59-d086b98b1fd6",
+                        "properties": {
+                          "width": 64,
+                          "height": 64,
+                          "name": "Icon [405]",
+                          "backgroundBrush.value": "default.text",
+                          "backgroundBrush.type": "resource",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "75e0320b-c318-cc6b-29bc-154415fa09fe",
+                        "properties": {
+                          "width": 180,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 80,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Friend name> + <online status>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "efc9c99c-af90-d82b-ef25-af9af7ff9bb9",
+                        "properties": {
+                          "width": 176,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 84,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "Ranking and information",
+                          "font.size": 20,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "3834f7ea-5cd1-4543-a922-df1b524fd6cd",
+                    "properties": {
+                      "name": "List item [343]",
+                      "left": 0,
+                      "top": 65,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Icon",
+                        "version": 6,
+                        "id": "375335f9-68ca-3e86-8c28-571a65832e8e",
+                        "properties": {
+                          "width": 64,
+                          "height": 64,
+                          "name": "Icon [405]",
+                          "backgroundBrush.value": "default.text",
+                          "backgroundBrush.type": "resource",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "0d1fc7ba-862e-56e3-567d-c98a2021487f",
+                        "properties": {
+                          "width": 180,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 80,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Friend name> + <online status>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "8647f09d-b3f4-b6d3-97cf-b4f8b619d03f",
+                        "properties": {
+                          "width": 176,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 84,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "Ranking and information",
+                          "font.size": 20,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "4c368893-cef5-5b4b-f2d0-293df919e3df",
+                    "properties": {
+                      "name": "List item [343]",
+                      "left": 0,
+                      "top": 65,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Icon",
+                        "version": 6,
+                        "id": "f80eee3d-f4ba-1136-2c05-93726d375b6b",
+                        "properties": {
+                          "width": 64,
+                          "height": 64,
+                          "name": "Icon [405]",
+                          "backgroundBrush.value": "default.text",
+                          "backgroundBrush.type": "resource",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "f1de1212-f924-2bef-b60e-13f85f157cf5",
+                        "properties": {
+                          "width": 180,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 80,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Friend name> + <online status>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "35566337-c53e-a476-c1c9-0c3b2e705be0",
+                        "properties": {
+                          "width": 176,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 84,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "Ranking and information",
+                          "font.size": 20,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "e9901a03-17ef-8df6-6600-976ef6c0db9f",
+                    "properties": {
+                      "name": "List item [343]",
+                      "left": 0,
+                      "top": 65,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Icon",
+                        "version": 6,
+                        "id": "72c5bbb4-c614-b0e6-84aa-fa0b0dbb2e04",
+                        "properties": {
+                          "width": 64,
+                          "height": 64,
+                          "name": "Icon [405]",
+                          "backgroundBrush.value": "default.text",
+                          "backgroundBrush.type": "resource",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "source.__type__": "sketch.framework.ImageSourceNone",
+                          "clipSelf": true
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "c2f1a508-2020-5095-06f5-4d62a0c3cfa1",
+                        "properties": {
+                          "width": 180,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 80,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Friend name> + <online status>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "70537446-f157-7426-d1fc-d92117bd4ca8",
+                        "properties": {
+                          "width": 176,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 84,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "Ranking and information",
+                          "font.size": 20,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "e07cd2a3-911c-7b43-9807-328725832233",
+                "properties": {
+                  "width": 156,
+                  "name": "Asset [322c93a3-c094-fd4b-60a7-dbf606943435]",
+                  "left": 285,
+                  "top": 730,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Back ",
+                  "showIcon": false,
+                  "height": 50
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "4f6f46b2-e43e-d1df-5131-79bf22fab34c",
+                "properties": {
+                  "width": 450,
+                  "height": 30,
+                  "name": "Label [1585]",
+                  "left": 0,
+                  "top": 112,
+                  "anchor.top": false,
+                  "anchor.bottom": true,
+                  "anchor.__type__": "sketch.framework.Anchor",
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "text": "Challenge a friend to a duel",
+                  "textAlign": "center",
+                  "textVerticalAlign": "middle",
+                  "font.size": 26,
+                  "font.__type__": "sketch.framework.Font"
+                }
+              },
+              {
+                "type": "sketch.ui.android.SeparatorHorizontal",
+                "version": 1,
+                "id": "6450ff13-b45a-191a-35d7-bc82aa2973c4",
+                "properties": {
+                  "height": 8,
+                  "name": "Asset [42628896-ff22-5982-bb46-75f4c9e262c9]",
+                  "left": 6,
+                  "top": 99,
+                  "templateId": "ui.android.templates.SeparatorHorizontalTemplate",
+                  "width": 435
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "9cf552ba-5c1d-51f1-aa16-2afffe74ef6b",
+                "properties": {
+                  "name": "Asset [b5fba6f0-cc98-2699-23b0-77c1c454f88c]",
+                  "left": 17,
+                  "top": 26,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "showIcon": false,
+                  "width": 424,
+                  "height": 50,
+                  "text": "Challenge a random opponent"
+                }
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "04470ce8-f8d1-df2e-78b5-36f36c7ee277",
+              "properties": {
+                "width": 450,
+                "height": 800,
+                "left": 1340,
+                "top": 760,
+                "clipSelf": true
+              }
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1,
+        "masterPageId": null
+      },
+      {
+        "version": 1,
+        "id": "87335762-975e-039c-4431-ec4f140ec565",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "LoginNew",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "75cdd554-d19c-b60f-f895-241b40288a38",
+            "properties": {
+              "width": 3130,
+              "height": 2320
+            },
+            "children": [
+              {
+                "type": "sketch.ui.common.Image",
+                "version": 6,
+                "id": "701a7f80-fa11-bf70-f6ea-9499f32706f9",
+                "properties": {
+                  "width": 438,
+                  "height": 263,
+                  "left": 5,
+                  "top": 11,
+                  "source.__type__": "sketch.framework.ImageSourceNone",
+                  "clipSelf": true
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "c9d2ff52-aa1c-080e-09ee-22ebe84e1ce5",
+                "properties": {
+                  "width": 0,
+                  "height": 0,
+                  "left": 279,
+                  "top": 424
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "1c1ed0bc-7347-06b7-d2ed-1ef381cf2d4f",
+                "properties": {
+                  "left": 101,
+                  "top": 366
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "f5426695-23f3-36cc-3b65-d560e542807e",
+                "properties": {
+                  "left": 84,
+                  "top": 376
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "e4bd6a21-5a9e-e5a5-657d-a556688e60fa",
+                "properties": {
+                  "left": 129,
+                  "top": 365
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "8df9640e-db59-41f4-e437-f54bdd29d80e",
+                "properties": {
+                  "width": 291,
+                  "height": 30,
+                  "left": 130,
+                  "top": 512,
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "text": "<failure indication>",
+                  "textAlign": "center",
+                  "textVerticalAlign": "middle"
+                }
+              },
+              {
+                "type": "sketch.ui.common.TextBlock",
+                "version": 2,
+                "id": "c2f54b74-ab9f-125d-1d79-836861f3b815",
+                "properties": {
+                  "width": 390,
+                  "height": 154,
+                  "left": 24,
+                  "top": 288,
+                  "text": "Welcome to Mutibo !\nWe noticed it's your first game. \nPlease choose a nickname to identify yourself on the leaderboard.",
+                  "textAlign": "center",
+                  "font.size": 37,
+                  "font.lineHeight": 1,
+                  "font.__type__": "sketch.framework.Font",
+                  "multiLine": true,
+                  "clipSelf": true
+                },
+                "tags": "Primitive,P"
+              },
+              {
+                "type": "sketch.ui.android.TextField",
+                "version": 1,
+                "id": "56749037-3815-a71b-fd71-8db503f75e6c",
+                "properties": {
+                  "width": 300,
+                  "name": "Asset [bc2f6bb2-d651-bbe6-7592-fd054e266663]",
+                  "left": 125,
+                  "top": 462,
+                  "templateId": "ui.android.templates.TextFieldTemplate",
+                  "height": 30
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "e4a0e340-0a56-94f3-cfdb-8ad78a9b84f3",
+                "properties": {
+                  "width": 89,
+                  "height": 26,
+                  "left": 24,
+                  "top": 464,
+                  "text": "Nickname:",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "38aaf5ad-0470-bf00-2ea8-30d03d24e4de",
+                "properties": {
+                  "width": 401,
+                  "name": "Asset [5fdcf01b-3993-4701-e2f6-9247b134e664]",
+                  "left": 19,
+                  "top": 617,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Let me play already!",
+                  "showIcon": false,
+                  "height": 50
+                }
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "cd9b73f5-b1f6-d67f-cfbc-bcd9e2a017cb",
+              "properties": {
+                "width": 450,
+                "height": 800,
+                "left": 1340,
+                "top": 760,
+                "clipSelf": true
+              }
+            }
+          },
+          {
+            "type": "sketch.framework.Line",
+            "version": 2,
+            "id": "3aaf5707-7989-2a0b-a194-4e09058572ba",
+            "properties": {
+              "left": 1170,
+              "top": 1222
+            }
+          },
+          {
+            "type": "sketch.framework.Line",
+            "version": 2,
+            "id": "9fa201b0-c08e-0ab5-4c55-4467cc7e613e",
+            "properties": {
+              "left": 1093,
+              "top": 1082
+            }
+          },
+          {
+            "type": "sketch.framework.Line",
+            "version": 2,
+            "id": "72843429-3de5-c514-975c-203047297d35",
+            "properties": {
+              "width": 3,
+              "height": 7,
+              "left": 1074,
+              "top": 1056,
+              "x2": 3,
+              "y2": 7
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1
+      },
+      {
+        "version": 1,
+        "id": "906c827d-144d-6f30-1a2f-15810b2fcff2",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "Menu",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "6656a242-fe73-e8a2-a766-e656ea85a0a0",
+            "properties": {
+              "width": 3130,
+              "height": 2320
+            },
+            "children": [
+              {
+                "type": "sketch.ui.common.Image",
+                "version": 6,
+                "id": "62f50bb9-3a78-5373-e07c-c115d4452093",
+                "properties": {
+                  "width": 430,
+                  "height": 83,
+                  "left": 10,
+                  "top": 11,
+                  "source.__type__": "sketch.framework.ImageSourceNone",
+                  "clipSelf": true
+                }
+              },
+              {
+                "type": "sketch.ui.common.TextBlock",
+                "version": 2,
+                "id": "d8be8c20-73ce-73b0-45f4-aeeb0b214eca",
+                "properties": {
+                  "width": 430,
+                  "height": 43,
+                  "left": 10,
+                  "top": 112,
+                  "text": "News ticker with high-score and information",
+                  "textAlign": "center",
+                  "multiLine": true,
+                  "clipSelf": true,
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "textVerticalAlign": "middle"
+                },
+                "tags": "Primitive,P"
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "c0e385ed-59de-c6ab-6319-6c1f0ede28c0",
+                "properties": {
+                  "name": "Asset [12b20aba-2d2a-74ec-a7dc-84a3a3f7983f]",
+                  "left": 10,
+                  "top": 297,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "showIcon": false,
+                  "text": "Play a new game",
+                  "width": 430,
+                  "height": 50
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "73f3bbf2-a306-b543-7456-665f301ffd8e",
+                "properties": {
+                  "width": 430,
+                  "name": "Asset [12b20aba-2d2a-74ec-a7dc-84a3a3f7983f]",
+                  "left": 10,
+                  "top": 364,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Friend Duel (+notification)",
+                  "showIcon": false,
+                  "height": 50
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "80a7fe74-53ea-3c65-3481-c47865642d92",
+                "properties": {
+                  "width": 430,
+                  "name": "Asset [12b20aba-2d2a-74ec-a7dc-84a3a3f7983f]",
+                  "left": 10,
+                  "top": 721,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Logout",
+                  "showIcon": false,
+                  "height": 50
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "717c459f-d65e-2066-ca62-c55f8ef1237b",
+                "properties": {
+                  "width": 430,
+                  "name": "Asset [12b20aba-2d2a-74ec-a7dc-84a3a3f7983f]",
+                  "left": 10,
+                  "top": 434,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Visit leaderboards",
+                  "showIcon": false,
+                  "height": 50
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "88988b97-27f4-9de7-c8f5-5866ba4ddcbf",
+                "properties": {
+                  "width": 430,
+                  "name": "Asset [12b20aba-2d2a-74ec-a7dc-84a3a3f7983f]",
+                  "left": 10,
+                  "top": 645,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "About Mutibo",
+                  "showIcon": false,
+                  "height": 50
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "88227ee1-6ba9-26a3-eff4-fae2d2d95036",
+                "properties": {
+                  "width": 407,
+                  "height": 26,
+                  "left": 22,
+                  "top": 194,
+                  "text": "Welcome <nickname>, please enjoy your stag!",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "539712b7-f8c6-1ec3-c26b-cc0506426f4e",
+                "properties": {
+                  "width": 430,
+                  "name": "Asset [12b20aba-2d2a-74ec-a7dc-84a3a3f7983f]",
+                  "left": 10,
+                  "top": 572,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Rules - How to play",
+                  "showIcon": false,
+                  "height": 50
+                }
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "18bcf473-abad-b83c-239d-a36306709fa0",
+              "properties": {
+                "width": 450,
+                "height": 800,
+                "left": 1340,
+                "top": 760,
+                "clipSelf": true
+              }
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1
+      },
+      {
+        "version": 1,
+        "id": "9e32fbf7-8a64-90e2-2591-22b14db64a01",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "Leaderboards",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "525c235b-8ab2-9182-9794-eaf3c5e33ce8",
+            "properties": {
+              "width": 3130,
+              "height": 2320
+            },
+            "children": [
+              {
+                "type": "sketch.ui.android.TabBar",
+                "version": 1,
+                "id": "c48f5c6b-23f8-fe8d-4706-f911f9b17e29",
+                "properties": {
+                  "name": "Asset [49e360e5-a26f-29f5-7432-bdce08f02db6]",
+                  "left": 0,
+                  "top": 0,
+                  "backgroundBrush.lineWidth": 0,
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "borderBrush.value": "rgba(0,0,0,1)",
+                  "borderBrush.type": "color",
+                  "borderBrush.__type__": "sketch.framework.Brush",
+                  "dropPositioning": "horizontal",
+                  "enableGroupLocking": true,
+                  "templateId": "ui.android.templates.TabBarTemplate"
+                },
+                "tags": "Bar",
+                "children": [
+                  {
+                    "type": "sketch.ui.android.TabBarItem",
+                    "version": 1,
+                    "id": "ab0d2129-4417-567f-3048-0abdb937cb19",
+                    "properties": {
+                      "name": "Asset [dea228f2-4e80-1259-8df6-1e66ad83c47c]",
+                      "left": 0,
+                      "top": 1,
+                      "verticalAlignment": "center",
+                      "dropPositioning": "vertical",
+                      "templateId": "ui.android.templates.TabBarItemTemplate",
+                      "selected": false,
+                      "text": "You"
+                    },
+                    "tags": "TabBarItem"
+                  },
+                  {
+                    "type": "sketch.ui.android.TabBarItem",
+                    "version": 1,
+                    "id": "d9027ea2-7a67-b94b-ebfa-0c7e97a3e549",
+                    "properties": {
+                      "name": "Asset [efc04029-d51f-4d2f-2ae3-acaa8728cf46]",
+                      "left": 138,
+                      "top": 1,
+                      "verticalAlignment": "center",
+                      "dropPositioning": "vertical",
+                      "templateId": "ui.android.templates.TabBarItemTemplate",
+                      "text": "Top 10",
+                      "selected": false,
+                      "width": 130,
+                      "height": 45
+                    },
+                    "tags": "TabBarItem"
+                  },
+                  {
+                    "type": "sketch.ui.android.TabBarItem",
+                    "version": 1,
+                    "id": "5f4035ed-c8a6-e3ca-4d24-013e0b8362e2",
+                    "properties": {
+                      "name": "Asset [3ae80179-bd1d-eb99-4ebd-3120319bc2ab]",
+                      "left": 276,
+                      "top": 1,
+                      "verticalAlignment": "center",
+                      "dropPositioning": "vertical",
+                      "templateId": "ui.android.templates.TabBarItemTemplate",
+                      "text": "Your friends"
+                    },
+                    "tags": "TabBarItem"
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.android.List",
+                "version": 1,
+                "id": "e6afd06e-ecd7-5a5f-220b-dca24975ae36",
+                "properties": {
+                  "name": "List [1426]",
+                  "left": 0,
+                  "top": 67,
+                  "dropPositioning": "vertical",
+                  "enableGroupLocking": true,
+                  "templateId": "ui.android.templates.ListTemplate",
+                  "width": 450,
+                  "height": 654
+                },
+                "tags": "List",
+                "children": [
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "61823619-2fd5-a159-7276-cd2e2c42040e",
+                    "properties": {
+                      "name": "List item [274]",
+                      "left": 0,
+                      "top": 0,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "d2321fa8-2211-312c-75f1-103d15725aa9",
+                        "properties": {
+                          "width": 333,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 20,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "1. <Nickname> : <score> points",
+                          "font.size": 28,
+                          "font.bold": true,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "937dbc5f-3fd4-57bb-5608-881a31e045db",
+                        "properties": {
+                          "width": 393,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 24,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Info (last played, number of games played...)>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "e19377bd-ebfe-d182-9e16-8d4bce5ef588",
+                    "properties": {
+                      "name": "List item [274]",
+                      "left": 0,
+                      "top": 65,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "e367a99c-a65c-a03b-88a3-0bf0a2af2cf4",
+                        "properties": {
+                          "width": 333,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 20,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "2. <Nickname> : <score> points",
+                          "font.size": 28,
+                          "font.bold": true,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "7f56687c-dff1-ede6-4994-b0dcb74903a2",
+                        "properties": {
+                          "width": 393,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 24,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Info (last played, number of games played...)>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "9dc0d1cb-00d6-f80d-9a85-33453a231691",
+                    "properties": {
+                      "name": "List item [274]",
+                      "left": 0,
+                      "top": 130,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "59724be2-943d-415c-65a9-a0f1bb57699e",
+                        "properties": {
+                          "width": 333,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 20,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "3. <Nickname> : <score> points",
+                          "font.size": 28,
+                          "font.bold": true,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "bb897395-d4a6-06b5-7a36-f2bb8a2bf5e5",
+                        "properties": {
+                          "width": 393,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 24,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Info (last played, number of games played...)>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "2e6e794d-5525-80c3-2d37-bcc1ada2a49d",
+                    "properties": {
+                      "name": "List item [274]",
+                      "left": 0,
+                      "top": 130,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "384a2fa9-8e28-beb4-aa00-fa6a539428aa",
+                        "properties": {
+                          "width": 333,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 20,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "4. <Nickname> : <score> points",
+                          "font.size": 28,
+                          "font.bold": true,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "0d34576f-c000-2047-729e-ceddcfabee76",
+                        "properties": {
+                          "width": 393,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 24,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Info (last played, number of games played...)>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "fefcc363-0619-8274-44ab-2a9717e8ab73",
+                    "properties": {
+                      "name": "List item [274]",
+                      "left": 0,
+                      "top": 130,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "c09dfcff-a75d-4d4b-0094-b199e8cc9083",
+                        "properties": {
+                          "width": 333,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 20,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "5. <Nickname> : <score> points",
+                          "font.size": 28,
+                          "font.bold": true,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "268c781a-8fa0-0f4b-f208-22554f67b58e",
+                        "properties": {
+                          "width": 393,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 24,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Info (last played, number of games played...)>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "da802e6a-2432-37e2-1d5e-c5767876794d",
+                    "properties": {
+                      "name": "List item [274]",
+                      "left": 0,
+                      "top": 130,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "d26c2979-03b2-78c2-7101-661a0130b956",
+                        "properties": {
+                          "width": 333,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 20,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "6. <Nickname> : <score> points",
+                          "font.size": 28,
+                          "font.bold": true,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "944bc6cc-6ac4-6f5e-c1d8-cf2c22557f8a",
+                        "properties": {
+                          "width": 393,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 24,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Info (last played, number of games played...)>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "175c5d60-ba8c-26ca-0a3d-7621d713ce3f",
+                    "properties": {
+                      "name": "List item [274]",
+                      "left": 0,
+                      "top": 130,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "9408756a-0303-cb94-e95d-9da516d4d00a",
+                        "properties": {
+                          "width": 333,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 20,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "7. <Nickname> : <score> points",
+                          "font.size": 28,
+                          "font.bold": true,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "fe89bf95-0d40-ac10-ab6b-c88322b4398f",
+                        "properties": {
+                          "width": 393,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 24,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Info (last played, number of games played...)>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "86a35ffc-ee8e-c2e8-c729-65706c4ff9dc",
+                    "properties": {
+                      "name": "List item [274]",
+                      "left": 0,
+                      "top": 455,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "69d48f5e-4794-e7c5-76e0-50db4368a791",
+                        "properties": {
+                          "width": 333,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 20,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "8. <Nickname> : <score> points",
+                          "font.size": 28,
+                          "font.bold": true,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "0e6d70f4-63c1-7856-0a1f-a3a56fc6a225",
+                        "properties": {
+                          "width": 393,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 24,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Info (last played, number of games played...)>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "d2947359-64dc-1120-3921-cadffe57dc53",
+                    "properties": {
+                      "name": "List item [274]",
+                      "left": 0,
+                      "top": 455,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "80010200-51bd-ab74-10a6-ffffdbacfba4",
+                        "properties": {
+                          "width": 333,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 20,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "9. <Nickname> : <score> points",
+                          "font.size": 28,
+                          "font.bold": true,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "c40ded63-2e40-3e09-df92-e159f4cdc434",
+                        "properties": {
+                          "width": 393,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 24,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Info (last played, number of games played...)>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "sketch.ui.android.ListItem",
+                    "version": 1,
+                    "id": "b25b1f89-1211-5df9-77d9-86fa3da21570",
+                    "properties": {
+                      "name": "List item [274]",
+                      "left": 0,
+                      "top": 455,
+                      "horizontalAlignment": "stretch",
+                      "enableGroupLocking": true,
+                      "templateId": "ui.android.templates.ListItemTemplate"
+                    },
+                    "tags": "ListItem",
+                    "children": [
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "364b3728-0092-9700-ed50-2e87bd43eada",
+                        "properties": {
+                          "width": 333,
+                          "height": 25,
+                          "name": "Label [2524]",
+                          "left": 20,
+                          "top": 15,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "10. <Nickname> : <score> points",
+                          "font.size": 28,
+                          "font.bold": true,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font"
+                        }
+                      },
+                      {
+                        "type": "sketch.ui.common.Label",
+                        "version": 3,
+                        "id": "bb6ce92b-29a5-92d9-c19c-05d57f3ed1d7",
+                        "properties": {
+                          "width": 393,
+                          "height": 24,
+                          "name": "Label [2525]",
+                          "left": 24,
+                          "top": 40,
+                          "anchor.__type__": "sketch.framework.Anchor",
+                          "backgroundBrush.lineWidth": 0,
+                          "backgroundBrush.__type__": "sketch.framework.Brush",
+                          "borderBrush.lineWidth": 0,
+                          "borderBrush.__type__": "sketch.framework.Brush",
+                          "text": "<Info (last played, number of games played...)>",
+                          "font.size": 28,
+                          "font.color.value": "default.text",
+                          "font.color.type": "resource",
+                          "font.color.__type__": "sketch.framework.Brush",
+                          "font.__type__": "sketch.framework.Font",
+                          "multiLine": true
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "009c14a2-8d17-4303-8708-309ed1a9c7a7",
+                "properties": {
+                  "width": 156,
+                  "name": "Asset [322c93a3-c094-fd4b-60a7-dbf606943435]",
+                  "left": 276,
+                  "top": 734,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Back ",
+                  "showIcon": false,
+                  "height": 50
+                }
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "84410564-77bc-fbdf-361a-0d35325b8194",
+              "properties": {
+                "width": 450,
+                "height": 800,
+                "left": 1340,
+                "top": 760,
+                "clipSelf": true
+              }
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1
+      },
+      {
+        "version": 1,
+        "id": "a99edeee-da22-9bd2-cc7d-23b5bfc4534d",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "Login",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "d57a1082-5ac3-63cf-43bb-a0b63c9aa942",
+            "properties": {
+              "width": 3130,
+              "height": 2320
+            },
+            "children": [
+              {
+                "type": "sketch.ui.common.Image",
+                "version": 6,
+                "id": "7ffcad4f-0286-de23-afa9-be4ae820ea2d",
+                "properties": {
+                  "width": 438,
+                  "height": 263,
+                  "left": 5,
+                  "top": 11,
+                  "source.__type__": "sketch.framework.ImageSourceNone",
+                  "clipSelf": true
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "65bdd5fc-3544-53d2-3816-cd8f8f1e8129",
+                "properties": {
+                  "width": 357,
+                  "height": 26,
+                  "left": 41,
+                  "top": 297,
+                  "text": "Welcome to mutibo! Please login to play.",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "a0d803e2-7c10-fc2a-7f95-da1b02dbc578",
+                "properties": {
+                  "width": 0,
+                  "height": 0,
+                  "left": 279,
+                  "top": 424
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "154954e2-dc84-7e23-2993-a99b6afef209",
+                "properties": {
+                  "left": 101,
+                  "top": 366
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "f048bef0-1186-f9f6-3c0e-ccfd4c4735ee",
+                "properties": {
+                  "left": 84,
+                  "top": 376
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "1f8c32d4-b62f-ba3e-4a16-ade06211a5fa",
+                "properties": {
+                  "left": 129,
+                  "top": 365
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "b7802ad8-8f06-1cd2-1069-c784228ee3d6",
+                "properties": {
+                  "width": 401,
+                  "name": "Asset [5172e54d-31fe-16e7-b8e4-8374cfcb40e2]",
+                  "left": 19,
+                  "top": 358,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Login using Facebook",
+                  "height": 50
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "113adedb-05b5-a956-d566-cd53efc5049f",
+                "properties": {
+                  "width": 401,
+                  "name": "Asset [5172e54d-31fe-16e7-b8e4-8374cfcb40e2]",
+                  "left": 19,
+                  "top": 462,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Login using Google+",
+                  "height": 50
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "46788363-3d80-dd7f-113b-a0c237f48d1c",
+                "properties": {
+                  "width": 65,
+                  "height": 26,
+                  "left": 179,
+                  "top": 424,
+                  "text": "- or -",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.ui.android.Checkbox",
+                "version": 1,
+                "id": "baef9c1a-79f9-2960-0f80-33e6d40b877f",
+                "properties": {
+                  "width": 303,
+                  "name": "Asset [f3855140-ced9-e3c3-d640-7d23f987f5f6]",
+                  "left": 28,
+                  "top": 758,
+                  "templateId": "ui.android.templates.CheckBoxTemplate",
+                  "text": "Login automatically in the future"
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "54dd95de-3c6e-ea02-8349-9333930d9ea7",
+                "properties": {
+                  "width": 401,
+                  "height": 30,
+                  "left": 19,
+                  "top": 553,
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "text": "<Login failure indication>",
+                  "textAlign": "center",
+                  "textVerticalAlign": "middle"
+                }
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "cd9b73f5-b1f6-d67f-cfbc-bcd9e2a017cb",
+              "properties": {
+                "width": 450,
+                "height": 800,
+                "left": 1340,
+                "top": 760,
+                "clipSelf": true
+              }
+            }
+          },
+          {
+            "type": "sketch.framework.Line",
+            "version": 2,
+            "id": "b59f5e6b-abe7-9866-18c6-c64a0f5c1fc1",
+            "properties": {
+              "left": 1170,
+              "top": 1222
+            }
+          },
+          {
+            "type": "sketch.framework.Line",
+            "version": 2,
+            "id": "a299ea4d-3194-c259-7e8d-5fefc6b11af1",
+            "properties": {
+              "left": 1093,
+              "top": 1082
+            }
+          },
+          {
+            "type": "sketch.framework.Line",
+            "version": 2,
+            "id": "eb7a64c9-04bd-b037-b060-4ff566e35bb5",
+            "properties": {
+              "width": 3,
+              "height": 7,
+              "left": 1074,
+              "top": 1056,
+              "x2": 3,
+              "y2": 7
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1
+      },
+      {
+        "version": 1,
+        "id": "b75faca8-e8dc-30f3-6e41-28246728ba9b",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "GameDone",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "f9c4649a-6c34-1f1a-2554-2bfa47364adc",
+            "properties": {
+              "width": 3130,
+              "height": 2321
+            },
+            "children": [
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "b8d5a0b8-e5e5-921d-a4d1-e849a3ae9c86",
+                "properties": {
+                  "width": 406,
+                  "height": 26,
+                  "left": 17,
+                  "top": 50,
+                  "text": "Which movie doesn't fit in with the others ?",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "cf642baf-c63b-9277-30de-935f07fcb745",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "a117df44-f16c-cf0c-2bab-48038233d7ec",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "bca2a69e-3651-5284-a08b-f2be745c8fd1",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "c38d5e9c-34f5-aae9-a7b5-c336916a47d5",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "327cbc5b-d1dc-6d69-b3f6-b90f1c136ac8",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "251983d1-ece6-2623-1d68-22556bead0df",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.Rectangle",
+                "version": 3,
+                "id": "aecdcf04-f9e7-5342-f02c-f74944762808",
+                "properties": {
+                  "left": -1340,
+                  "top": -760
+                }
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "ea81e7c9-0229-e9a3-4857-bd01981a8e17",
+                "properties": {
+                  "width": 190,
+                  "height": 281,
+                  "left": 16,
+                  "top": 83,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.common.Image",
+                    "version": 6,
+                    "id": "ae2ac43e-ab17-0081-ae6f-b33cbe4eb635",
+                    "properties": {
+                      "width": 190,
+                      "height": 250,
+                      "left": 0,
+                      "top": 0,
+                      "source.__type__": "sketch.framework.ImageSourceNone",
+                      "clipSelf": true
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.common.Label",
+                    "version": 3,
+                    "id": "866f126d-b9b8-7085-01f4-b1a78d2385fe",
+                    "properties": {
+                      "width": 187,
+                      "height": 26,
+                      "left": 3,
+                      "top": 255,
+                      "text": "<movie title>",
+                      "textAlign": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "ce51eaa5-c2cd-0bc4-cb41-0e792fb5b703",
+                "properties": {
+                  "width": 190,
+                  "height": 281,
+                  "left": 232,
+                  "top": 83,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.common.Image",
+                    "version": 6,
+                    "id": "ec6a75e1-76b1-9afa-bbca-d6b1e04a293f",
+                    "properties": {
+                      "width": 190,
+                      "height": 250,
+                      "left": 0,
+                      "top": 0,
+                      "source.__type__": "sketch.framework.ImageSourceNone",
+                      "clipSelf": true
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.common.Label",
+                    "version": 3,
+                    "id": "f90dd709-7dd6-2ca2-7bc4-34c0bb5fd321",
+                    "properties": {
+                      "width": 187,
+                      "height": 26,
+                      "left": 2,
+                      "top": 255,
+                      "text": "<movie title>",
+                      "textAlign": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "a1db50d3-ae03-dc96-8d8d-ed4e75b7afb5",
+                "properties": {
+                  "width": 191,
+                  "height": 276,
+                  "left": 16,
+                  "top": 372,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.common.Image",
+                    "version": 6,
+                    "id": "f5cc760c-bcb7-4356-d14e-65632bd4549a",
+                    "properties": {
+                      "width": 190,
+                      "height": 250,
+                      "left": 0,
+                      "top": 0,
+                      "source.__type__": "sketch.framework.ImageSourceNone",
+                      "clipSelf": true
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.common.Label",
+                    "version": 3,
+                    "id": "f4e6647b-fd75-ee8e-7102-05fb080d26e4",
+                    "properties": {
+                      "width": 187,
+                      "height": 26,
+                      "left": 4,
+                      "top": 250,
+                      "text": "<movie title>",
+                      "textAlign": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "e6c4ebae-b2b4-c789-8b04-d3defafefc20",
+                "properties": {
+                  "width": 190,
+                  "height": 276,
+                  "left": 232,
+                  "top": 372,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.common.Image",
+                    "version": 6,
+                    "id": "cfbb5cef-5e6a-8ecc-dc58-83b580b46656",
+                    "properties": {
+                      "width": 190,
+                      "height": 250,
+                      "left": 0,
+                      "top": 0,
+                      "source.__type__": "sketch.framework.ImageSourceNone",
+                      "clipSelf": true
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.common.Label",
+                    "version": 3,
+                    "id": "0caa34e6-9897-4f7e-4f21-5b68a7892d99",
+                    "properties": {
+                      "width": 187,
+                      "height": 26,
+                      "left": 2,
+                      "top": 250,
+                      "text": "<movie title>",
+                      "textAlign": "center"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "bc1d7f70-7f24-27c0-8027-755cb6a66870",
+                "properties": {
+                  "width": 406,
+                  "height": 26,
+                  "left": 17,
+                  "top": 11,
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "text": "   Your total score : <x>",
+                  "textVerticalAlign": "middle",
+                  "font.family": "Impact",
+                  "font.size": 20,
+                  "font.__type__": "sketch.framework.Font"
+                }
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "01e492ef-b6c3-8e84-3269-f43f0ce7d155",
+                "properties": {
+                  "width": 86,
+                  "height": 25,
+                  "left": 335,
+                  "top": 12,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "fbd2768a-ada8-5722-50e1-6be9013fef27",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [cedc5d34-9452-8ea3-f983-ad8ebbc7f6e6]",
+                      "left": 0,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "3d4636ef-5726-5f80-2516-6133ecb2e3ed",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [aaa2ac0b-dd9d-958d-913f-4674a90eaed2]",
+                      "left": 30,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  },
+                  {
+                    "type": "sketch.ui.shapes.TemplatedShape",
+                    "version": 1,
+                    "id": "84ddf610-51be-07bb-9810-048d977a8dde",
+                    "properties": {
+                      "width": 25,
+                      "height": 25,
+                      "name": "Asset [76d0b31b-779a-378b-c61b-4cd9c56bf75e]",
+                      "left": 61,
+                      "top": 0,
+                      "templateId": "ui.shapes.templates.HeartTemplate"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "7676c064-3e87-13e0-a438-de28ac397c20",
+                "properties": {
+                  "width": 156,
+                  "name": "Asset [322c93a3-c094-fd4b-60a7-dbf606943435]",
+                  "left": 265,
+                  "top": 735,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Continue Game",
+                  "showIcon": false
+                }
+              },
+              {
+                "type": "sketch.ui.common.TextBlock",
+                "version": 2,
+                "id": "f8340327-8983-f780-de36-9661842acbf3",
+                "properties": {
+                  "width": 405,
+                  "height": 67,
+                  "left": 16,
+                  "top": 648,
+                  "text": "<Indication of succes or failure>\n<Explanation of the odd one out>",
+                  "multiLine": true,
+                  "clipSelf": true,
+                  "textAlign": "center",
+                  "font.lineHeight": 0.9,
+                  "borderBrush.value": "rgba(229,229,229,1)",
+                  "borderBrush.type": "color",
+                  "borderBrush.__type__": "sketch.framework.Brush",
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "textVerticalAlign": "middle"
+                },
+                "tags": "Primitive,P"
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "f330516d-ea06-623a-bbb7-ba7250ce40c7",
+                "properties": {
+                  "width": 173,
+                  "height": 26,
+                  "left": 40.5,
+                  "top": 729,
+                  "text": "Please rate this set",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.framework.GroupContainer",
+                "version": 1,
+                "id": "3d1e6b57-aca2-85f1-7882-5cf78f8e5a6d",
+                "properties": {
+                  "width": 183,
+                  "height": 30,
+                  "left": 36.5,
+                  "top": 755,
+                  "enableGroupLocking": true
+                },
+                "children": [
+                  {
+                    "type": "sketch.framework.Star",
+                    "version": 2,
+                    "id": "310a3f7e-0d36-473f-cad1-b57229cbfa70",
+                    "properties": {
+                      "width": 30,
+                      "height": 30,
+                      "left": 0,
+                      "top": 0
+                    }
+                  },
+                  {
+                    "type": "sketch.framework.Star",
+                    "version": 2,
+                    "id": "5e562f1b-6ace-2773-3f00-2f85f90e9c57",
+                    "properties": {
+                      "width": 30,
+                      "height": 30,
+                      "left": 38,
+                      "top": 0
+                    }
+                  },
+                  {
+                    "type": "sketch.framework.Star",
+                    "version": 2,
+                    "id": "f346fa5f-a633-c8f9-ac5c-3ef36d05c165",
+                    "properties": {
+                      "width": 30,
+                      "height": 30,
+                      "left": 76,
+                      "top": 0
+                    }
+                  },
+                  {
+                    "type": "sketch.framework.Star",
+                    "version": 2,
+                    "id": "0001d997-207a-1000-cc83-121957a5dac3",
+                    "properties": {
+                      "width": 30,
+                      "height": 30,
+                      "left": 114,
+                      "top": 0
+                    }
+                  },
+                  {
+                    "type": "sketch.framework.Star",
+                    "version": 2,
+                    "id": "25cc78c7-b81c-9c48-a63e-e141acc609e7",
+                    "properties": {
+                      "width": 30,
+                      "height": 30,
+                      "left": 153,
+                      "top": 0
+                    }
+                  }
+                ]
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "a8a46bad-9a8e-fcd1-ab4e-4211704dad86",
+              "properties": {
+                "width": 450,
+                "height": 801,
+                "left": 1340,
+                "top": 760,
+                "clipSelf": true
+              }
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1
+      },
+      {
+        "version": 1,
+        "id": "e965e32e-158f-9f92-14e9-e07bdcebca9e",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "Duel 2",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "690c7bde-8bfe-502a-7391-f69411d0b98f",
+            "properties": {
+              "width": 3130,
+              "height": 2320
+            },
+            "children": [
+              {
+                "type": "sketch.ui.common.Image",
+                "version": 6,
+                "id": "02b8c304-e135-716e-a10a-028771d4e570",
+                "properties": {
+                  "width": 430,
+                  "height": 83,
+                  "left": 10,
+                  "top": 9,
+                  "source.__type__": "sketch.framework.ImageSourceNone",
+                  "clipSelf": true
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "79fb38fa-3457-2d7c-99b5-4decf0586b68",
+                "properties": {
+                  "width": 430,
+                  "height": 54,
+                  "left": 10,
+                  "top": 133,
+                  "text": "Starting a multiplayer game ...",
+                  "textAlign": "center",
+                  "font.size": 47,
+                  "font.__type__": "sketch.framework.Font",
+                  "multiLine": true
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "e9e01ddc-69dc-8ef3-9b84-7332391d4cde",
+                "properties": {
+                  "name": "Asset [e7ba9c4b-1ae4-abcb-2abb-4c161a5439de]",
+                  "left": 10,
+                  "top": 634,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "showIcon": false,
+                  "width": 430,
+                  "height": 50,
+                  "text": "Cancel"
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "2504f307-a63d-0820-13b9-7ee7c654ae03",
+                "properties": {
+                  "width": 348,
+                  "height": 26,
+                  "left": 51,
+                  "top": 214,
+                  "text": "Waiting for an opponent",
+                  "textAlign": "center",
+                  "font.__type__": "sketch.framework.Font"
+                }
+              },
+              {
+                "type": "sketch.framework.Circle",
+                "version": 2,
+                "id": "a0cedd47-554d-468c-3885-ec43946b388b",
+                "properties": {
+                  "width": 25,
+                  "height": 25,
+                  "left": 212,
+                  "top": 387
+                }
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "c8afda1b-3a2f-d4c3-99af-e2fa9d985004",
+              "properties": {
+                "width": 450,
+                "height": 800,
+                "left": 1340,
+                "top": 760,
+                "clipSelf": true
+              }
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1
+      },
+      {
+        "version": 1,
+        "id": "f5bd44e6-fa93-03dc-0804-e77e989afc00",
+        "type": "sketch.ui.pages.PortableDevicePage",
+        "name": "LoginPreliminary",
+        "background": {
+          "value": null,
+          "type": null,
+          "lineWidth": 0,
+          "__type__": "sketch.framework.Brush"
+        },
+        "children": [
+          {
+            "type": "sketch.ui.android.Android",
+            "version": 1,
+            "id": "7eb3238b-2e06-d828-a69b-c27fa50d0c72",
+            "properties": {
+              "width": 3130,
+              "height": 2320
+            },
+            "children": [
+              {
+                "type": "sketch.ui.common.Image",
+                "version": 6,
+                "id": "4bd9254a-574d-2eb9-688f-32039082f052",
+                "properties": {
+                  "width": 438,
+                  "height": 263,
+                  "left": 5,
+                  "top": 11,
+                  "source.__type__": "sketch.framework.ImageSourceNone",
+                  "clipSelf": true
+                }
+              },
+              {
+                "type": "sketch.ui.android.TextField",
+                "version": 1,
+                "id": "63127466-ccef-f89f-86c5-9f5f51dba992",
+                "properties": {
+                  "width": 300,
+                  "name": "Asset [bc2f6bb2-d651-bbe6-7592-fd054e266663]",
+                  "left": 128,
+                  "top": 374,
+                  "templateId": "ui.android.templates.TextFieldTemplate",
+                  "height": 30
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "63b822b2-c3b6-0d6b-1b51-561a50305865",
+                "properties": {
+                  "width": 89,
+                  "height": 26,
+                  "left": 27,
+                  "top": 376,
+                  "text": "Nickname:",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "5fd9444d-5747-9c0d-c63a-4450f1d4de4e",
+                "properties": {
+                  "width": 357,
+                  "height": 26,
+                  "left": 41,
+                  "top": 297,
+                  "text": "Welcome to mutibo! Please login to play",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "7b2c118a-925e-f9a8-e8b1-90f742d0b8cb",
+                "properties": {
+                  "width": 0,
+                  "height": 0,
+                  "left": 279,
+                  "top": 424
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "609e356b-76ed-845f-6cc9-36f96792b294",
+                "properties": {
+                  "left": 101,
+                  "top": 366
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "336214df-000a-b8f4-cfdc-956328473726",
+                "properties": {
+                  "left": 84,
+                  "top": 376
+                }
+              },
+              {
+                "type": "sketch.framework.Line",
+                "version": 2,
+                "id": "7e0ce7c0-0a04-2204-213e-f2a2df60fd21",
+                "properties": {
+                  "left": 129,
+                  "top": 365
+                }
+              },
+              {
+                "type": "sketch.ui.android.TextField",
+                "version": 1,
+                "id": "4174f5d6-e80b-ee58-35f3-b25d2a481eb7",
+                "properties": {
+                  "width": 302,
+                  "name": "Asset [bc2f6bb2-d651-bbe6-7592-fd054e266663]",
+                  "left": 126,
+                  "top": 445,
+                  "templateId": "ui.android.templates.TextFieldTemplate",
+                  "height": 30
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "8576e3d2-b326-6c0a-594d-90db2cdb3c56",
+                "properties": {
+                  "width": 94,
+                  "height": 26,
+                  "left": 27,
+                  "top": 448,
+                  "text": "Password :",
+                  "font.__type__": "sketch.framework.Font",
+                  "scaleWithFontSize": true
+                }
+              },
+              {
+                "type": "sketch.ui.android.Checkbox",
+                "version": 1,
+                "id": "a71ddbcd-b781-d1ef-e0d3-3a6e29e78217",
+                "properties": {
+                  "width": 303,
+                  "name": "Asset [f3855140-ced9-e3c3-d640-7d23f987f5f6]",
+                  "left": 28,
+                  "top": 758,
+                  "templateId": "ui.android.templates.CheckBoxTemplate",
+                  "text": "Login automatically in the future"
+                }
+              },
+              {
+                "type": "sketch.ui.android.ImageTextButton",
+                "version": 1,
+                "id": "291753b2-e57f-eb2f-7532-a509ce117e7a",
+                "properties": {
+                  "width": 401,
+                  "name": "Asset [5fdcf01b-3993-4701-e2f6-9247b134e664]",
+                  "left": 27,
+                  "top": 513,
+                  "templateId": "ui.android.templates.ImageTextButtonTemplate",
+                  "text": "Login",
+                  "showIcon": false,
+                  "height": 50
+                }
+              },
+              {
+                "type": "sketch.ui.android.SeparatorHorizontal",
+                "version": 1,
+                "id": "81d3004d-f7b2-013b-c3ad-f48772f1cbed",
+                "properties": {
+                  "width": 401,
+                  "height": 8,
+                  "name": "Asset [8a7dfe33-dffa-0732-8e82-e7ba294674fe]",
+                  "left": 26,
+                  "top": 422,
+                  "templateId": "ui.android.templates.SeparatorHorizontalTemplate"
+                }
+              },
+              {
+                "type": "sketch.ui.common.Label",
+                "version": 3,
+                "id": "ad529cdd-4af4-2622-1c59-9ad4152d5385",
+                "properties": {
+                  "width": 401,
+                  "height": 41,
+                  "left": 26,
+                  "top": 581,
+                  "backgroundBrush.value": "rgba(229,229,229,1)",
+                  "backgroundBrush.type": "color",
+                  "backgroundBrush.__type__": "sketch.framework.Brush",
+                  "text": "<Login failure indication>",
+                  "textAlign": "center",
+                  "textVerticalAlign": "middle"
+                }
+              }
+            ],
+            "panelProperties": {
+              "type": "sketch.ui.common.PortableDevicePanel",
+              "version": 1,
+              "id": "cd9b73f5-b1f6-d67f-cfbc-bcd9e2a017cb",
+              "properties": {
+                "width": 450,
+                "height": 800,
+                "left": 1340,
+                "top": 760,
+                "clipSelf": true
+              }
+            }
+          },
+          {
+            "type": "sketch.framework.Line",
+            "version": 2,
+            "id": "3c89058e-c4e3-fb82-5c55-7ae5a8fc38d9",
+            "properties": {
+              "left": 1170,
+              "top": 1222
+            }
+          },
+          {
+            "type": "sketch.framework.Line",
+            "version": 2,
+            "id": "9beed49b-25f1-bc8d-0113-52a88e322654",
+            "properties": {
+              "left": 1093,
+              "top": 1082
+            }
+          },
+          {
+            "type": "sketch.framework.Line",
+            "version": 2,
+            "id": "5dedfeaa-011c-5ef2-566c-919e3831bd34",
+            "properties": {
+              "width": 3,
+              "height": 7,
+              "left": 1074,
+              "top": 1056,
+              "x2": 3,
+              "y2": 7
+            }
+          }
+        ],
+        "isDeleted": false,
+        "groupId": 1
+      }
+    ],
+    "appName": "Mutibo",
+    "saveTime": "2014-10-17T20:00:15.412Z",
+    "lastNotificationId": 0,
+    "theme": "napkin",
+    "isCrazy": true,
+    "defaultFontFamily": "TomsHandwritten",
+    "pageGroups": [
+      {
+        "type": "sketch.framework.PageGroup",
+        "properties": {
+          "id": 1,
+          "name": "Default group",
+          "pageIds": [
+            "f5bd44e6-fa93-03dc-0804-e77e989afc00",
+            "a99edeee-da22-9bd2-cc7d-23b5bfc4534d",
+            "87335762-975e-039c-4431-ec4f140ec565",
+            "906c827d-144d-6f30-1a2f-15810b2fcff2",
+            "18c77848-f97d-0580-cfb3-544932411e54",
+            "b75faca8-e8dc-30f3-6e41-28246728ba9b",
+            "9e32fbf7-8a64-90e2-2591-22b14db64a01",
+            "73325a27-42f1-e6f8-4c9f-25ffda7908dd",
+            "e965e32e-158f-9f92-14e9-e07bdcebca9e",
+            "23085e05-7aa4-c237-cc70-b45cbc197ade",
+            "33d3d8c0-593e-05c8-df20-63da3049f05a",
+            "5d52ebae-8b97-a058-6cbd-4e5c616d3748"
+          ]
+        }
+      }
+    ],
+    "satelliteProjects": [],
+    "extraParameters": null,
+    "modelVersion": 2,
+    "version": "4acfce12-77d4-4217-9805-7fcbc0e4cf91",
+    "projectType": "AndroidProject",
+    "resources": {
+      "templates": {},
+      "colorPallet": []
+    },
+    "pageStatuses": [
+      {
+        "pageId": "23085e05-7aa4-c237-cc70-b45cbc197ade",
+        "userId": 1127642,
+        "dateTime": "2014-10-22T21:40:20",
+        "projectId": 1127696,
+        "statusId": "designComplete",
+        "statusMessage": "Design complete",
+        "id": 1146774
+      },
+      {
+        "pageId": "8d36a774-7c04-70d0-675b-66c80a580e95",
+        "userId": 1127642,
+        "dateTime": "2014-10-17T22:08:05",
+        "projectId": 1127696,
+        "statusId": "designComplete",
+        "statusMessage": "Design complete",
+        "id": 1127173
+      },
+      {
+        "pageId": "906c827d-144d-6f30-1a2f-15810b2fcff2",
+        "userId": 1127642,
+        "dateTime": "2014-10-18T15:22:42",
+        "projectId": 1127696,
+        "statusId": "designComplete",
+        "statusMessage": "Design complete",
+        "id": 1128810
+      }
+    ]
+  }
+}
