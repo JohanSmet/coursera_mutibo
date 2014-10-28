@@ -4,14 +4,13 @@ import javax.servlet.http.HttpServletResponse;
 import mutibo.data.MutiboMovie;
 import mutibo.repository.MutiboMovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import mutibo.themoviedb.TmdbApi;
 
 /**
  * /movie controller
@@ -20,6 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MutiboMovieControler 
 {
+	public MutiboMovieControler()
+	{
+	}
 	/**
 	 * Retrieve a list of all known movies
 	 * @return A list of MutiboMovies
@@ -51,6 +53,11 @@ public class MutiboMovieControler
 		return f_movie;
 	}
 
+	/**
+	 * Return a list of movies who's names match a given pattern
+	 * @param pattern
+	 * @return 
+	 */
 	@RequestMapping(method=RequestMethod.GET, value="/movie/find-by-name")
 	public Iterable<MutiboMovie> findByName(@RequestParam("pattern") String pattern)
 	{
@@ -59,19 +66,21 @@ public class MutiboMovieControler
 
 	/**
 	 * Add or update a movie
-	 * @param p_movie
+	 * @param id
 	 * @return MutiboMovie
 	 */
-	@RequestMapping(method=RequestMethod.POST, value="/movie")
-	public MutiboMovie addMovie(@RequestBody MutiboMovie p_movie)
+	@RequestMapping(method=RequestMethod.POST, value="/movie/{id}")
+	public MutiboMovie addMovie(@PathVariable("id") String id)
 	{	
-		movieRepository.save(p_movie);
-		return p_movie;
+		MutiboMovie f_movie = tmdbApi.findByImdbId(id);
+		movieRepository.save(f_movie);
+		return f_movie;
 	}
 
 	//
 	// member variables
 	//
 
-	@Autowired private MutiboMovieRepository	movieRepository;
+	@Autowired private MutiboMovieRepository   	movieRepository;
+	@Autowired private TmdbApi					tmdbApi;
 }

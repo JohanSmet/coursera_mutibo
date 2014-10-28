@@ -7,6 +7,7 @@ import mutibo.TestUtil;
 import mutibo.WebAppContext;
 import mutibo.data.MutiboMovie;
 import mutibo.repository.MutiboMovieRepository;
+import mutibo.themoviedb.TmdbApi;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
@@ -27,6 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -43,6 +45,9 @@ public class MutiboMovieControllerTest
 
 	@Autowired
 	private MutiboMovieRepository movieRepositoryMock;
+
+	@Autowired
+	private TmdbApi tmdbApiMock;
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
@@ -156,6 +161,27 @@ public class MutiboMovieControllerTest
 				;
 
 		verify(movieRepositoryMock, times(1)).findByNameLike("%Iron%");
+        verifyNoMoreInteractions(movieRepositoryMock);
+	}
+
+	@Test
+	public void addMovie_test() throws Exception
+	{
+		// setup the tmdb-mock
+		MutiboMovie f_movie_01 = new MutiboMovie("tt0848228", "Avengers Assemble", 2012, "Plot Irrelavant");
+		when(tmdbApiMock.findByImdbId("tt0848228")).thenReturn(f_movie_01);
+
+		mockMvc.perform(post("/movie/{id}", "tt0848228"))
+					.andExpect(status().isOk())
+					.andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+					.andExpect(jsonPath("$.imdbId", 		is("tt0848228")))
+					.andExpect(jsonPath("$.name", 			is("Avengers Assemble")))
+					.andExpect(jsonPath("$.yearRelease", 	is(2012)))
+					.andExpect(jsonPath("$.plot",			is("Plot Irrelavant")))
+				;
+
+		verify(movieRepositoryMock, times(1)).save(f_movie_01);
+		verify(tmdbApiMock, times(1)).findByImdbId("tt0848228");
         verifyNoMoreInteractions(movieRepositoryMock);
 	}
 }
