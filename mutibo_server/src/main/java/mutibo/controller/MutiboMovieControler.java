@@ -77,7 +77,13 @@ public class MutiboMovieControler
 	@RequestMapping(method=RequestMethod.POST, value="/movie/{id}")
 	public MutiboMovie addMovie(@PathVariable("id") String id)
 	{	
-		MutiboMovie f_movie = tmdbApi.findByImdbId(id);
+		MutiboMovie f_movie = null;
+
+		if (id.startsWith("tt"))
+			f_movie = tmdbApi.findByImdbId(id);
+		else if (id.matches("\\d+"))
+			f_movie = tmdbApi.findById(Integer.parseInt(id));
+
 		movieRepository.save(f_movie);
 		return f_movie;
 	}

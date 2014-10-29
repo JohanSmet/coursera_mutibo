@@ -5,6 +5,7 @@
  */
 package mutibo.themoviedb;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -92,6 +93,20 @@ public class TmdbMovie
 	public Date getRelease_date()
 	{
 		return release_date;
+	}
+
+	public int getRelease_year()
+	{
+		if (release_date != null)
+		{
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(release_date);
+			return cal.get(Calendar.YEAR);
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 	public void setRelease_date(Date release_date)

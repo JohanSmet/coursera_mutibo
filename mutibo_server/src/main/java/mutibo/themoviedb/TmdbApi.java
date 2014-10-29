@@ -82,6 +82,16 @@ public class TmdbApi
 		return new MutiboMovie(imdbId, f_movie.getTitle(), f_movie.getRelease_year(), f_plot);
 	}
 
+	public MutiboMovie findById(int id)
+	{
+		TmdbMovie f_movie = tmdbApiClient.findById(id, apiKey);
+
+		if (f_movie != null)
+			return new MutiboMovie(f_movie.getImdb_id(), f_movie.getTitle(), f_movie.getRelease_year(), f_movie.getOverview());
+		else
+			return null;
+	}
+
 	public Collection<MutiboMovie> findByName(String pattern)
 	{
 		Collection<MutiboMovie> f_results = new ArrayList<>();
