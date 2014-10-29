@@ -13,6 +13,7 @@ import org.springframework.data.repository.CrudRepository;
  * Repository that stores MutiboMovies
  * @author Redacted
  */
+
 public interface MutiboMovieRepository extends CrudRepository<MutiboMovie, String>
 {
  	List<MutiboMovie> findByNameLike(String pattern);

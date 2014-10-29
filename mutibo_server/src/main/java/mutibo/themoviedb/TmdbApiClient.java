@@ -16,4 +16,6 @@ public interface TmdbApiClient
 	@GET("/3/movie/{id}")
 	public TmdbMovie findById(@Path("id") int tmdbId, @Query("api_key") String apiKey);
 
+	@GET("/3/search/movie")
+	public  TmdbSearchResults findByName(@Query("query") String query, @Query("page") int page, @Query("api_key") String apiKey);
 }

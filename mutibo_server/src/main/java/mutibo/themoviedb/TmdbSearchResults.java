@@ -40,6 +40,16 @@ public class TmdbSearchResults
 	{
 		this.total_results = total_results;
 	}
+
+	public List<TmdbSearchMovie> getResults()
+	{
+		return results;
+	}
+
+	public void setResults(List<TmdbSearchMovie> results)
+	{
+		this.results = results;
+	}
 	
 	// member variables
 	private int 					page;

@@ -1,6 +1,7 @@
 package mutibo.themoviedb;
 
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -59,9 +60,16 @@ public class TmdbSearchMovie
 
 	public int getRelease_year()
 	{
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(release_date);
-		return cal.get(Calendar.YEAR);
+		if (release_date != null)
+		{
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(release_date);
+			return cal.get(Calendar.YEAR);
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 	public void setRelease_date(Date release_date)
@@ -117,6 +125,15 @@ public class TmdbSearchMovie
 	public void setVote_count(int vote_count)
 	{
 		this.vote_count = vote_count;
+	}
+
+	public static class Comparators {
+		public static Comparator<TmdbSearchMovie> POPULARITY_DESC = new Comparator<TmdbSearchMovie>() {
+            @Override
+            public int compare(TmdbSearchMovie o1, TmdbSearchMovie o2) {
+                return Float.compare(o1.getPopularity(), o2.getPopularity()) * -1;
+            }
+        };
 	}
 
 	// member variables

@@ -1,5 +1,6 @@
 package mutibo.controller;
 
+import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import mutibo.data.MutiboMovie;
 import mutibo.repository.MutiboMovieRepository;
@@ -61,7 +62,11 @@ public class MutiboMovieControler
 	@RequestMapping(method=RequestMethod.GET, value="/movie/find-by-name")
 	public Iterable<MutiboMovie> findByName(@RequestParam("pattern") String pattern)
 	{
-		return movieRepository.findByNameLike(pattern);
+		List<MutiboMovie> f_results = movieRepository.findByNameLike(pattern);
+
+		f_results.addAll(tmdbApi.findByName(pattern));
+
+		return f_results;
 	}
 
 	/**
