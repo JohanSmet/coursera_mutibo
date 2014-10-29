@@ -1,5 +1,6 @@
 package mutibo;
 
+import mutibo.repository.MutiboDeckRepository;
 import mutibo.repository.MutiboMovieRepository;
 import mutibo.themoviedb.TmdbApi;
 import org.mockito.Mockito;
@@ -16,6 +17,12 @@ public class TestContext
 	public MutiboMovieRepository movieRepository() 
 	{
 		return Mockito.mock(MutiboMovieRepository.class);
+	}
+
+	@Bean
+	public MutiboDeckRepository deckRepository() 
+	{
+		return Mockito.mock(MutiboDeckRepository.class);
 	}
 
 	@Bean

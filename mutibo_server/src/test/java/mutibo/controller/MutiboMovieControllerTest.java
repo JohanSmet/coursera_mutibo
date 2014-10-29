@@ -59,6 +59,7 @@ public class MutiboMovieControllerTest
 		// are managed by the Spring container. If we would not reset them,
 		// stubbing and verified behavior would "leak" from one test to another.
 		Mockito.reset(movieRepositoryMock);
+		Mockito.reset(tmdbApiMock);
 		mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
 	}
 	
