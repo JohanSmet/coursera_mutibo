@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MutiboDeckController
 {
-	private Object httpResponse;
 	public MutiboDeckController()
 	{
 	}
@@ -68,7 +67,6 @@ public class MutiboDeckController
 		f_deck.setReleased(true);
 		return deckRepository.save(f_deck);
 	}
-
 		
 	// member variables	
 	@Autowired
