@@ -1,5 +1,6 @@
 package mutibo.data;
 
+import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -104,6 +105,20 @@ public class MutiboMovie
 	public void setPlot(String plot)
 	{
 		this.plot = plot;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		return obj instanceof MutiboMovie && this.imdbId.equals(((MutiboMovie) obj).imdbId);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int hash = 7;
+		hash = 73 * hash + Objects.hashCode(this.imdbId);
+		return hash;
 	}
 
 	// member variables

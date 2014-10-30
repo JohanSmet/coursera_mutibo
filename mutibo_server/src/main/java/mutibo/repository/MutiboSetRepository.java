@@ -5,6 +5,7 @@
  */
 package mutibo.repository;
 
+import java.util.List;
 import mutibo.data.MutiboSet;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MutiboSetRepository extends CrudRepository<MutiboSet, Long>
 {
+	List<MutiboSet> findByDeckId(Long deckId);
 }

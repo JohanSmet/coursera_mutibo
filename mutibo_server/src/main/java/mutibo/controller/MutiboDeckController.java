@@ -7,7 +7,10 @@ package mutibo.controller;
 
 import javax.servlet.http.HttpServletResponse;
 import mutibo.data.MutiboDeck;
+import mutibo.data.MutiboSync;
 import mutibo.repository.MutiboDeckRepository;
+import mutibo.repository.MutiboMovieRepository;
+import mutibo.repository.MutiboSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -63,12 +66,26 @@ public class MutiboDeckController
 			httpResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
 			return f_deck;
 		}
-
+		
+		// toggle the release flag
 		f_deck.setReleased(true);
+
+		// update the content-hash
+		MutiboSync mutiboSync = new MutiboSync(f_deck);
+		mutiboSync.fill(movieRepository, setRepository);
+		f_deck.setContentHash(mutiboSync.computeHash());
+		
+		// save to the database
 		return deckRepository.save(f_deck);
 	}
 		
 	// member variables	
 	@Autowired
+	private MutiboMovieRepository movieRepository;
+
+	@Autowired
 	private MutiboDeckRepository deckRepository;
+	
+	@Autowired
+	private MutiboSetRepository setRepository;
 }
