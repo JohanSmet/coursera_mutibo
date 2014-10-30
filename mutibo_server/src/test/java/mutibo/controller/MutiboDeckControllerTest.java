@@ -1,22 +1,20 @@
 package mutibo.controller;
 
 import com.google.gson.Gson;
-import java.util.ArrayList;
 import java.util.Arrays;
 import mutibo.TestContext;
 import mutibo.TestUtil;
 import mutibo.WebAppContext;
 import mutibo.data.MutiboDeck;
-import mutibo.data.MutiboMovie;
 import mutibo.repository.MutiboDeckRepository;
-import mutibo.repository.MutiboMovieRepository;
-import mutibo.themoviedb.TmdbApi;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatcher;
+import static org.mockito.Matchers.argThat;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -96,13 +94,22 @@ public class MutiboDeckControllerTest
         verifyNoMoreInteractions(deckRepositoryMock);
 	}
 
+	class IsDeckOne extends ArgumentMatcher<MutiboDeck> 
+	{
+		@Override
+		public boolean matches(Object deck) 
+		{
+			return ((MutiboDeck) deck).getDeckId() == 1L;
+		}
+	}
+
 	@Test
-	public void addMovie_test() throws Exception
+	public void addDeck_test() throws Exception
 	{
 		// setup the tmdb-mock
 		MutiboDeck f_deck_01 = new MutiboDeck(1l, "Deck 1", false, "11");
 		
-		when(deckRepositoryMock.save(f_deck_01)).thenReturn(f_deck_01);
+		when(deckRepositoryMock.save(argThat(new IsDeckOne()))).thenReturn(f_deck_01);
 
 		Gson gson = new Gson();
 
@@ -111,16 +118,15 @@ public class MutiboDeckControllerTest
 							.content(gson.toJson(f_deck_01))
 					   )
 					.andExpect(status().isOk())
-/*					.andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+					.andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
 					.andExpect(jsonPath("$.deckId",			is(1)))
 					.andExpect(jsonPath("$.description",	is("Deck 1")))
 					.andExpect(jsonPath("$.released",		is(false)))
 					.andExpect(jsonPath("$.contentHash",	is("11")))
-*/
 				;
 
-		// verify(deckRepositoryMock, times(1)).save(f_deck_01);
-        //verifyNoMoreInteractions(deckRepositoryMock);
+		verify(deckRepositoryMock, times(1)).save(argThat(new IsDeckOne()));
+        verifyNoMoreInteractions(deckRepositoryMock);
 	}
 
 	@Test
