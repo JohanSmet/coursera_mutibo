@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Mutibo</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_menu">Menu</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_game_over">GameOverActivity</string>
+
+    <!-- login -->
+    <string name="login_welcome">Welcome, please login to play !</string>
+    <string name="login_nickname">Nickname:</string>
+    <string name="login_password">Password:</string>
+    <string name="login_auto">Login automatically in the future</string>
+    <string name="login_button">Login</string>
+    <string name="login_failed">Sorry, incorrect username or password</string>
+
+    <!-- menu -->
+    <string name="menu_welcome">Welcome, (nickname). Please enjoy your stay!</string>
+    <string name="menu_singleplayer">Play a single player game</string>
+    <string name="menu_multiplayer">Play a multi player game</string>
+    <string name="menu_leaderboards">Visit the leaderboards</string>
+    <string name="menu_howto">Rules - How to play</string>
+    <string name="menu_about">About Mutibo</string>
+    <string name="menu_logout">Logout</string>
+
+    <!-- game -->
+    <string name="game_heading">Which movie doesn\'t fit in with the others?</string>
+    <string name="game_score">Your total score : </string>
+    <string name="game_quit">Let me out !</string>
+    <string name="game_difficulty">Difficulty: %s</string>
+    <string name="game_points">Points: %s</string>
+    <string name="game_difficulty_easy">Easy</string>
+    <string name="game_difficulty_medium">Medium</string>
+    <string name="game_difficulty_hard">Hard</string>
+    <string name="game_success">Correct.</string>
+    <string name="game_failure">Incorrect.</string>
+    <string name="game_continue">Continue game</string>
+    <string name="game_rate">Please rate this set</string>
+
+    <string name="gamedone_game_over">Game Over !</string>
+    <string name="gamedone_result">Congratulations !\nYou got %1$d questions correct and earned %2$d points.</string>
+    <string name="gamedone_another">Play another game !</string>
+    <string name="gamedone_ranking">What\'s my ranking ?</string>
+    <string name="gamedone_menu">Return to menu.</string>
+
+
+</resources>

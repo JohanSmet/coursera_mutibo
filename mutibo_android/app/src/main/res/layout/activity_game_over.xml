@@ -1,0 +1,62 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_margin="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/small_logo"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gamedone_game_over"
+        android:layout_gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginTop="32dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gamedone_result"
+        android:layout_gravity="center_horizontal"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtResults"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gamedone_another"
+        android:id="@+id/btnAnotherGame"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center_horizontal"
+        android:onClick="btnAnother_clicked"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gamedone_ranking"
+        android:id="@+id/btnRanking"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center_horizontal"
+        android:onClick="btnRanking_clicked"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/gamedone_menu"
+        android:id="@+id/btnMenu"
+        android:layout_marginTop="32dp"
+        android:layout_gravity="center_horizontal"
+        android:onClick="btnMenu_clicked"/>
+
+</LinearLayout>
