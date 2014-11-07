@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Mutibo Management</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="js/external/themes/ui-darkness/jquery-ui.min.css"></link>
+	<script src="js/external/jquery-1.9.1.min.js"></script>
+	<script src="js/external/jquery-ui-1.10.3.min.js"></script>
+	<script src="js/external/handlebars-v2.0.0.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="editor.css"></link>
+
+	<script id="deck-template" type="text/x-handlebars-template"> 
+		<table>
+    		<thead> 
+        		<th>Id</th> 
+        		<th>Description</th> 
+				<th>Released</th>
+        		<th>Edit</th> 
+    		</thead> 
+    		<tbody> 
+        	{{#decks}} 
+        		<tr> 
+            		<td>{{deckId}}</td> 
+            		<td>{{description}}</td> 
+					<td>{{released}}</td>
+            		<td><a href="#" class="edit-deck" id={{deckId}}>Edit</a></td> 
+        		</tr> 
+        	{{/decks}} 
+    		</tbody> 
+		</table> 
+	</script>
+
+	<script id="set-template" type="text/x-handlebars-template">
+		<table>
+			<thead>
+				<th>Id</th>
+				<th>Good 1</th>
+				<th>Good 2</th>
+				<th>Good 3</th>
+				<th>Bad</th>
+				<th>Reason</th>
+				<th>Points</th>
+				<th>Difficulty</th>
+				<th>Rating</th>
+				<th><a href="#" class="new-set">New</a></th>
+				<th></th>
+			</thead>
+			<tbody>
+			{{#each sets}}
+				<tr>
+					<td>{{setId}}</td>
+					<td>{{movieName goodMovies.[0]}}</td>
+					<td>{{movieName goodMovies.[1]}}</td>
+					<td>{{movieName goodMovies.[2]}}</td>
+					<td>{{movieName badMovies.[0]}}</td>
+					<td>{{reason}}</td>
+					<td>{{points}}</td>
+					<td>{{difficulty}}</td>
+					<td>{{setRating this}}</td>
+					<td><a href="#" class="edit-set" id={{setId}}>Edit</a></td>
+					<td><a href="#" class="delete-set" id={{setId}}>Delete</a></td>
+				</tr>
+			{{/each}}
+			</tbody>
+		</table>
+	</script>
+
+	<script id="set-edit-template" type="text/x-handlebars-template">
+		<label>Id:    <input id="setId"  type="text" value="{{setId}}" /></label>
+		<label>Good:  <input id="good1"  type="text" class="movie" value="{{movieName goodMovies.[0]}}"/></label>
+		<label>Good:  <input id="good2"  type="text" class="movie" value="{{movieName goodMovies.[1]}}"/></label>
+		<label>Good:  <input id="good3"  type="text" class="movie" value="{{movieName goodMovies.[2]}}"/></label>
+		<label>Bad:   <input id="bad"    type="text" class="movie" value="{{movieName badMovies.[0]}}"/></label>
+		<label>Reason:<input id="reason" type="text" value="{{reason}}"/></label>
+		<label>Points:<input id="points" type="text" value="{{points}}"/></label>
+		<label>Difficulty:<input id="difficulty" type="text" value="{{difficulty}}"/></label>
+		
+		<div id="edit-buttons">
+			<button id="set-save">Save</button>
+			<button id="set-cancel">Cancel</button>
+		</div>
+	</script>
+
+	<script>
+		var mutibo = {};
+
+		function hb_template(p_name) {
+			var f_script = $(p_name).html();
+			return Handlebars.compile(f_script);
+		}
+
+		function edit_deck(p_id) {
+			// retrieve the data
+			var dataPromises = [];
+			dataPromises.push(	$.getJSON(	'/sync', { id : p_id, hash : 'nvt'}, function(p_data) {
+									mutibo.current_deck = p_data.mutiboDeck;
+									mutibo.movies = {};
+									mutibo.sets	  = {};
+
+									$.each(p_data.mutiboMovies, function (p_idx, p_movie) {
+										mutibo.movies[p_movie.imdbId] = p_movie;
+									});
+
+									$.each(p_data.mutiboSets, function (p_idx, p_set) {
+										mutibo.sets[p_set.setId] = p_set;
+									});
+								}));
+
+			// build the UI when everything has arrived
+			$.when.apply($, dataPromises).done(function() {
+				$('#sets').html(hb_template('#set-template')(mutibo));
+
+				$('a.new-set').click(function() {
+					create_set();
+				});
+
+				$('a.edit-set').click(function() {
+					edit_set(this.id, false);
+				});
+
+				$('a.delete-set').click(function() {
+					delete_set(this.id);
+				});
+			});
+		}
+
+		function new_setId() {
+			var f_maxid = mutibo.current_deck.deckId * 100;
+			
+			$.each(mutibo.sets, function (idx, set) {
+				f_maxid = Math.max(f_maxid, set.setId);
+			});
+
+			return f_maxid + 1;
+		}
+
+		function create_set() {
+			mutibo.current_set = {
+				setId : new_setId(),
+				deckId : mutibo.current_deck.deckId,
+				goodMovies : [ '', '', ''],
+				badMovies : [''],
+				reason : '',
+				points : 0,
+				difficulty : 0,
+				ratingTotal : 0,
+				ratingCount : 0
+			};
+
+			edit_set(mutibo.current_set.setId, true);
+		}
+
+		function edit_set(p_id, p_new) {
+			if (!p_new) {
+				mutibo.current_set = mutibo.sets[p_id];
+			}
+
+			$('#set').html(hb_template('#set-edit-template')(mutibo.current_set));
+
+			$("input#setId").prop('disabled', !p_new);
+
+			$('#set-save').click(set_save_edit);
+			$('#set-cancel').click(set_cancel_edit);
+
+			$('input#setId').change(function () {
+				mutibo.current_set.setId = $('input#setId').val();
+			});
+
+			$('input#reason').change(function () {
+				mutibo.current_set.reason = $('input#reason').val();
+			});
+
+			$('input#points').change(function () {
+				mutibo.current_set.points = $('input#points').val();
+			});
+			$('input#difficulty').change(function () {
+				mutibo.current_set.difficulty = $('input#difficulty').val();
+			});
+
+			$('input.movie').autocomplete({
+				source : function (request, response) {
+					$.getJSON('movie/find-by-name', {pattern : request.term}, function (p_data) {
+						var f_array = [];
+
+						$.each(p_data, function (p_index, p_movie) {
+							f_array.push({ label : p_movie.name, value : p_movie.imdbId } );
+						});
+
+						response(f_array);
+					});
+				},
+				minLength : 3,
+				select : function (event, ui) {
+					if (ui.item) {
+						$(this).val(ui.item.label);
+							
+						if (this.id === "good1") {
+							mutibo.current_set.goodMovies[0] = ui.item.value;
+						} else if (this.id === "good2") {
+							mutibo.current_set.goodMovies[1] = ui.item.value;
+						} else if (this.id === "good3") {
+							mutibo.current_set.goodMovies[2] = ui.item.value;
+						} else if (this.id === "bad") {
+							mutibo.current_set.badMovies[0] = ui.item.value;
+						}
+							
+						return false;
+					}
+				}
+			});
+		}
+
+		function delete_set(p_id) {
+			$.ajax({
+				type: 'DELETE',
+				url: '/set/' + p_id,
+				dataType: 'json',
+				success: function (data) {
+					edit_deck(mutibo.current_deck.deckId);
+				}
+			});
+		}
+
+		function set_save_edit() {
+
+			var promises = [];
+			
+			// make sure the movies are known
+			$.each(mutibo.current_set.goodMovies.concat(mutibo.current_set.badMovies), function (index, imdbId) {
+				promises.push($.ajax({
+					type: 'POST',
+					url: '/movie/' + imdbId,
+    				dataType: "json",
+    				success: function(data) {
+						if (index === 3) {
+							mutibo.current_set.badMovies[0] = data.imdbId;
+						} else {
+							mutibo.current_set.goodMovies[index] = data.imdbId;
+						}
+					}
+				}));
+			});
+
+			// save the set
+			$.when.apply($, promises).done(function() {
+				$.ajax({
+					type: "POST",
+					url:  "/set",
+					data: JSON.stringify(mutibo.current_set),
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(data){
+						mutibo.current_set = {};
+						$('#set').html('');
+
+						edit_deck(mutibo.current_deck.deckId);
+					},
+					failure: function(errMsg) {}
+				});
+			});
+		}
+
+		function set_cancel_edit() {
+			mutibo.current_set = {};
+			$('#set').html('');
+		}
+
+		$(document).ready(function() {
+			// setup handlebars
+			Handlebars.registerHelper('movieName', function(imdbId) {
+				if (mutibo.movies[imdbId])
+					return mutibo.movies[imdbId].name;
+				else
+					return '';
+			});
+
+			Handlebars.registerHelper('setRating', function (set) {
+				if (set && set.ratingCount > 0)
+					return set.ratingTotal / set.ratingCount;
+				else
+					return 0;
+			});
+
+			// retrieve the data
+			var dataPromises = [];
+			dataPromises.push(	$.getJSON('/deck', function(p_data) {
+									mutibo.decks = p_data;
+								}));
+
+			// build the UI when everything has arrived
+			$.when.apply($, dataPromises).done(function() {
+
+				var deckTemplateScript = $("#deck-template").html(); 
+				var deckTemplate = Handlebars.compile(deckTemplateScript);
+				$('#decks').append(deckTemplate(mutibo));
+
+				$("a.edit-deck").click(function () {
+					edit_deck(this.id);
+				});
+			});
+		});
+
+	</script>
+
+
+</head>
+<body>	
+	<div id='decks'>
+	</div>
+
+	<div id='sets'>
+	</div>
+
+	<div id='set' class='ui-widget'>
+	
+	</div>
+
+</body>
+</html>

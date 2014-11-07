@@ -50,6 +50,12 @@ public class MutiboDeckController
 		return f_deck;
 	}
 
+	@RequestMapping(method=RequestMethod.GET, value="/deck")
+	public Iterable<MutiboDeck> listAll()
+	{
+		return deckRepository.findAll();
+	}
+
 	@RequestMapping(method=RequestMethod.GET, value="/deck/list-released")
 	public Iterable<MutiboDeck> listReleased()
 	{

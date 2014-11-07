@@ -62,6 +62,22 @@ public class MutiboSetController
 		return setRepository.save(p_set);
 	}
 
+	@RequestMapping(method=RequestMethod.DELETE, value="/set/{id}")
+	public MutiboSet deleteSet(@PathVariable("id") Long id, HttpServletResponse httpResponse)
+	{
+		MutiboSet f_set = setRepository.findOne(id);
+
+		if (f_set == null)
+		{
+			httpResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			return f_set;
+		}
+		
+		setRepository.delete(id);
+
+		return f_set;
+	}
+
 	@RequestMapping(method=RequestMethod.GET, value="/set/{id}")
 	public MutiboSet getSet(@PathVariable("id") Long id, HttpServletResponse httpResponse)
 	{
