@@ -9,8 +9,17 @@ public interface GameControl
     public static final int GAME_STATE_ANSWERED = 2;
     public static final int GAME_STATE_FINISHED = 3;
 
+    public enum SetSuccess
+    {
+        UNKNOWN,
+        SUCCESS,
+        FAILURE,
+        TIMEOUT
+    }
+
     public void     startGame();
     public boolean  answerSet(int index);
+    public void     timeoutSet();
     public void     continueGame();
     public int      currentGameState();
 
@@ -23,6 +32,6 @@ public interface GameControl
     public int         currentSetPoints();
     public MutiboMovie currentSetMovie(int index);
     public String      currentSetReason();
-    public boolean     currentSetSuccess();
+    public SetSuccess  currentSetSuccess();
 
 }

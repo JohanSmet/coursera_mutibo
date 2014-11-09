@@ -1,8 +1,6 @@
 package org.coursera.mutibo;
 
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.media.Image;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,17 +10,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.coursera.mutibo.game.GameControl;
+
 public class GameDoneFragment extends Fragment implements View.OnClickListener
 {
     private static final String ARG_SUCCESS = "success";
     private static final String ARG_REASON  = "reason";
 
-    public static GameDoneFragment newInstance(boolean p_success, String p_reason)
+    public static GameDoneFragment newInstance(GameControl.SetSuccess p_success, String p_reason)
     {
         GameDoneFragment fragment = new GameDoneFragment();
 
         Bundle args = new Bundle();
-        args.putBoolean(ARG_SUCCESS, p_success);
+        args.putSerializable(ARG_SUCCESS, p_success);
         args.putString(ARG_REASON, p_reason);
         fragment.setArguments(args);
 
@@ -42,7 +42,7 @@ public class GameDoneFragment extends Fragment implements View.OnClickListener
 
         if (getArguments() != null)
         {
-            mSuccess = getArguments().getBoolean(ARG_SUCCESS);
+            mSuccess = (GameControl.SetSuccess) getArguments().getSerializable(ARG_SUCCESS);
             mReason  = getArguments().getString(ARG_REASON);
         }
     }
@@ -53,8 +53,12 @@ public class GameDoneFragment extends Fragment implements View.OnClickListener
         // Inflate the layout for this fragment
         View f_view = inflater.inflate(R.layout.fragment_game_done, container, false);
 
-        ((TextView) f_view.findViewById(R.id.txtSuccessReason)).setText(getString(mSuccess ? R.string.game_success : R.string.game_failure) + " " + mReason);
-        ((Button) f_view.findViewById(R.id.btnContinue)).setOnClickListener(this);
+        if (mSuccess == GameControl.SetSuccess.TIMEOUT)
+            ((TextView) f_view.findViewById(R.id.txtSuccessReason)).setText(getString(R.string.game_timeout));
+        else
+            ((TextView) f_view.findViewById(R.id.txtSuccessReason)).setText(getString(mSuccess == GameControl.SetSuccess.SUCCESS ? R.string.game_success : R.string.game_failure) + " " + mReason);
+
+        f_view.findViewById(R.id.btnContinue).setOnClickListener(this);
 
         imgRating[0] = (ImageView) f_view.findViewById(R.id.imgRating01);
         imgRating[1] = (ImageView) f_view.findViewById(R.id.imgRating02);
@@ -146,10 +150,10 @@ public class GameDoneFragment extends Fragment implements View.OnClickListener
     }
 
     // member variables
-    private boolean     mSuccess;
-    private String      mReason;
-    private int         mRating;
-    private ImageView   imgRating[] = new ImageView[5];
+    private GameControl.SetSuccess  mSuccess;
+    private String                  mReason;
+    private int                     mRating;
+    private ImageView               imgRating[] = new ImageView[5];
 
     private OnFragmentInteractionListener mListener;
 

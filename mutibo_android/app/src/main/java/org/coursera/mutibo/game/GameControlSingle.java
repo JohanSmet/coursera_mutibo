@@ -5,11 +5,9 @@ import org.coursera.mutibo.data.MutiboMovie;
 import org.coursera.mutibo.data.MutiboSet;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 public class GameControlSingle implements GameControl
 {
@@ -21,7 +19,7 @@ public class GameControlSingle implements GameControl
         this.mPlayedSets = new HashSet<Long>();
         this.mSetSeed    = null;
         this.mSetMovies  = new ArrayList<MutiboMovie>();
-        this.mSuccess    = false;
+        this.mSuccess    = SetSuccess.UNKNOWN;
     }
 
     @Override
@@ -41,15 +39,17 @@ public class GameControlSingle implements GameControl
     public boolean answerSet(int index)
     {
         // check for success
-        this.mSuccess    = false;
+        boolean correctGuess = false;
 
         for (String f_bad :  mCurrentSet.getBadMovies())
         {
-            this.mSuccess = this.mSuccess || (f_bad.equals(mSetMovies.get(index).getImdbId()));
+            correctGuess = correctGuess || (f_bad.equals(mSetMovies.get(index).getImdbId()));
         }
 
-        // consequences of a wrong guess
-        if (!this.mSuccess)
+        this.mSuccess = (correctGuess) ? SetSuccess.SUCCESS : SetSuccess.FAILURE;
+
+        // consequences of a guess
+        if (this.mSuccess != SetSuccess.SUCCESS)
         {
             --this.mLives;
         }
@@ -60,20 +60,28 @@ public class GameControlSingle implements GameControl
         }
 
         // change state of the game
-        if (this.mLives > 0)
-            this.mState = GAME_STATE_ANSWERED;
-        else
-            this.mState = GAME_STATE_FINISHED;
+        updateGameState();
 
-        return this.mSuccess;
+        return this.mSuccess == SetSuccess.SUCCESS;
     }
 
+    @Override
+    public void timeoutSet()
+    {
+        --this.mLives;
+        this.mSuccess = SetSuccess.TIMEOUT;
+
+        updateGameState();
+    }
+
+    @Override
     public void continueGame()
     {
         if (this.mState == GAME_STATE_ANSWERED)
             chooseNextSet();
     }
 
+    @Override
     public int currentGameState()
     {
         return mState;
@@ -134,7 +142,7 @@ public class GameControlSingle implements GameControl
     }
 
     @Override
-    public boolean currentSetSuccess()
+    public SetSuccess currentSetSuccess()
     {
         return this.mSuccess;
     }
@@ -164,7 +172,16 @@ public class GameControlSingle implements GameControl
         for (String imdbId : f_movies)
             mSetMovies.add(mDataStore.getMovieById(imdbId));
 
+        mPlayedSets.add(mCurrentSet.getSetId());
         mState = GAME_STATE_QUESTION;
+    }
+
+    private void updateGameState()
+    {
+        if (this.mLives == 0 || mPlayedSets.size() == mDataStore.countSets())
+            this.mState = GAME_STATE_FINISHED;
+        else
+            this.mState = GAME_STATE_ANSWERED;
     }
 
     // member variables
@@ -177,7 +194,7 @@ public class GameControlSingle implements GameControl
     private HashSet<Long>           mPlayedSets;
     private Random                  mSetSeed;
     private ArrayList<MutiboMovie>  mSetMovies;
-    private boolean                 mSuccess;
+    private SetSuccess              mSuccess;
 
     private DataStore               mDataStore = DataStore.getInstance();
 }

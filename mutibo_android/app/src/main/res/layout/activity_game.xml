@@ -61,7 +61,7 @@
             android:layout_height="fill_parent"
             android:id="@+id/btnMovie01"
             android:onClick="btnMovie_clicked"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <Button
             android:layout_width="fill_parent"

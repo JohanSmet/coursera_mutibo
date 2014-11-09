@@ -2,12 +2,13 @@ package org.coursera.mutibo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,8 +36,26 @@ public class GameActivity extends Activity
         imgLives[0]   = (ImageView)findViewById(R.id.imgLife1);
         imgLives[1]   = (ImageView)findViewById(R.id.imgLife2);
         imgLives[2]   = (ImageView)findViewById(R.id.imgLife3);
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+        // Bind to SyncService
+        syncServiceClient.bind();
 
         displayCurrentSet();
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+
+        // Unbind from the service
+        syncServiceClient.unbind();
     }
 
     private void displayCurrentSet()
@@ -46,6 +65,8 @@ public class GameActivity extends Activity
         // movies
         for (int f_idx=0; f_idx < 4; ++f_idx)
             btnMovies[f_idx].setText(mGameControl.currentSetMovie(f_idx).getName());
+
+        addPosterToButtons();
 
         // remaining lives
         for (int f_idx=0; f_idx < mGameControl.remainingLives(); ++f_idx)
@@ -85,18 +106,22 @@ public class GameActivity extends Activity
         GameDoneFragment f_fragment = GameDoneFragment.newInstance(mGameControl.currentSetSuccess(), mGameControl.currentSetReason());
 
         getFragmentManager().beginTransaction()
-                .replace(R.id.frameFooter, f_fragment)
-                .commit();
+                                .replace(R.id.frameFooter, f_fragment)
+                            .commit();
     }
 
     private void endCurrentSet(int p_movie)
     {
-        boolean f_success = mGameControl.answerSet(p_movie);
+        mGameControl.answerSet(p_movie);
+        displayCurrentSet();
+    }
 
-        if (mGameControl.currentGameState() == GameControl.GAME_STATE_ANSWERED)
-            displayCurrentSet();
-        else
-            startActivity(new Intent(this, GameOverActivity.class));
+    private void addPosterToButtons()
+    {
+        for (int f_idx=0; f_idx < 4; ++f_idx)
+        {
+            new DownloadPosterTask().execute(f_idx);
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -135,15 +160,49 @@ public class GameActivity extends Activity
 
     public void onQuestionTimeout()
     {
-
+        mGameControl.timeoutSet();
+        displayCurrentSet();
     }
 
     public void onQuestionContinue(int rating)
     {
-        mGameControl.continueGame();
-        displayCurrentSet();
+        if (mGameControl.currentGameState() == GameControl.GAME_STATE_FINISHED)
+        {
+            startActivity(new Intent(this, GameOverActivity.class));
+        }
+        else
+        {
+            mGameControl.continueGame();
+            displayCurrentSet();
+        }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // nested classes
+    //
+
+    private class DownloadPosterTask extends AsyncTask<Integer, Integer, Drawable>
+    {
+        protected Drawable doInBackground(Integer... params)
+        {
+            mIndex = params[0];
+            String imdbId = mGameControl.currentSetMovie(mIndex).getImdbId();
+
+            syncServiceClient.wait_for_service();
+            Bitmap bitmap = syncServiceClient.getSyncService().downloadPosterBitmap(imdbId);
+
+            return new BitmapDrawable(getResources(), bitmap);
+        }
+
+        protected void onPostExecute(Drawable result)
+        {
+            // btnMovies[mIndex].setBackground(result);
+            btnMovies[mIndex].setCompoundDrawablesRelativeWithIntrinsicBounds(null, result, null, null);
+        }
+
+        private Integer mIndex;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //
@@ -155,4 +214,5 @@ public class GameActivity extends Activity
     private Button[]    btnMovies = new Button[4];
     private ImageView[] imgLives  = new ImageView[3];
 
+    private SyncServiceClient   syncServiceClient = new SyncServiceClient(this);
 }

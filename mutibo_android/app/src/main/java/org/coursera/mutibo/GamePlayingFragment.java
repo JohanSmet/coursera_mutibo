@@ -1,15 +1,14 @@
 package org.coursera.mutibo;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 public class GamePlayingFragment extends Fragment
 {
@@ -53,7 +52,7 @@ public class GamePlayingFragment extends Fragment
         {
             mDifficulty = getArguments().getInt(ARG_DIFFICULTY);
             mPoints     = getArguments().getInt(ARG_POINTS);
-            mTimeout    = getArguments().getInt(ARG_TIMEOUT);
+            mTimeout    = getArguments().getInt(ARG_TIMEOUT) * 1000;
         }
     }
 
@@ -62,8 +61,26 @@ public class GamePlayingFragment extends Fragment
     {
         View f_view = inflater.inflate(R.layout.fragment_game_playing, container, false);
 
-        ((TextView) f_view.findViewById(R.id.txtDifficulty)).setText(String.format(getString(R.string.game_difficulty), "bla"));
+        ((TextView) f_view.findViewById(R.id.txtDifficulty)).setText(String.format(getString(R.string.game_difficulty), difficultyText()));
         ((TextView) f_view.findViewById(R.id.txtPoints)).setText(String.format(getString(R.string.game_points), mPoints));
+
+        mProgressBar = (ProgressBar) f_view.findViewById(R.id.progressBar);
+        mProgressBar.setMax(mTimeout);
+        mProgressBar.setProgress(mTimeout);
+
+        mCountDownTimer = new CountDownTimer (mTimeout, 100)
+        {
+            public void onTick(long millisUntilFinished)
+            {
+                mProgressBar.setProgress((int) millisUntilFinished);
+            }
+
+            public void onFinish()
+            {
+                if (mListener != null)
+                    mListener.onQuestionTimeout();
+            }
+        }.start();
 
         return f_view;
     }
@@ -85,7 +102,20 @@ public class GamePlayingFragment extends Fragment
     public void onDetach()
     {
         super.onDetach();
+
+        mCountDownTimer.cancel();
         mListener = null;
+    }
+
+    private String difficultyText()
+    {
+        switch (mDifficulty)
+        {
+            case 5 :    return getString(R.string.game_difficulty_easy);
+            case 10 :   return getString(R.string.game_difficulty_medium);
+            case 15 :   return getString(R.string.game_difficulty_hard);
+            default :   return "";
+        }
     }
 
     /**
@@ -104,9 +134,11 @@ public class GamePlayingFragment extends Fragment
     }
 
     // member variables
-    private int mDifficulty;
-    private int mPoints;
-    private int mTimeout;
+    private int             mDifficulty;
+    private int             mPoints;
+    private int             mTimeout;
+    private ProgressBar     mProgressBar;
+    private CountDownTimer  mCountDownTimer;
 
     private OnFragmentInteractionListener mListener;
 

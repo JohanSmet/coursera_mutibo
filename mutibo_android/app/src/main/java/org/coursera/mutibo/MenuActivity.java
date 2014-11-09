@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import org.coursera.mutibo.game.GameFactory;
@@ -83,7 +81,7 @@ public class MenuActivity extends Activity {
             mSyncBound = true;
 
             // download server data
-            mSyncService.sync_data();
+            mSyncService.downloadDataAsync();
         }
 
         @Override

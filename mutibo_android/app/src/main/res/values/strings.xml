@@ -36,8 +36,9 @@
     <string name="game_difficulty_hard">Hard</string>
     <string name="game_success">Correct.</string>
     <string name="game_failure">Incorrect.</string>
-    <string name="game_continue">Continue game</string>
+    <string name="game_continue">Continue</string>
     <string name="game_rate">Please rate this set</string>
+    <string name="game_timeout">You failed to answer the question in the allotted time.</string>
 
     <string name="gamedone_game_over">Game Over !</string>
     <string name="gamedone_result">Congratulations !\nYou got %1$d questions correct and earned %2$d points.</string>
