@@ -32,7 +32,7 @@ public class DataStore
         try {
             for (MutiboSet f_set : newSets)
             {
-                this.mSets.put(f_set.getDeckId(), f_set);
+                this.mSets.put(f_set.getSetId(), f_set);
             }
         } finally {
             mDataLock.unlock();
