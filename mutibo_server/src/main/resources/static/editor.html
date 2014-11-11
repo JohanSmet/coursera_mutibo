@@ -185,7 +185,7 @@
 						var f_array = [];
 
 						$.each(p_data, function (p_index, p_movie) {
-							f_array.push({ label : p_movie.name, value : p_movie.imdbId } );
+							f_array.push({ label : p_movie.name + ' (' + p_movie.yearRelease + ')', value : p_movie.imdbId } );
 						});
 
 						response(f_array);
