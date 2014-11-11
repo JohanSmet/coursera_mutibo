@@ -15,7 +15,7 @@ import org.springframework.core.env.Environment;
  * @author Redacted
  */
 @Configuration
-@Import({WebAppContext.class, PersistenceContext.class})
+@Import({WebAppContext.class, PersistenceContext.class, SecurityContext.class})
 @EnableAutoConfiguration
 @PropertySource("classpath:application.properties")
 @ComponentScan(basePackages = {"mutibo.themoviedb"})

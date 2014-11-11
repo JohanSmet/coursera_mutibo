@@ -9,6 +9,7 @@ import mutibo.data.MutiboDeck;
 import mutibo.repository.MutiboDeckRepository;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -175,7 +176,7 @@ public class MutiboDeckControllerTest
 					.andExpect(jsonPath("$.deckId",			is(1)))
 					.andExpect(jsonPath("$.description",	is("Deck 1")))
 					.andExpect(jsonPath("$.released",		is(true)))
-					.andExpect(jsonPath("$.contentHash",	is("11")))
+					.andExpect(jsonPath("$.contentHash",	not(is("11"))))
 				;
 
 		verify(deckRepositoryMock, times(1)).save(f_deck_01);

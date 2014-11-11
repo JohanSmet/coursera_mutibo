@@ -2,7 +2,6 @@ package mutibo.controller;
 
 import javax.servlet.http.HttpServletResponse;
 import mutibo.data.MutiboDeck;
-import mutibo.data.MutiboSet;
 import mutibo.data.MutiboSync;
 import mutibo.repository.MutiboDeckRepository;
 import mutibo.repository.MutiboMovieRepository;
