@@ -1,5 +1,6 @@
 package mutibo.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -33,6 +34,24 @@ public class MutiboMovie
 		this.name			= name;
 		this.yearRelease	= year;
 		this.plot			= plot;
+		this.tmdbPosterPath = "";
+	}
+
+	/**
+	 * Constructor that initializes the record to the given values
+	 * @param imdbId Id of the movie on IMDB
+	 * @param name Official name of the movie
+	 * @param year The year the movie was released
+	 * @param plot Short plot of the movie
+	 * @param tmdbPosterPath Internal path to the movie poster on themoviedb.org
+	 */
+	public MutiboMovie(String imdbId, String name, int year, String plot, String tmdbPosterPath)
+	{
+		this.imdbId			= imdbId;
+		this.name			= name;
+		this.yearRelease	= year;
+		this.plot			= plot;
+		this.tmdbPosterPath = tmdbPosterPath;
 	}
 
 	/**
@@ -107,6 +126,16 @@ public class MutiboMovie
 		this.plot = plot;
 	}
 
+	public String getTmdbPosterPath()
+	{
+		return tmdbPosterPath;
+	}
+
+	public void setTmdbPosterPath(String tmdbPosterPath)
+	{
+		this.tmdbPosterPath = tmdbPosterPath;
+	}
+
 	@Override
 	public boolean equals(Object obj)
 	{
@@ -127,4 +156,7 @@ public class MutiboMovie
 	private String 	name;
 	private int	 	yearRelease;
 	private String	plot;
+
+	@JsonIgnore
+	private String 	tmdbPosterPath;
 }

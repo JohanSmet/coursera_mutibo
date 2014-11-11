@@ -21,8 +21,9 @@ import org.springframework.core.env.Environment;
 @ComponentScan(basePackages = {"mutibo.themoviedb"})
 public class Application 
 {
-	private static final String PROPERTY_NAME_TMDB_HOST 	= "tmdb.host";
-	private static final String PROPERTY_NAME_TMDB_API_KEY  = "tmdb.apikey";
+	private static final String PROPERTY_NAME_TMDB_HOST 		= "tmdb.host";
+	private static final String PROPERTY_NAME_TMDB_IMAGE_HOST 	= "tmdb.imagehost";
+	private static final String PROPERTY_NAME_TMDB_API_KEY  	= "tmdb.apikey";
 
 	/**
 	 * Main entry method of the application
@@ -37,6 +38,7 @@ public class Application
 	TmdbApi createTmdbApi()
 	{
 		 return new TmdbApi(environment.getRequiredProperty(PROPERTY_NAME_TMDB_HOST),
+				 			environment.getRequiredProperty(PROPERTY_NAME_TMDB_IMAGE_HOST),
 							environment.getRequiredProperty(PROPERTY_NAME_TMDB_API_KEY));
 	}
 
