@@ -40,6 +40,7 @@ public class UserController
 		user.setPassword(encoder.encode("password"));
 		user.grantRole(UserRole.ADMIN);
 		user.grantRole(UserRole.USER);
+		user.setGoogleId("105510070566529232484");
 		userRepository.save(user);
 
 		user = new User();

@@ -58,6 +58,17 @@ public class User implements UserDetails
 		this.password = password;
 	}
 
+	@JsonIgnore
+	public String getGoogleId()
+	{
+		return googleId;
+	}
+
+	public void setGoogleId(String googleId)
+	{
+		this.googleId = googleId;
+	}
+
 	public long getExpires()
 	{
 		return expires;
@@ -160,6 +171,7 @@ public class User implements UserDetails
 			u.setId((Long) source.get("_id"));
 			u.setUsername((String) source.get("username"));
 			u.setPassword((String) source.get("password"));
+			u.setGoogleId((String) source.get("googleId"));
 
 			if (source.containsField("roles"))
 			{
@@ -184,6 +196,7 @@ public class User implements UserDetails
     		dbo.put("_id", 		source.getId());
     		dbo.put("username", source.getUsername());
 			dbo.put("password", source.getPassword());
+			dbo.put("googleId", source.getGoogleId());
 
 			if (source.authorities != null) 
 			{
@@ -206,6 +219,7 @@ public class User implements UserDetails
 	private Long				id;
 	private String				username;
 	private String				password;
+	private String				googleId;
 	private Set<UserAuthority> 	authorities;
 
 	@Transient

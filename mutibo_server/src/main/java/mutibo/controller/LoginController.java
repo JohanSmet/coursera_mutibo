@@ -7,6 +7,8 @@ package mutibo.controller;
 
 import javax.servlet.http.HttpServletResponse;
 import mutibo.data.User;
+import mutibo.data.UserRole;
+import mutibo.google.GoogleTokenChecker;
 import mutibo.repository.UserRepository;
 import mutibo.security.TokenAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController
 {
 	@RequestMapping(method=RequestMethod.POST, value="/login/login-password")
-	public void sync(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletResponse httpResponse)
+	public void loginPassword(@RequestParam("username") String username, @RequestParam("password") String password, HttpServletResponse httpResponse)
 	{
 		// find the user
 		User user = userRepository.findByUsername(username);
@@ -48,9 +50,56 @@ public class LoginController
 		tokenAuthenticationService.addAuthentication(httpResponse, user);
 	}
 
+	@RequestMapping(method=RequestMethod.POST, value="/login/login-google")
+	public String loginGoogle(@RequestParam("googleToken") String googleToken, @RequestParam("username") String username, HttpServletResponse httpResponse)
+	{
+		String googleId = googleTokenChecker.checkForId(googleToken);
+
+		// stop if it's an invalid token
+		if (googleId == null)
+		{
+			httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return "FAILED";
+		}
+
+		// check if the user is already known
+		User 	user = userRepository.findByGoogleId(googleId);
+		String	result = "OK";
+
+		// create a new user if necessary
+		if (user == null) 
+		{
+			user = new User();
+			user.setId(makeUniqueUserId(Long.valueOf(googleId.substring(1, 9))));
+			user.setUsername(username);
+			user.grantRole(UserRole.USER);
+			user.setGoogleId(googleId);
+			userRepository.save(user);
+			result = "NEW";
+		}
+
+		// add a token to the request
+		tokenAuthenticationService.addAuthentication(httpResponse, user);
+		return result;
+	}
+
+	private Long makeUniqueUserId(Long startId)
+	{
+		Long newId = startId;
+
+		// XXX goe plan Guido
+		while(userRepository.findOne(newId) != null)
+			++newId;
+		
+		return newId;
+	}
+
 	// member variables	
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private GoogleTokenChecker	googleTokenChecker;
 
 	@Autowired
 	private TokenAuthenticationService tokenAuthenticationService;

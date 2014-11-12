@@ -21,7 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 
 @Configuration
-@ComponentScan(basePackages = {"mutibo.controller"})
+@ComponentScan(basePackages = {"mutibo.google", "mutibo.controller"})
 @EnableWebMvc
 public class WebAppContext extends WebMvcConfigurerAdapter/* extends WebMvcAutoConfiguration */
 {

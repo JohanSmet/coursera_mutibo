@@ -5,6 +5,7 @@ import mutibo.repository.MutiboMoviePosterRepository;
 import mutibo.repository.MutiboMovieRepository;
 import mutibo.repository.MutiboSetRepository;
 import mutibo.repository.UserRepository;
+import mutibo.security.TokenAuthenticationService;
 import mutibo.themoviedb.TmdbApi;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
@@ -50,5 +51,11 @@ public class TestContext
 	TmdbApi createTmdbApi()
 	{
 		return Mockito.mock(TmdbApi.class);
+	}
+
+	@Bean
+	TokenAuthenticationService tokenAuthenticationService()
+	{
+		return Mockito.mock(TokenAuthenticationService.class);
 	}
 }
