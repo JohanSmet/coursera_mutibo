@@ -47,7 +47,9 @@ public class SecurityContext extends WebSecurityConfigurerAdapter
 			// allow anonymous resource requests
 			.antMatchers("/").permitAll()
 			.antMatchers("/favicon.ico").permitAll()
-			.antMatchers("/public/**").permitAll()
+			.antMatchers("/*.html").permitAll()
+			.antMatchers("/*.css").permitAll()
+			.antMatchers("/js/**").permitAll()
 
 			// allow anonymous access to the login controller
 			.antMatchers("/login/**").permitAll()
@@ -78,6 +80,8 @@ public class SecurityContext extends WebSecurityConfigurerAdapter
 	{
 		return userDetailsService;
 	}
+
+	
 
 	@Autowired
 	private UserDetailsService userDetailsService;
