@@ -11,6 +11,12 @@
 
 	<link rel="stylesheet" type="text/css" href="editor.css"></link>
 
+	<script id="login-template" type="text/x-handlebars-template">
+		<label>Login :     <input id="login"  	 type="text" value="{{login}}" /></label>
+		<label>Password :  <input id="password"  type="password" value="{{password}}"/></label>
+		<button id="login">Login</button>
+	</script>
+
 	<script id="deck-template" type="text/x-handlebars-template"> 
 		<table>
     		<thead> 
@@ -85,28 +91,72 @@
 
 	<script>
 		var mutibo = {};
+		var token = '';
 
 		function hb_template(p_name) {
 			var f_script = $(p_name).html();
 			return Handlebars.compile(f_script);
 		}
 
+		function show_decks() {
+
+			Handlebars.registerHelper('movieName', function(imdbId) {
+				if (mutibo.movies[imdbId])
+					return mutibo.movies[imdbId].name;
+				else
+					return '';
+			});
+
+			// retrieve the data
+			var dataPromises = [];
+			dataPromises.push(	$.ajax({
+									dataType: "json",
+									url: '/deck',
+									headers: {
+     								   'X-Auth-Token' : token
+   									},
+									success: function (p_data) {
+										mutibo.decks = p_data;
+									}
+								})
+							 );
+
+			// build the UI when everything has arrived
+			$.when.apply($, dataPromises).done(function() {
+
+				$('#decks').append(hb_template("#deck-template")(mutibo));
+
+				$("a.edit-deck").click(function () {
+					edit_deck(this.id);
+				});
+			});
+		}
+
 		function edit_deck(p_id) {
 			// retrieve the data
 			var dataPromises = [];
-			dataPromises.push(	$.getJSON(	'/sync', { id : p_id, hash : 'nvt'}, function(p_data) {
-									mutibo.current_deck = p_data.mutiboDeck;
-									mutibo.movies = {};
-									mutibo.sets	  = {};
+			dataPromises.push(	$.ajax({
+									datatype : 'json',
+									url : '/sync',
+									data : { id : p_id, hash : 'nvt'},
+									headers: {
+     								   'X-Auth-Token' : token
+   									},
+									success : function(p_data) {
+										mutibo.current_deck = p_data.mutiboDeck;
+										mutibo.movies = {};
+										mutibo.sets	  = {};
 
-									$.each(p_data.mutiboMovies, function (p_idx, p_movie) {
-										mutibo.movies[p_movie.imdbId] = p_movie;
-									});
+										$.each(p_data.mutiboMovies, function (p_idx, p_movie) {
+											mutibo.movies[p_movie.imdbId] = p_movie;
+										});
 
-									$.each(p_data.mutiboSets, function (p_idx, p_set) {
-										mutibo.sets[p_set.setId] = p_set;
-									});
-								}));
+										$.each(p_data.mutiboSets, function (p_idx, p_set) {
+											mutibo.sets[p_set.setId] = p_set;
+										});
+									}
+								})
+							);
 
 			// build the UI when everything has arrived
 			$.when.apply($, dataPromises).done(function() {
@@ -181,15 +231,23 @@
 
 			$('input.movie').autocomplete({
 				source : function (request, response) {
-					$.getJSON('movie/find-by-name', {pattern : request.term}, function (p_data) {
-						var f_array = [];
+					$.ajax({
+								datatype : 'json',
+								url: 'movie/find-by-name', 
+								data : {pattern : request.term}, 
+								headers: {
+     							   'X-Auth-Token' : token
+   								},
+								success : function (p_data) {
+									var f_array = [];
 
-						$.each(p_data, function (p_index, p_movie) {
-							f_array.push({ label : p_movie.name + ' (' + p_movie.yearRelease + ')', value : p_movie.imdbId } );
-						});
+									$.each(p_data, function (p_index, p_movie) {
+										f_array.push({ label : p_movie.name + ' (' + p_movie.yearRelease + ')', value : p_movie.imdbId } );
+									});
 
-						response(f_array);
-					});
+									response(f_array);
+								}
+							});
 				},
 				minLength : 3,
 				select : function (event, ui) {
@@ -217,6 +275,9 @@
 				type: 'DELETE',
 				url: '/set/' + p_id,
 				dataType: 'json',
+				headers: {
+     			   'X-Auth-Token' : token
+   				},
 				success: function (data) {
 					edit_deck(mutibo.current_deck.deckId);
 				}
@@ -233,6 +294,9 @@
 					type: 'POST',
 					url: '/movie/' + imdbId,
     				dataType: "json",
+					headers: {
+					   'X-Auth-Token' : token
+					},
     				success: function(data) {
 						if (index === 3) {
 							mutibo.current_set.badMovies[0] = data.imdbId;
@@ -251,6 +315,9 @@
 					data: JSON.stringify(mutibo.current_set),
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
+					headers: {
+					   'X-Auth-Token' : token
+					},
 					success: function(data){
 						mutibo.current_set = {};
 						$('#set').html('');
@@ -269,13 +336,6 @@
 
 		$(document).ready(function() {
 			// setup handlebars
-			Handlebars.registerHelper('movieName', function(imdbId) {
-				if (mutibo.movies[imdbId])
-					return mutibo.movies[imdbId].name;
-				else
-					return '';
-			});
-
 			Handlebars.registerHelper('setRating', function (set) {
 				if (set && set.ratingCount > 0)
 					return set.ratingTotal / set.ratingCount;
@@ -283,21 +343,19 @@
 					return 0;
 			});
 
-			// retrieve the data
-			var dataPromises = [];
-			dataPromises.push(	$.getJSON('/deck', function(p_data) {
-									mutibo.decks = p_data;
-								}));
-
-			// build the UI when everything has arrived
-			$.when.apply($, dataPromises).done(function() {
-
-				var deckTemplateScript = $("#deck-template").html(); 
-				var deckTemplate = Handlebars.compile(deckTemplateScript);
-				$('#decks').append(deckTemplate(mutibo));
-
-				$("a.edit-deck").click(function () {
-					edit_deck(this.id);
+			// show login screen
+			$('#login-screen').html(hb_template('#login-template')({login:'',password:''}));
+			
+			$('button#login').click(function() {
+				$.ajax({
+					type: "POST",
+					url:  "/login/login-password",
+					data : {username : $('input#login').val(), password : $('input#password').val()},
+					success: function(data, status, xhr){
+						$('#login-screen').html('');
+						token = xhr.getResponseHeader('X-Auth-Token');
+						show_decks();
+					}
 				});
 			});
 		});
@@ -307,6 +365,8 @@
 
 </head>
 <body>	
+	<div id='login-screen'>
+	</div>
 	<div id='decks'>
 	</div>
 
