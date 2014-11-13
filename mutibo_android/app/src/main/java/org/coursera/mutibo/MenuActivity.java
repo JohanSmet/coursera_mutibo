@@ -59,6 +59,14 @@ public class MenuActivity extends Activity {
     public void btnLogout_clicked(View p_view)
     {
         Intent f_intent = new Intent(this, LoginActivity.class);
+        f_intent.putExtra(LoginActivity.PARAMETER_LOGIN_ACTION, LoginActivity.LoginAction.LOGOUT);
+        startActivity(f_intent);
+    }
+
+    public void btnAbout_clicked(View p_view)
+    {
+        Intent f_intent = new Intent(this, LoginActivity.class);
+        f_intent.putExtra(LoginActivity.PARAMETER_LOGIN_ACTION, LoginActivity.LoginAction.REVOKE_ACCESS_GOOGLE);
         startActivity(f_intent);
     }
 

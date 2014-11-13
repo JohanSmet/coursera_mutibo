@@ -93,7 +93,8 @@
             android:layout_marginBottom="10dp"
             android:text="@string/menu_about"
             android:id="@+id/btnAbout"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal"
+            android:onClick="btnAbout_clicked"/>
 
         <Button
             android:layout_width="fill_parent"

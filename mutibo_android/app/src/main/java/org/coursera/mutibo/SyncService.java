@@ -15,14 +15,24 @@ import org.coursera.mutibo.data.MutiboSync;
 import java.io.IOException;
 import java.util.Collection;
 
+import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.client.Header;
+import retrofit.client.OkClient;
 import retrofit.client.Response;
 import retrofit.http.GET;
+import retrofit.http.POST;
 import retrofit.http.Query;
 
 public class SyncService extends Service
 {
-    public interface RestClient
+    public enum LoginStatus {
+        LOGIN_FAILED,
+        LOGIN_KNOWN_USER,
+        LOGIN_NEW_USER
+    }
+
+    private interface RestClient
     {
         @GET("/deck/list-released")
         public Collection<MutiboDeck> lisReleased();
@@ -32,6 +42,9 @@ public class SyncService extends Service
 
         @GET("/movie/poster")
         public Response getMoviePoster(@Query("id") String imdbId, @Query("resolution") String resolution);
+
+        @POST("/login/login-google")
+        public Response loginGoogle(@Query("googleToken") String googleToken, @Query("username") String name);
     }
 
     public class SyncBinder extends Binder
@@ -56,7 +69,20 @@ public class SyncService extends Service
         if (restClient == null)
         {
             restClient = new RestAdapter.Builder()
-                                .setEndpoint(this.mutiboServer)
+                                .setEndpoint(this.serverBaseUrl)
+                                // .setClient(new OkClient(OkHttpBuilder.getUnsafeOkHttpClient()))
+                                .setClient(new OkClient(OkHttpBuilder.getSelfSignedOkHttpClient(this, serverHost)))
+                                .setRequestInterceptor(new RequestInterceptor()
+                                {
+                                    @Override
+                                    public void intercept(RequestFacade request)
+                                    {
+                                        if (GlobalState.getAuthToken() != null)
+                                        {
+                                            request.addHeader("X-Auth-Token", GlobalState.getAuthToken());
+                                        }
+                                    }
+                                })
                                 .build()
                                     .create(RestClient.class)
                             ;
@@ -111,10 +137,34 @@ public class SyncService extends Service
         }
     }
 
+    LoginStatus loginGoogle(String googleToken, String name)
+    {
+        Response response = restClient.loginGoogle(googleToken, name);
+
+        if (response.getStatus() != 200)
+            return LoginStatus.LOGIN_FAILED;
+
+        // find the X-Auth-Token header
+        for (Header header : response.getHeaders())
+        {
+            if (header.getName() != null && header.getName().equalsIgnoreCase("X-Auth-Token"))
+            {
+                GlobalState.setAuthToken(header.getValue());
+                break;
+            }
+        }
+
+        // check the body of the request
+        if (response.getBody().toString().equals("NEW"))
+            return LoginStatus.LOGIN_NEW_USER;
+        else
+            return LoginStatus.LOGIN_KNOWN_USER;
+    }
+
     // member variables
     private IBinder     binder = new SyncBinder();
     private RestClient  restClient;
 
-    private String      mutiboServer = "http://10.0.2.2:8080";     // XXX configurable
-
+    private String      serverHost    = "10.0.2.2";
+    private String      serverBaseUrl = "https://" + serverHost + ":8443";
 }
