@@ -3,6 +3,7 @@ package org.coursera.mutibo;
 import android.content.Context;
 import android.util.Log;
 
+import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 
 import javax.net.ssl.HostnameVerifier;
@@ -25,9 +26,9 @@ public class OkHttpBuilder
 
     public static OkHttpClient getSelfSignedOkHttpClient(Context context, final String allowedHost)
     {
-        KeyStore keyStore = loadSelfSignedKeyStore(context, "changeit");
-
         try {
+            // security configuration (trust our self signed certificate)
+            KeyStore keyStore = loadSelfSignedKeyStore(context, "changeit");
 
             TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
             trustManagerFactory.init(keyStore);
@@ -38,6 +39,11 @@ public class OkHttpBuilder
             SSLContext sslContext = SSLContext.getInstance("SSL");
             sslContext.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), new SecureRandom());
 
+            // cache control
+            int cacheSize = 50 * 1024 * 1024;   // 50 MiB
+            Cache cache = new Cache(context.getCacheDir(), cacheSize);
+
+            // create client
             OkHttpClient client = new OkHttpClient();
             client.setSslSocketFactory(sslContext.getSocketFactory());
             client.setHostnameVerifier(new HostnameVerifier()
@@ -48,6 +54,7 @@ public class OkHttpBuilder
                     return hostname.equalsIgnoreCase(allowedHost);
                 }
             });
+            client.setCache(cache);
 
             return client;
 

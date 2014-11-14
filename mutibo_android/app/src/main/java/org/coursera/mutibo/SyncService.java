@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.Log;
 
 import org.coursera.mutibo.data.DataStore;
 import org.coursera.mutibo.data.MutiboDeck;
@@ -17,12 +18,9 @@ import java.util.Collection;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
-import retrofit.client.Header;
-import retrofit.client.OkClient;
-import retrofit.client.Response;
-import retrofit.http.GET;
-import retrofit.http.POST;
-import retrofit.http.Query;
+import retrofit.RetrofitError;
+import retrofit.client.*;
+import retrofit.http.*;
 
 public class SyncService extends Service
 {
@@ -32,16 +30,23 @@ public class SyncService extends Service
         LOGIN_NEW_USER
     }
 
+    private static final String LOG_TAG = "SyncService";
+
+    public static final String HEADER_CACHE_CONTROL = "Cache-Control";
+    public static final String CACHE_CONTROL_SERVER         = "max-age=0";
+    public static final String CACHE_CONTROL_PREFER_CACHE   = "max-age=315360000";
+    public static final String CACHE_CONTROL_ONLY_CACHE     = "only-if-cached";
+
     private interface RestClient
     {
         @GET("/deck/list-released")
-        public Collection<MutiboDeck> lisReleased();
+        public Collection<MutiboDeck> lisReleased(@retrofit.http.Header(HEADER_CACHE_CONTROL) String cacheControlValue);
 
         @GET("/sync")
-        public MutiboSync syncData(@Query("id") Long deckId, @Query("hash") String hash);
+        public MutiboSync syncData(@Query("id") Long deckId, @Query("hash") String hash, @retrofit.http.Header(HEADER_CACHE_CONTROL) String cacheControlValue);
 
         @GET("/movie/poster")
-        public Response getMoviePoster(@Query("id") String imdbId, @Query("resolution") String resolution);
+        public Response getMoviePoster(@Query("id") String imdbId, @Query("resolution") String resolution, @retrofit.http.Header(HEADER_CACHE_CONTROL) String cacheControlValue);
 
         @POST("/login/login-google")
         public Response loginGoogle(@Query("googleToken") String googleToken, @Query("username") String name);
@@ -96,25 +101,21 @@ public class SyncService extends Service
             @Override
             public void run()
             {
-                DataStore f_store = DataStore.getInstance();
+                // load all available data from the local cache before going over the network
+                Collection<MutiboDeck> decks = listReleasedDecks(CACHE_CONTROL_ONLY_CACHE);
 
-                // retrieve a list of released decks
-                Collection<MutiboDeck> f_decks = restClient.lisReleased();
-
-                // retrieve data for each deck
-                for (MutiboDeck f_deck : f_decks)
+                if (decks != null)
                 {
-                    MutiboSync f_sync = restClient.syncData(f_deck.getDeckId(), f_deck.getContentHash());
+                    downloadAllData(decks, CACHE_CONTROL_ONLY_CACHE);
+                }
 
-                    f_store.addDeck(f_sync.getMutiboDeck());
-                    f_store.addMovies(f_sync.getMutiboMovies());
-                    f_store.addSets(f_sync.getMutiboSets());
+                // check for updated data - force refresh of deck-list, the rest of the data can
+                // come from the cache if still up-to-date (hash matches)
+                decks = listReleasedDecks(CACHE_CONTROL_SERVER);
 
-                    // retrieve posters for all movies
-                    for (MutiboMovie movie : f_sync.getMutiboMovies())
-                    {
-                        restClient.getMoviePoster(movie.getImdbId(), "low");
-                    }
+                if (decks != null)
+                {
+                    downloadAllData(decks, CACHE_CONTROL_PREFER_CACHE);
                 }
             }
         };
@@ -125,9 +126,9 @@ public class SyncService extends Service
 
     Bitmap downloadPosterBitmap(String imdbId)
     {
-        Response response = restClient.getMoviePoster(imdbId, "low");
+        Response response = retrieveMoviePoster(imdbId, "low", CACHE_CONTROL_PREFER_CACHE);
 
-        if (response.getStatus() != 200)
+        if (response == null || response.getStatus() != 200)
             return null;
 
         try {
@@ -139,32 +140,102 @@ public class SyncService extends Service
 
     LoginStatus loginGoogle(String googleToken, String name)
     {
-        Response response = restClient.loginGoogle(googleToken, name);
+        try {
+            Response response = restClient.loginGoogle(googleToken, name);
 
-        if (response.getStatus() != 200)
-            return LoginStatus.LOGIN_FAILED;
+            if (response.getStatus() != 200)
+                return LoginStatus.LOGIN_FAILED;
 
-        // find the X-Auth-Token header
-        for (Header header : response.getHeaders())
-        {
-            if (header.getName() != null && header.getName().equalsIgnoreCase("X-Auth-Token"))
+            // find the X-Auth-Token header
+            for (retrofit.client.Header header : response.getHeaders())
             {
-                GlobalState.setAuthToken(header.getValue());
-                break;
+                if (header.getName() != null && header.getName().equalsIgnoreCase("X-Auth-Token"))
+                {
+                    GlobalState.setAuthToken(header.getValue());
+                    break;
+                }
             }
+
+            // check the body of the request
+            if (response.getBody().toString().equals("NEW"))
+                return LoginStatus.LOGIN_NEW_USER;
+            else
+                return LoginStatus.LOGIN_KNOWN_USER;
+
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "loginGoogle", e);
         }
 
-        // check the body of the request
-        if (response.getBody().toString().equals("NEW"))
-            return LoginStatus.LOGIN_NEW_USER;
-        else
-            return LoginStatus.LOGIN_KNOWN_USER;
+        return LoginStatus.LOGIN_FAILED;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // helper functions
+    //
+
+    private void downloadAllData(Collection<MutiboDeck> decks, String cacheControl)
+    {
+        DataStore f_store = DataStore.getInstance();
+
+        // retrieve data for each deck
+        for (MutiboDeck deck : decks)
+        {
+            MutiboSync f_sync = syncData(deck, cacheControl);
+
+            if (f_sync != null)
+            {
+                f_store.addDeck(f_sync.getMutiboDeck());
+                f_store.addMovies(f_sync.getMutiboMovies());
+                f_store.addSets(f_sync.getMutiboSets());
+
+                // retrieve posters for all movies
+                for (MutiboMovie movie : f_sync.getMutiboMovies())
+                {
+                    retrieveMoviePoster(movie.getImdbId(), "low", cacheControl);
+                }
+            }
+        }
+    }
+
+    private Collection<MutiboDeck> listReleasedDecks(String cacheControl)
+    {
+        try {
+            return restClient.lisReleased(cacheControl);
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "listReleasedDecks", e);
+            return null;
+        }
+    }
+
+    private MutiboSync syncData(MutiboDeck deck, String cacheControl)
+    {
+        try {
+            return restClient.syncData(deck.getDeckId(), deck.getContentHash(), cacheControl);
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "syncData", e);
+            return null;
+        }
+    }
+
+    private Response retrieveMoviePoster(String imdbId, String resolution, String cacheControl)
+    {
+        try {
+            return restClient.getMoviePoster(imdbId, resolution, cacheControl);
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "syncData", e);
+            return null;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //
     // member variables
+    //
+
     private IBinder     binder = new SyncBinder();
     private RestClient  restClient;
 
-    private String      serverHost    = "10.0.2.2";
+    private String      serverHost    = "ivy"; // "10.0.2.2";
     private String      serverBaseUrl = "https://" + serverHost + ":8443";
 }
