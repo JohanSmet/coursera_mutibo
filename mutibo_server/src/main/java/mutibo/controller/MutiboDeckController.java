@@ -57,8 +57,9 @@ public class MutiboDeckController
 	}
 
 	@RequestMapping(method=RequestMethod.GET, value="/deck/list-released")
-	public Iterable<MutiboDeck> listReleased()
+	public Iterable<MutiboDeck> listReleased(HttpServletResponse httpResponse)
 	{
+		httpResponse.setHeader("Cache-Control", "max-age=315360000");
 		return deckRepository.findByReleased(true);
 	}
 

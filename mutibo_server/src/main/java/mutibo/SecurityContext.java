@@ -41,7 +41,8 @@ public class SecurityContext extends WebSecurityConfigurerAdapter
 			.exceptionHandling().and()
 			.anonymous().and()
 			.servletApi().and()
-			.headers().cacheControl().and()
+			// .headers().cacheControl().and()
+			.headers().disable()
 			.authorizeRequests()
 			
 			// allow anonymous resource requests

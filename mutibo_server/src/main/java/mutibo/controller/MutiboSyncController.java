@@ -22,6 +22,8 @@ public class MutiboSyncController
 	@RequestMapping(method=RequestMethod.GET, value="/sync")
 	public MutiboSync sync(@RequestParam("id") Long id, @RequestParam("hash") String hash, HttpServletResponse httpResponse)
 	{
+		httpResponse.setHeader("Cache-Control", "max-age=315360000");
+		
 		// fetch the requested deck
 		MutiboDeck mutiboDeck = deckRepository.findOne(id);
 

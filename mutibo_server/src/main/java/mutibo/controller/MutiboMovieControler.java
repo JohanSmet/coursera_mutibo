@@ -117,6 +117,7 @@ public class MutiboMovieControler
 			return null;
 		}
 
+		httpResponse.setHeader("Cache-Control", "max-age=315360000");
 		return poster.getImageData();
 	}
 
