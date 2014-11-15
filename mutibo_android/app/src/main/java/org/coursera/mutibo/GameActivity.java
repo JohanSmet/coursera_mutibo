@@ -8,8 +8,10 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import org.coursera.mutibo.game.GameControl;
@@ -25,17 +27,29 @@ public class GameActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
         txtTotalScore = (TextView) findViewById(R.id.txtTotalScore);
-        btnMovies[0]  = (Button)   findViewById(R.id.btnMovie01);
-        btnMovies[1]  = (Button)   findViewById(R.id.btnMovie02);
-        btnMovies[2]  = (Button)   findViewById(R.id.btnMovie03);
-        btnMovies[3]  = (Button)   findViewById(R.id.btnMovie04);
-        imgLives[0]   = (ImageView)findViewById(R.id.imgLife1);
-        imgLives[1]   = (ImageView)findViewById(R.id.imgLife2);
-        imgLives[2]   = (ImageView)findViewById(R.id.imgLife3);
+
+        btnMovies[0]  = (LinearLayout)  findViewById(R.id.btnMovie01);
+        imgMovies[0]  = (ImageView)     findViewById(R.id.imgMovie01);
+        txtMovies[0]  = (TextView)      findViewById(R.id.txtMovie01);
+        btnMovies[1]  = (LinearLayout)  findViewById(R.id.btnMovie02);
+        imgMovies[1]  = (ImageView)     findViewById(R.id.imgMovie02);
+        txtMovies[1]  = (TextView)      findViewById(R.id.txtMovie02);
+        btnMovies[2]  = (LinearLayout)  findViewById(R.id.btnMovie03);
+        imgMovies[2]  = (ImageView)     findViewById(R.id.imgMovie03);
+        txtMovies[2]  = (TextView)      findViewById(R.id.txtMovie03);
+        btnMovies[3]  = (LinearLayout)  findViewById(R.id.btnMovie04);
+        imgMovies[3]  = (ImageView)     findViewById(R.id.imgMovie04);
+        txtMovies[3]  = (TextView)      findViewById(R.id.txtMovie04);
+
+        imgLives[0]   = (ImageView)     findViewById(R.id.imgLife1);
+        imgLives[1]   = (ImageView)     findViewById(R.id.imgLife2);
+        imgLives[2]   = (ImageView)     findViewById(R.id.imgLife3);
     }
 
     @Override
@@ -64,7 +78,7 @@ public class GameActivity extends Activity
 
         // movies
         for (int f_idx=0; f_idx < 4; ++f_idx)
-            btnMovies[f_idx].setText(mGameControl.currentSetMovie(f_idx).getName());
+            txtMovies[f_idx].setText(mGameControl.currentSetMovie(f_idx).getName());
 
         addPosterToButtons();
 
@@ -85,8 +99,7 @@ public class GameActivity extends Activity
     private void displayActiveSet()
     {
         // make sure the movie buttons are enabled
-        for (int index=0; index < btnMovies.length; ++index)
-            btnMovies[index].setEnabled(true);
+        enableMovieButtons(true);
 
         // show the game running fragment
         GamePlayingFragment f_fragment = GamePlayingFragment.newInstance(mGameControl.currentSetDifficulty(), mGameControl.currentSetPoints(), 15);
@@ -99,8 +112,7 @@ public class GameActivity extends Activity
     private void displayFinishedSet()
     {
         // make sure the movie buttons are disabled
-        for (int index=0; index < btnMovies.length; ++index)
-            btnMovies[index].setEnabled(false);
+        enableMovieButtons(false);
 
         // show the game over fragment
         GameDoneFragment f_fragment = GameDoneFragment.newInstance(mGameControl.currentSetSuccess(), mGameControl.currentSetReason());
@@ -112,6 +124,9 @@ public class GameActivity extends Activity
 
     private void endCurrentSet(int p_movie)
     {
+        if (mGameControl.currentGameState() != GameControl.GAME_STATE_QUESTION)
+            return;
+
         mGameControl.answerSet(p_movie);
         displayCurrentSet();
     }
@@ -124,33 +139,40 @@ public class GameActivity extends Activity
         }
     }
 
+    private void enableMovieButtons(Boolean enable)
+    {
+        for (int index=0; index < txtMovies.length; ++index)
+        {
+            btnMovies[index].setClickable(enable);
+            imgMovies[index].setClickable(enable);
+            txtMovies[index].setClickable(enable);
+            txtMovies[index].setEnabled(enable);
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // events
     //
 
-    public void btnMovie_clicked(View p_view)
+    public void btnMovie01_clicked(View p_view)
     {
-        switch (p_view.getId())
-        {
-            case R.id.btnMovie01:
-                endCurrentSet(0);
-                break;
+        endCurrentSet(0);
+    }
 
-            case R.id.btnMovie02:
-                endCurrentSet(1);
-                break;
+    public void btnMovie02_clicked(View p_view)
+    {
+        endCurrentSet(1);
+    }
 
+    public void btnMovie03_clicked(View p_view)
+    {
+        endCurrentSet(2);
+    }
 
-            case R.id.btnMovie03:
-                endCurrentSet(2);
-                break;
-
-            case R.id.btnMovie04:
-                endCurrentSet(3);
-                break;
-
-        }
+    public void btnMovie04_clicked(View p_view)
+    {
+        endCurrentSet(3);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -197,8 +219,7 @@ public class GameActivity extends Activity
 
         protected void onPostExecute(Drawable result)
         {
-            // btnMovies[mIndex].setBackground(result);
-            btnMovies[mIndex].setCompoundDrawablesRelativeWithIntrinsicBounds(null, result, null, null);
+            imgMovies[mIndex].setImageDrawable(result);
         }
 
         private Integer mIndex;
@@ -211,8 +232,11 @@ public class GameActivity extends Activity
 
     private GameControl mGameControl = GameFactory.getInstance().currentGame();
     private TextView    txtTotalScore;
-    private Button[]    btnMovies = new Button[4];
-    private ImageView[] imgLives  = new ImageView[3];
+
+    private LinearLayout[]    btnMovies = new LinearLayout[4];
+    private ImageView[]       imgMovies = new ImageView[4];
+    private TextView[]        txtMovies = new TextView[4];
+    private ImageView[]       imgLives  = new ImageView[3];
 
     private SyncServiceClient   syncServiceClient = new SyncServiceClient(this);
 }

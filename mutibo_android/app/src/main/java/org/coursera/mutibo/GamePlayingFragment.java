@@ -68,7 +68,7 @@ public class GamePlayingFragment extends Fragment
         mProgressBar.setMax(mTimeout);
         mProgressBar.setProgress(mTimeout);
 
-        mCountDownTimer = new CountDownTimer (mTimeout, 100)
+        mCountDownTimer = new CountDownTimer (mTimeout, 33)
         {
             public void onTick(long millisUntilFinished)
             {

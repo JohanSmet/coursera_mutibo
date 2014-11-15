@@ -36,7 +36,7 @@
     <string name="game_difficulty_hard">Hard</string>
     <string name="game_success">Correct.</string>
     <string name="game_failure">Incorrect.</string>
-    <string name="game_continue">Continue</string>
+    <string name="game_continue">Continue playing</string>
     <string name="game_rate">Please rate this set</string>
     <string name="game_timeout">You failed to answer the question in the allotted time.</string>
 

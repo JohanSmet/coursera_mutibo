@@ -7,7 +7,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:theme="@style/AppTheme">
 
 
     <LinearLayout
@@ -51,45 +52,131 @@
 
 
     <LinearLayout
+        android:baselineAligned="false"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="2"
         android:orientation="horizontal">
 
-        <Button
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:onClick="btnMovie01_clicked"
+            android:orientation="vertical"
             android:id="@+id/btnMovie01"
-            android:onClick="btnMovie_clicked"
-            android:layout_weight="1" />
+            style="@style/MovieButton">
 
-        <Button
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:layout_margin="1dp"
+                android:onClick="btnMovie01_clicked"
+                android:id="@+id/imgMovie01"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center"
+                android:onClick="btnMovie01_clicked"
+                android:id="@+id/txtMovie01"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:onClick="btnMovie02_clicked"
+            android:orientation="vertical"
             android:id="@+id/btnMovie02"
-            android:onClick="btnMovie_clicked"
-            android:layout_weight="1"/>
+            style="@style/MovieButton">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:scaleType="fitCenter"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:onClick="btnMovie02_clicked"
+                android:id="@+id/imgMovie02"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center"
+                android:onClick="btnMovie02_clicked"
+                android:id="@+id/txtMovie02"/>
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
+        android:baselineAligned="false"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="2"
         android:orientation="horizontal">
 
-        <Button
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
+            style="@style/MovieButton"
+            android:onClick="btnMovie03_clicked"
             android:id="@+id/btnMovie03"
-            android:onClick="btnMovie_clicked"
-            android:layout_weight="1"/>
+            android:orientation="vertical">
 
-        <Button
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:scaleType="fitCenter"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:onClick="btnMovie03_clicked"
+                android:id="@+id/imgMovie03"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center"
+                android:onClick="btnMovie03_clicked"
+                android:id="@+id/txtMovie03"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
+            style="@style/MovieButton"
+            android:onClick="btnMovie04_clicked"
             android:id="@+id/btnMovie04"
-            android:onClick="btnMovie_clicked"
-            android:layout_weight="1"/>
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:scaleType="fitCenter"
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:onClick="btnMovie04_clicked"
+                android:id="@+id/imgMovie04"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:gravity="center"
+                android:onClick="btnMovie04_clicked"
+                android:id="@+id/txtMovie04"/>
+        </LinearLayout>
 
     </LinearLayout>
 

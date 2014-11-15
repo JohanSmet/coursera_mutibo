@@ -2,6 +2,7 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:minHeight="100dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
@@ -10,6 +11,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/game_heading"
         android:layout_gravity="center_horizontal"
+        android:gravity="center"
         android:layout_marginTop="5dp"/>
 
     <LinearLayout
@@ -21,7 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/game_difficulty"
             android:id="@+id/txtDifficulty"
             android:layout_marginTop="5dp"/>
@@ -29,7 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/game_points"
             android:id="@+id/txtPoints"
             android:layout_marginStart="16dp"
