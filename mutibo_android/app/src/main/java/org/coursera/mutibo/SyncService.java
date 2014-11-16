@@ -94,6 +94,18 @@ public class SyncService extends Service
         }
     }
 
+    @Override
+    public void onDestroy()
+    {
+        Log.i(LOG_TAG, "onDestroy called");
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId)
+    {
+        Log.i(LOG_TAG, "Received start id " + startId + ": " + intent);
+        return START_STICKY;
+    }
     void downloadDataAsync()
     {
         Runnable downloadRunnable = new Runnable()

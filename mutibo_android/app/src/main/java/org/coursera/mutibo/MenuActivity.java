@@ -25,8 +25,11 @@ public class MenuActivity extends Activity {
     {
         super.onStart();
 
-        // Bind to SyncService
+        // start the SyncService before binding to it so it keeps running for the lifetime of the app
         Intent intent = new Intent(this, SyncService.class);
+        startService(intent);
+
+        // bind to SyncService
         bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
     }
 

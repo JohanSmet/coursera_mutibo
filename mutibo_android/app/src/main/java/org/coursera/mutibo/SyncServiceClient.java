@@ -30,7 +30,7 @@ public class SyncServiceClient
         }
     }
 
-    public void wait_for_service()
+    private void wait_for_service()
     {
         while (!mSyncBound)
         {
@@ -43,6 +43,7 @@ public class SyncServiceClient
 
     public SyncService getSyncService()
     {
+        wait_for_service();
         return mSyncService;
     }
 
