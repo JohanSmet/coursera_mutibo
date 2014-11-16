@@ -1,5 +1,6 @@
 package org.coursera.mutibo.game;
 
+import org.coursera.mutibo.data.MutiboGameResult;
 import org.coursera.mutibo.data.MutiboMovie;
 
 public interface GameControl
@@ -18,15 +19,17 @@ public interface GameControl
     }
 
     public void     startGame();
+    public void     endGame();
     public boolean  answerSet(int index);
     public void     timeoutSet();
-    public void     continueGame();
+    public void     continueGame(int rating);
     public int      currentGameState();
 
     public int      totalScore();
     public int      numCorrectQuestions();
+    public int      remainingLives();
 
-    public int  remainingLives();
+    public MutiboGameResult gameResult();
 
     public int         currentSetDifficulty();
     public int         currentSetPoints();

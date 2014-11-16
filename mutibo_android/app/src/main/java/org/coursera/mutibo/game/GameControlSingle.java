@@ -1,11 +1,15 @@
 package org.coursera.mutibo.game;
 
 import org.coursera.mutibo.data.DataStore;
+import org.coursera.mutibo.data.MutiboGameResult;
 import org.coursera.mutibo.data.MutiboMovie;
 import org.coursera.mutibo.data.MutiboSet;
+import org.coursera.mutibo.data.MutiboSetResult;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -20,6 +24,7 @@ public class GameControlSingle implements GameControl
         this.mSetSeed    = null;
         this.mSetMovies  = new ArrayList<MutiboMovie>();
         this.mSuccess    = SetSuccess.UNKNOWN;
+        this.mGameResult = new MutiboGameResult();
     }
 
     @Override
@@ -33,9 +38,21 @@ public class GameControlSingle implements GameControl
         this.mPlayedSets.clear();
         this.mSetSeed = new Random();
 
+        // initialize the GameResult object that will eventually be sent to the server
+        mGameResult.setStartTime(new Date());
+        mGameResult.setEndTime(null);
+        mGameResult.clearSetResults();
+
         chooseNextSet();
     }
 
+    @Override
+    public void endGame()
+    {
+        mGameResult.setEndTime(new Date());
+    }
+
+    @Override
     public boolean answerSet(int index)
     {
         // check for success
@@ -48,6 +65,7 @@ public class GameControlSingle implements GameControl
 
         this.mSuccess = (correctGuess) ? SetSuccess.SUCCESS : SetSuccess.FAILURE;
 
+
         // consequences of a guess
         if (this.mSuccess != SetSuccess.SUCCESS)
         {
@@ -58,6 +76,7 @@ public class GameControlSingle implements GameControl
             ++this.mNumCorrect;
             this.mScore +=  this.mCurrentSet.getPoints();
         }
+
 
         // change state of the game
         updateGameState();
@@ -75,8 +94,17 @@ public class GameControlSingle implements GameControl
     }
 
     @Override
-    public void continueGame()
+    public void continueGame(int rating)
     {
+        // initialize the SetResult object to report back to the server
+        MutiboSetResult setResult = new MutiboSetResult(mCurrentSet.getSetId());
+        setResult.setRating(rating);
+
+        if (mSuccess == SetSuccess.SUCCESS)
+            setResult.setScore(this.mCurrentSet.getPoints());
+
+        mGameResult.addSetResult(setResult);
+
         if (this.mState == GAME_STATE_ANSWERED)
             chooseNextSet();
     }
@@ -103,6 +131,12 @@ public class GameControlSingle implements GameControl
     public int remainingLives()
     {
         return mLives;
+    }
+
+    @Override
+    public MutiboGameResult gameResult()
+    {
+        return mGameResult;
     }
 
     @Override
@@ -195,6 +229,8 @@ public class GameControlSingle implements GameControl
     private Random                  mSetSeed;
     private ArrayList<MutiboMovie>  mSetMovies;
     private SetSuccess              mSuccess;
+
+    private MutiboGameResult        mGameResult;
 
     private DataStore               mDataStore = DataStore.getInstance();
 }

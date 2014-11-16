@@ -78,7 +78,7 @@ public class GameDoneFragment extends Fragment implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.btnContinue :
-                mListener.onQuestionContinue(3);
+                mListener.onQuestionContinue(mRating);
                 break;
 
             case R.id.imgRating01 :

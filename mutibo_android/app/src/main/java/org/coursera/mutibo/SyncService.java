@@ -8,18 +8,24 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.coursera.mutibo.data.DataStore;
 import org.coursera.mutibo.data.MutiboDeck;
+import org.coursera.mutibo.data.MutiboGameResult;
 import org.coursera.mutibo.data.MutiboMovie;
 import org.coursera.mutibo.data.MutiboSync;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.*;
+import retrofit.converter.GsonConverter;
 import retrofit.http.*;
 
 public class SyncService extends Service
@@ -50,6 +56,9 @@ public class SyncService extends Service
 
         @POST("/login/login-google")
         public Response loginGoogle(@Query("googleToken") String googleToken, @Query("username") String name);
+
+        @POST("/game/results")
+        public Response postGameResult(@Body MutiboGameResult gameResult);
     }
 
     public class SyncBinder extends Binder
@@ -73,9 +82,14 @@ public class SyncService extends Service
 
         if (restClient == null)
         {
+            Gson gson = new GsonBuilder()
+                            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                            .create()
+                        ;
+
             restClient = new RestAdapter.Builder()
                                 .setEndpoint(this.serverBaseUrl)
-                                // .setClient(new OkClient(OkHttpBuilder.getUnsafeOkHttpClient()))
+                                .setConverter(new GsonConverter(gson))
                                 .setClient(new OkClient(OkHttpBuilder.getSelfSignedOkHttpClient(this, serverHost)))
                                 .setRequestInterceptor(new RequestInterceptor()
                                 {
@@ -88,9 +102,13 @@ public class SyncService extends Service
                                         }
                                     }
                                 })
+                                .setLogLevel(RestAdapter.LogLevel.FULL)
                                 .build()
                                     .create(RestClient.class)
                             ;
+
+            gameResultThread = new GameResultPostThread();
+            gameResultThread.start();
         }
     }
 
@@ -106,6 +124,7 @@ public class SyncService extends Service
         Log.i(LOG_TAG, "Received start id " + startId + ": " + intent);
         return START_STICKY;
     }
+
     void downloadDataAsync()
     {
         Runnable downloadRunnable = new Runnable()
@@ -181,6 +200,12 @@ public class SyncService extends Service
         return LoginStatus.LOGIN_FAILED;
     }
 
+    void postGameResult(MutiboGameResult gameResult)
+    {
+        // store the game result in a queue to be sent to the server when we're online and logged in
+        gameResultQueue.add(gameResult);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // helper functions
@@ -242,6 +267,57 @@ public class SyncService extends Service
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //
+    // nested class
+    //
+
+    private class GameResultPostThread extends Thread
+    {
+        @Override
+        public void run()
+        {
+            try {
+
+                while (!isInterrupted())
+                {
+                    // wait for a new result to come in
+                    MutiboGameResult gameResult = gameResultQueue.take();
+
+                    // a null gameResult is a request to stop the thread's execution
+                    if (gameResult == null) {
+                        return;
+                    }
+
+                    // check if we're able to reach the internet
+                    Boolean online = NetworkStatus.internetAvailable(SyncService.this);
+
+                    if (GlobalState.getAuthToken() == null)
+                        online = false;
+
+                    // post the result to the server
+                    try {
+                        if (online)
+                        {
+                            restClient.postGameResult(gameResult);
+                        }
+                    } catch (RetrofitError e) {
+                        Log.d(LOG_TAG, "GameResultPostThread", e);
+                        online = false;
+                    }
+
+                    // if not online, sleep for a while and try again later
+                    if (!online)
+                    {
+                        sleep(5 * 60 * 1000);
+                    }
+                }
+            } catch (InterruptedException e) {
+                return;
+            }
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //
     // member variables
     //
 
@@ -250,4 +326,7 @@ public class SyncService extends Service
 
     private String      serverHost    = "ivy"; // "10.0.2.2";
     private String      serverBaseUrl = "https://" + serverHost + ":8443";
+
+    private LinkedBlockingQueue<MutiboGameResult>   gameResultQueue = new LinkedBlockingQueue<MutiboGameResult>();
+    private GameResultPostThread                    gameResultThread;
 }

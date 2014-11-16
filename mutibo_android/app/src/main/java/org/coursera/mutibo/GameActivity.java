@@ -188,13 +188,15 @@ public class GameActivity extends Activity
 
     public void onQuestionContinue(int rating)
     {
+        mGameControl.continueGame(rating);
+
         if (mGameControl.currentGameState() == GameControl.GAME_STATE_FINISHED)
         {
+            syncServiceClient.getSyncService().postGameResult(mGameControl.gameResult());
             startActivity(new Intent(this, GameOverActivity.class));
         }
         else
         {
-            mGameControl.continueGame();
             displayCurrentSet();
         }
     }
@@ -211,7 +213,6 @@ public class GameActivity extends Activity
             mIndex = params[0];
             String imdbId = mGameControl.currentSetMovie(mIndex).getImdbId();
 
-            syncServiceClient.wait_for_service();
             Bitmap bitmap = syncServiceClient.getSyncService().downloadPosterBitmap(imdbId);
 
             return new BitmapDrawable(getResources(), bitmap);

@@ -305,7 +305,6 @@ public class LoginActivity extends Activity
             }
 
             // send a login request
-            syncServiceClient.wait_for_service();
             return syncServiceClient.getSyncService().loginGoogle(authToken, googlePlusClient.getPersonDisplayName());
         }
 
