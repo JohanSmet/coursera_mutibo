@@ -126,6 +126,12 @@ public class MutiboSet
 		this.ratingCount = ratingCount;
 	}
 
+	public void addRating(int rating)
+	{
+		++this.ratingCount;
+		this.ratingTotal += rating;
+	}
+
 	// member variables
 	@Id
 	private Long setId;

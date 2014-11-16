@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author Redacted
@@ -18,7 +19,8 @@ import org.springframework.core.env.Environment;
 @Import({WebAppContext.class, PersistenceContext.class, SecurityContext.class})
 @EnableAutoConfiguration
 @PropertySource("classpath:application.properties")
-@ComponentScan(basePackages = {"mutibo.themoviedb"})
+@EnableScheduling
+@ComponentScan(basePackages = {"mutibo.themoviedb", "mutibo.background"})
 public class Application 
 {
 	private static final String PROPERTY_NAME_TMDB_HOST 		= "tmdb.host";
