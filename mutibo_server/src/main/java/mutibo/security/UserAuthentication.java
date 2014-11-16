@@ -9,6 +9,7 @@ import java.util.Collection;
 import mutibo.data.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -65,5 +66,17 @@ public class UserAuthentication implements Authentication
 	public void setAuthenticated(boolean authenticated) 
 	{
 		this.authenticated = authenticated;
+	}
+	
+	public static User getLoggedInUser()
+	{
+		final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		if (authentication instanceof UserAuthentication) 
+		{
+			return ((UserAuthentication) authentication).getDetails();
+		}
+
+		return null;
 	}
 }

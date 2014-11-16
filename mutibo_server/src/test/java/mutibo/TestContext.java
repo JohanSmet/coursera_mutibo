@@ -3,7 +3,9 @@ package mutibo;
 import mutibo.repository.MutiboDeckRepository;
 import mutibo.repository.MutiboMoviePosterRepository;
 import mutibo.repository.MutiboMovieRepository;
+import mutibo.repository.MutiboSessionRepository;
 import mutibo.repository.MutiboSetRepository;
+import mutibo.repository.MutiboSetResultRepository;
 import mutibo.repository.UserRepository;
 import mutibo.security.TokenAuthenticationService;
 import mutibo.themoviedb.TmdbApi;
@@ -39,6 +41,16 @@ public class TestContext
 	public MutiboSetRepository setRepository() 
 	{
 		return Mockito.mock(MutiboSetRepository.class);
+	}
+
+	@Bean MutiboSetResultRepository setResultRepository()
+	{
+		return Mockito.mock(MutiboSetResultRepository.class);
+	}
+
+	@Bean MutiboSessionRepository sessionepository()
+	{
+		return Mockito.mock(MutiboSessionRepository.class);
 	}
 
 	@Bean
