@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mutibo.controller;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,14 +6,17 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import mutibo.data.MutiboSession;
 import mutibo.data.MutiboSetResult;
+import mutibo.data.MutiboUserResult;
 import mutibo.data.User;
 import mutibo.repository.MutiboSessionRepository;
 import mutibo.repository.MutiboSetResultRepository;
+import mutibo.repository.MutiboUserResultRepository;
 import mutibo.security.UserAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -59,6 +57,27 @@ public class GameController
 
 		// save the session
 		mutiboSessionRepository.save(session);
+	}
+
+	@RequestMapping(method=RequestMethod.GET, value="/game/leaderboard")
+	List<MutiboUserResult> getLeaderboard(@RequestParam("from") int from, @RequestParam("count") int count)
+	{
+		return mutiboUserResultRepository.findByRankingBetweenOrderByRankingAsc(from - 1, from + count);
+	}
+
+	@RequestMapping(method=RequestMethod.GET, value="/game/leaderboard-player")
+	List<MutiboUserResult> getLeaderboardPlayer(@RequestParam("player") String nickName, @RequestParam("count") int count)
+	{
+		MutiboUserResult userResult = mutiboUserResultRepository.findByNickName(nickName);
+
+		if (userResult == null)
+			return null;
+		
+		int from = userResult.getRanking() - (count / 2);
+		if (from <= 0)
+			from = 1;
+
+		return mutiboUserResultRepository.findByRankingBetweenOrderByRankingAsc(from, from+count);
 	}
 
 	// nested types
@@ -103,4 +122,7 @@ public class GameController
 
 	@Autowired
 	private MutiboSetResultRepository mutiboSetResultsRepository;
+
+	@Autowired
+	private MutiboUserResultRepository mutiboUserResultRepository;
 }

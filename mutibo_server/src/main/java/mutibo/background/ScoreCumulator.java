@@ -4,10 +4,12 @@ import mutibo.data.MutiboSession;
 import mutibo.data.MutiboSet;
 import mutibo.data.MutiboSetResult;
 import mutibo.data.MutiboUserResult;
+import mutibo.data.User;
 import mutibo.repository.MutiboSessionRepository;
 import mutibo.repository.MutiboSetRepository;
 import mutibo.repository.MutiboSetResultRepository;
 import mutibo.repository.MutiboUserResultRepository;
+import mutibo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -32,7 +34,8 @@ public class ScoreCumulator
 			if (userResult == null)
 			{
 				// new player - just create a new record
-				userResult = new MutiboUserResult(session.getUserId());
+				User user  = userRepository.findOne(session.getUserId());
+				userResult = new MutiboUserResult(session.getUserId(), user.getUsername());
 				userResult.setDateRegistered(session.getTimeBegin());
 			}
 			
@@ -70,6 +73,18 @@ public class ScoreCumulator
 		}
 	}
 
+	@Scheduled(fixedRate = 60 * 60 * 1000)
+	public void updateUserRanking()
+	{
+		int ranking = 0;
+
+		for (MutiboUserResult userResult : mutiboUserResultRepository.findByPlayedGamesGreaterThanOrderByBestScoreDescTotalScoreDesc(0))
+		{
+			userResult.setRanking(++ranking);
+			mutiboUserResultRepository.save(userResult);
+		}
+	}
+
 	@Autowired
 	private MutiboSessionRepository mutiboSessionRepository;
 
@@ -81,5 +96,8 @@ public class ScoreCumulator
 
 	@Autowired
 	private MutiboSetResultRepository mutiboSetResultRepository;
+
+	@Autowired
+	private UserRepository userRepository;
 
 }

@@ -5,6 +5,7 @@
  */
 package mutibo.repository;
 
+import java.util.List;
 import mutibo.data.MutiboUserResult;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -17,5 +18,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MutiboUserResultRepository extends CrudRepository<MutiboUserResult, Long>
 {
-	
+	List<MutiboUserResult>	findByPlayedGamesGreaterThanOrderByBestScoreDescTotalScoreDesc(int playedGames);
+
+	List<MutiboUserResult>	findByRankingBetweenOrderByRankingAsc(int start, int end);
+
+	MutiboUserResult		findByNickName(String nickName);
 }

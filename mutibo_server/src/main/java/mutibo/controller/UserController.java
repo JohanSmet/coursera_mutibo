@@ -5,8 +5,12 @@
  */
 package mutibo.controller;
 
+import java.util.Date;
+import java.util.Random;
+import mutibo.data.MutiboUserResult;
 import mutibo.data.User;
 import mutibo.data.UserRole;
+import mutibo.repository.MutiboUserResultRepository;
 import mutibo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -30,11 +34,11 @@ public class UserController
 	}
 
 	@RequestMapping(method=RequestMethod.POST, value="/user/create-default")
-	public User createDefault()
+	public void createDefault()
 	{
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
-		User user = new User();
+		/* User user = new User();
 		user.setId(1L);
 		user.setUsername("admin");
 		user.setPassword(encoder.encode("password"));
@@ -48,12 +52,33 @@ public class UserController
 		user.setUsername("player");
 		user.setPassword(encoder.encode("password"));
 		user.grantRole(UserRole.USER);
-		userRepository.save(user);
+		userRepository.save(user); */
 
-		return user;
+		Random rand = new Random();
+
+		for (int idx=100;idx<400;++idx)
+		{
+			User user = new User();
+			user.setId(Long.valueOf(idx));
+			user.setUsername(String.format("demo%.3s", idx));
+			user.setPassword("");
+			user.grantRole(UserRole.USER);
+			userRepository.save(user);
+			
+			MutiboUserResult userResult = new MutiboUserResult(user.getId(), user.getUsername());
+			userResult.setDateRegistered(new Date());
+			userResult.setDateLastPlayed(new Date());
+			userResult.setPlayedGames(rand.nextInt(20));
+			userResult.setTotalScore(rand.nextInt(300));
+			userResult.setBestScore(rand.nextInt(30));
+			mutiboUserSetRepository.save(userResult);
+		}
 	}
 
 	// member variables	
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private MutiboUserResultRepository mutiboUserSetRepository;
 }

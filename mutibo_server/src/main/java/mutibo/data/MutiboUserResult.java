@@ -21,9 +21,10 @@ public class MutiboUserResult
 	{
 	}
 
-	public MutiboUserResult(Long id)
+	public MutiboUserResult(Long id, String nickName)
 	{
 		this.id = id;
+		this.nickName	 = nickName;
 		this.totalScore  = 0;
 		this.bestScore   = 0;
 		this.playedGames = 0;
@@ -37,6 +38,16 @@ public class MutiboUserResult
 	public void setId(Long id)
 	{
 		this.id = id;
+	}
+
+	public String getNickName()
+	{
+		return nickName;
+	}
+
+	public void setNickName(String nickName)
+	{
+		this.nickName = nickName;
 	}
 
 	public Date getDateRegistered()
@@ -96,14 +107,26 @@ public class MutiboUserResult
 		this.bestScore = Math.max(score, this.bestScore);
 	}
 
+	public int getRanking()
+	{
+		return ranking;
+	}
+
+	public void setRanking(int ranking)
+	{
+		this.ranking = ranking;
+	}
+
 	// member variables
 	@Id
 	private Long	id;
 
+	private String	nickName;
 	private Date	dateRegistered;
 	private Date	dateLastPlayed;
 
 	private long	totalScore;
 	private int		bestScore;
 	private long	playedGames;
+	private int 	ranking;
 }
