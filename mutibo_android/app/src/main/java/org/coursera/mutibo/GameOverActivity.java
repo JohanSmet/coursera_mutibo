@@ -41,6 +41,8 @@ public class GameOverActivity extends Activity
 
     public void btnRanking_clicked(View p_view)
     {
+        Intent intent = new Intent(this, LeaderboardActivity.class);
+        startActivity(intent);
     }
 
     public void btnMenu_clicked(View p_view)

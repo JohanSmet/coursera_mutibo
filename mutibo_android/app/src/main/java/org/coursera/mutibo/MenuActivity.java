@@ -8,6 +8,8 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.view.View;
+import android.view.Window;
+import android.widget.TextView;
 
 import org.coursera.mutibo.game.GameFactory;
 
@@ -16,8 +18,11 @@ public class MenuActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        ((TextView) findViewById(R.id.txtWelcome)).setText(String.format(getString(R.string.menu_welcome), GlobalState.getNickName()));
     }
 
     @Override
@@ -34,7 +39,8 @@ public class MenuActivity extends Activity {
     }
 
     @Override
-    protected void onStop() {
+    protected void onStop()
+    {
         super.onStop();
 
         // Unbind from the service
@@ -56,6 +62,12 @@ public class MenuActivity extends Activity {
         GameFactory.getInstance().newGame(GameFactory.GAME_TYPE_SINGLEPLAYER);
 
         Intent f_intent = new Intent(this, GameActivity.class);
+        startActivity(f_intent);
+    }
+
+    public void btnLeaderboards_clicked(View p_view)
+    {
+        Intent f_intent = new Intent(this, LeaderboardActivity.class);
         startActivity(f_intent);
     }
 

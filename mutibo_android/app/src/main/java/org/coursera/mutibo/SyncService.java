@@ -16,6 +16,7 @@ import org.coursera.mutibo.data.MutiboDeck;
 import org.coursera.mutibo.data.MutiboGameResult;
 import org.coursera.mutibo.data.MutiboMovie;
 import org.coursera.mutibo.data.MutiboSync;
+import org.coursera.mutibo.data.MutiboUserResult;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -25,6 +26,7 @@ import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.*;
+import retrofit.converter.ConversionException;
 import retrofit.converter.GsonConverter;
 import retrofit.http.*;
 
@@ -46,7 +48,7 @@ public class SyncService extends Service
     private interface RestClient
     {
         @GET("/deck/list-released")
-        public Collection<MutiboDeck> lisReleased(@retrofit.http.Header(HEADER_CACHE_CONTROL) String cacheControlValue);
+        public Collection<MutiboDeck> listReleased(@retrofit.http.Header(HEADER_CACHE_CONTROL) String cacheControlValue);
 
         @GET("/sync")
         public MutiboSync syncData(@Query("id") Long deckId, @Query("hash") String hash, @retrofit.http.Header(HEADER_CACHE_CONTROL) String cacheControlValue);
@@ -59,6 +61,14 @@ public class SyncService extends Service
 
         @POST("/game/results")
         public Response postGameResult(@Body MutiboGameResult gameResult);
+
+        @GET("/game/leaderboard")
+        @Headers("Cache-control: max-age=86400")
+        public Collection<MutiboUserResult> leaderBoard(@Query("from") int from, @Query("count") int count);
+
+        @GET("/game/leaderboard-player")
+        @Headers("Cache-control: max-age=86400")
+        public Collection<MutiboUserResult> leaderBoardPlayer(@Query("player") String player, @Query("count") int count);
     }
 
     public class SyncBinder extends Binder
@@ -82,14 +92,14 @@ public class SyncService extends Service
 
         if (restClient == null)
         {
-            Gson gson = new GsonBuilder()
-                            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
-                            .create()
-                        ;
+            gsonConverter = new GsonConverter(new GsonBuilder()
+                                                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+                                                .create()
+            );
 
             restClient = new RestAdapter.Builder()
                                 .setEndpoint(this.serverBaseUrl)
-                                .setConverter(new GsonConverter(gson))
+                                .setConverter(gsonConverter)
                                 .setClient(new OkClient(OkHttpBuilder.getSelfSignedOkHttpClient(this, serverHost)))
                                 .setRequestInterceptor(new RequestInterceptor()
                                 {
@@ -102,7 +112,7 @@ public class SyncService extends Service
                                         }
                                     }
                                 })
-                                .setLogLevel(RestAdapter.LogLevel.FULL)
+                                // .setLogLevel(RestAdapter.LogLevel.FULL)
                                 .build()
                                     .create(RestClient.class)
                             ;
@@ -178,20 +188,28 @@ public class SyncService extends Service
                 return LoginStatus.LOGIN_FAILED;
 
             // find the X-Auth-Token header
-            for (retrofit.client.Header header : response.getHeaders())
-            {
-                if (header.getName() != null && header.getName().equalsIgnoreCase("X-Auth-Token"))
-                {
+            for (retrofit.client.Header header : response.getHeaders()) {
+                if (header.getName() != null && header.getName().equalsIgnoreCase("X-Auth-Token")) {
                     GlobalState.setAuthToken(header.getValue());
                     break;
                 }
             }
 
             // check the body of the request
-            if (response.getBody().toString().equals("NEW"))
-                return LoginStatus.LOGIN_NEW_USER;
-            else
-                return LoginStatus.LOGIN_KNOWN_USER;
+            try {
+                LoginInfo loginInfo = (LoginInfo) gsonConverter.fromBody(response.getBody(), LoginInfo.class);
+
+                GlobalState.setNickName(loginInfo.getNickName());
+
+                if (loginInfo.getStatus().equals("NEW"))
+                    return LoginStatus.LOGIN_NEW_USER;
+                else
+                    return LoginStatus.LOGIN_KNOWN_USER;
+
+            } catch (ConversionException e) {
+                Log.d(LOG_TAG, "loginGoogle", e);
+                return LoginStatus.LOGIN_FAILED;
+            }
 
         } catch (RetrofitError e) {
             Log.d(LOG_TAG, "loginGoogle", e);
@@ -204,6 +222,26 @@ public class SyncService extends Service
     {
         // store the game result in a queue to be sent to the server when we're online and logged in
         gameResultQueue.add(gameResult);
+    }
+
+    Collection<MutiboUserResult> getLeaderboardPlayer(int count)
+    {
+        try {
+            return restClient.leaderBoardPlayer(GlobalState.getNickName(), count);
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "getLeaderboardPlayer", e);
+            return null;
+        }
+    }
+
+    Collection<MutiboUserResult> getLeaderboard(int from, int count)
+    {
+        try {
+            return restClient.leaderBoard(from, count);
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "getLeaderboard", e);
+            return null;
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -238,7 +276,7 @@ public class SyncService extends Service
     private Collection<MutiboDeck> listReleasedDecks(String cacheControl)
     {
         try {
-            return restClient.lisReleased(cacheControl);
+            return restClient.listReleased(cacheControl);
         } catch (RetrofitError e) {
             Log.d(LOG_TAG, "listReleasedDecks", e);
             return null;
@@ -316,13 +354,44 @@ public class SyncService extends Service
         }
     }
 
+    private class LoginInfo
+    {
+        private LoginInfo()
+        {
+        }
+
+        public String getStatus()
+        {
+            return status;
+        }
+
+        public void setStatus(String status)
+        {
+            this.status = status;
+        }
+
+        public String getNickName()
+        {
+            return nickName;
+        }
+
+        public void setNickName(String nickName)
+        {
+            this.nickName = nickName;
+        }
+
+        private String status;
+        private String nickName;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // member variables
     //
 
-    private IBinder     binder = new SyncBinder();
-    private RestClient  restClient;
+    private IBinder         binder = new SyncBinder();
+    private RestClient      restClient;
+    private GsonConverter   gsonConverter;
 
     private String      serverHost    = "ivy"; // "10.0.2.2";
     private String      serverBaseUrl = "https://" + serverHost + ":8443";
