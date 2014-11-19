@@ -60,13 +60,14 @@ public class GameController
 	}
 
 	@RequestMapping(method=RequestMethod.GET, value="/game/leaderboard")
-	List<MutiboUserResult> getLeaderboard(@RequestParam("from") int from, @RequestParam("count") int count)
+	List<MutiboUserResult> getLeaderboard(@RequestParam("from") int from, @RequestParam("count") int count, HttpServletResponse httpResponse)
 	{
+		httpResponse.setHeader("Cache-Control", "max-age=315360000");
 		return mutiboUserResultRepository.findByRankingBetweenOrderByRankingAsc(from - 1, from + count);
 	}
 
 	@RequestMapping(method=RequestMethod.GET, value="/game/leaderboard-player")
-	List<MutiboUserResult> getLeaderboardPlayer(@RequestParam("player") String nickName, @RequestParam("count") int count)
+	List<MutiboUserResult> getLeaderboardPlayer(@RequestParam("player") String nickName, @RequestParam("count") int count, HttpServletResponse httpResponse)
 	{
 		MutiboUserResult userResult = mutiboUserResultRepository.findByNickName(nickName);
 
@@ -77,7 +78,23 @@ public class GameController
 		if (from <= 0)
 			from = 1;
 
+		httpResponse.setHeader("Cache-Control", "max-age=315360000");
 		return mutiboUserResultRepository.findByRankingBetweenOrderByRankingAsc(from, from+count);
+	}
+
+	@RequestMapping(method=RequestMethod.GET, value="/game/score")
+	MutiboUserResult getScore(HttpServletResponse httpResponse)
+	{
+		// get the currently logged in user
+		User currentUser = UserAuthentication.getLoggedInUser();
+
+		if (currentUser == null)
+		{
+			httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return null;
+		}
+
+		return mutiboUserResultRepository.findOne(currentUser.getId());
 	}
 
 	// nested types
