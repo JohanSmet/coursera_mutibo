@@ -72,7 +72,6 @@ public class LoginController
 		if (user == null) 
 		{
 			user = new User();
-			user.setId(makeUniqueUserId(Long.valueOf(googleId.substring(1, 9))));
 			user.setUsername(username);
 			user.grantRole(UserRole.USER);
 			user.setGoogleId(googleId);

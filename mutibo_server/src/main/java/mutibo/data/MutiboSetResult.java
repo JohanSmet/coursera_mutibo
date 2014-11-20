@@ -18,7 +18,7 @@ public class MutiboSetResult
 		this.isCumulated = false;
 	}
 
-	public MutiboSetResult(ObjectId sessionId, Long setId, Long userId)
+	public MutiboSetResult(ObjectId sessionId, Long setId, ObjectId userId)
 	{
 		this.sessionId = sessionId;
 		this.setId 	   = setId;
@@ -57,12 +57,12 @@ public class MutiboSetResult
 		this.setId = setId;
 	}
 
-	public Long getUserId()
+	public ObjectId getUserId()
 	{
 		return userId;
 	}
 
-	public void setUserId(Long userId)
+	public void setUserId(ObjectId userId)
 	{
 		this.userId = userId;
 	}
@@ -115,7 +115,7 @@ public class MutiboSetResult
 	private ObjectId sessionId;
 
 	private Long 	 setId;
-	private Long	 userId;
+	private ObjectId userId;
 	private long	 msTimePlayed;
 	private int		 score;
 	private int		 rating;

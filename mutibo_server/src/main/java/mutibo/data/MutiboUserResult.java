@@ -6,6 +6,7 @@
 package mutibo.data;
 
 import java.util.Date;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -21,7 +22,7 @@ public class MutiboUserResult
 	{
 	}
 
-	public MutiboUserResult(Long id, String nickName)
+	public MutiboUserResult(ObjectId id, String nickName)
 	{
 		this.id = id;
 		this.nickName	 = nickName;
@@ -30,12 +31,12 @@ public class MutiboUserResult
 		this.playedGames = 0;
 	}
 
-	public Long getId()
+	public ObjectId getId()
 	{
 		return id;
 	}
 
-	public void setId(Long id)
+	public void setId(ObjectId id)
 	{
 		this.id = id;
 	}
@@ -119,7 +120,7 @@ public class MutiboUserResult
 
 	// member variables
 	@Id
-	private Long	id;
+	private ObjectId	id;
 
 	private String	nickName;
 	private Date	dateRegistered;

@@ -25,7 +25,7 @@ public class MutiboSession
 		this.totalScore  = 0;
 	}
 
-	public MutiboSession(Long userId)
+	public MutiboSession(ObjectId userId)
 	{
 		this.userId 	 = userId;
 		this.isCumulated = false;
@@ -42,12 +42,12 @@ public class MutiboSession
 		this.sessionId = sessionId;
 	}
 
-	public Long getUserId()
+	public ObjectId getUserId()
 	{
 		return userId;
 	}
 
-	public void setUserId(Long userId)
+	public void setUserId(ObjectId userId)
 	{
 		this.userId = userId;
 	}
@@ -102,7 +102,7 @@ public class MutiboSession
 	private ObjectId	sessionId;
 
 	@Indexed
-	private Long		userId;
+	private ObjectId	userId;
 
 	private Date		timeBegin;
 	private Date		timeEnd;

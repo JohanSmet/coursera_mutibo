@@ -7,6 +7,7 @@ import com.mongodb.DBObject;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
+import org.bson.types.ObjectId;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -25,12 +26,12 @@ public class User implements UserDetails
 	{
 	}
 
-	public Long getId()
+	public ObjectId getId()
 	{
 		return id;
 	}
 
-	public void setId(Long id)
+	protected void setId(ObjectId id)
 	{
 		this.id = id;
 	}
@@ -168,7 +169,7 @@ public class User implements UserDetails
   		public User convert(DBObject source) 
 		{
 			User u = new User();
-			u.setId((Long) source.get("_id"));
+			u.setId((ObjectId) source.get("_id"));
 			u.setUsername((String) source.get("username"));
 			u.setPassword((String) source.get("password"));
 			u.setGoogleId((String) source.get("googleId"));
@@ -216,7 +217,7 @@ public class User implements UserDetails
 
 	// member variables
 	@Id
-	private Long				id;
+	private ObjectId			id;
 	private String				username;
 	private String				password;
 	private String				googleId;

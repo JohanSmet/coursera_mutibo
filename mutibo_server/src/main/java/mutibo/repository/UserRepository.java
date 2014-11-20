@@ -6,6 +6,7 @@
 package mutibo.repository;
 
 import mutibo.data.User;
+import org.bson.types.ObjectId;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long>
+public interface UserRepository extends CrudRepository<User, ObjectId>
 {
 	User findByUsername(String username);
 	User findByGoogleId(String googleId);

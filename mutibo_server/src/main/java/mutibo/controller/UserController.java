@@ -38,8 +38,7 @@ public class UserController
 	{
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
-		/* User user = new User();
-		user.setId(1L);
+		User user = new User();
 		user.setUsername("admin");
 		user.setPassword(encoder.encode("password"));
 		user.grantRole(UserRole.ADMIN);
@@ -48,18 +47,16 @@ public class UserController
 		userRepository.save(user);
 
 		user = new User();
-		user.setId(2L);
 		user.setUsername("player");
 		user.setPassword(encoder.encode("password"));
 		user.grantRole(UserRole.USER);
-		userRepository.save(user); */
+		userRepository.save(user);
 
 		Random rand = new Random();
 
 		for (int idx=100;idx<400;++idx)
 		{
-			User user = new User();
-			user.setId(Long.valueOf(idx));
+			user = new User();
 			user.setUsername(String.format("demo%.3s", idx));
 			user.setPassword("");
 			user.grantRole(UserRole.USER);
