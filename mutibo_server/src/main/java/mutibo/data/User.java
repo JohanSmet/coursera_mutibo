@@ -70,6 +70,16 @@ public class User implements UserDetails
 		this.googleId = googleId;
 	}
 
+	public String getFacebookId()
+	{
+		return facebookId;
+	}
+
+	public void setFacebookId(String facebookId)
+	{
+		this.facebookId = facebookId;
+	}
+
 	public long getExpires()
 	{
 		return expires;
@@ -173,6 +183,7 @@ public class User implements UserDetails
 			u.setUsername((String) source.get("username"));
 			u.setPassword((String) source.get("password"));
 			u.setGoogleId((String) source.get("googleId"));
+			u.setFacebookId((String) source.get("facebookId"));
 
 			if (source.containsField("roles"))
 			{
@@ -194,10 +205,11 @@ public class User implements UserDetails
   		public DBObject convert(User source) 
 		{
     		DBObject dbo = new BasicDBObject();
-    		dbo.put("_id", 		source.getId());
-    		dbo.put("username", source.getUsername());
-			dbo.put("password", source.getPassword());
-			dbo.put("googleId", source.getGoogleId());
+    		dbo.put("_id", 			source.getId());
+    		dbo.put("username", 	source.getUsername());
+			dbo.put("password", 	source.getPassword());
+			dbo.put("googleId", 	source.getGoogleId());
+			dbo.put("facebookId", 	source.getFacebookId());
 
 			if (source.authorities != null) 
 			{
@@ -221,6 +233,7 @@ public class User implements UserDetails
 	private String				username;
 	private String				password;
 	private String				googleId;
+	private String				facebookId;
 	private Set<UserAuthority> 	authorities;
 
 	@Transient

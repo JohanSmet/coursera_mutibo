@@ -20,4 +20,5 @@ public interface UserRepository extends CrudRepository<User, ObjectId>
 {
 	User findByUsername(String username);
 	User findByGoogleId(String googleId);
+	User findByFacebookId(String facebookId);
 }

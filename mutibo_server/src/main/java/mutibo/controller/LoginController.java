@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.servlet.http.HttpServletResponse;
 import mutibo.data.User;
 import mutibo.data.UserRole;
+import mutibo.facebook.FacebookTokenChecker;
 import mutibo.google.GoogleTokenChecker;
 import mutibo.repository.UserRepository;
 import mutibo.security.TokenAuthenticationService;
@@ -84,15 +85,35 @@ public class LoginController
 		return new LoginInfo(user.getUsername(), result);
 	}
 
-	private Long makeUniqueUserId(Long startId)
+	@RequestMapping(method=RequestMethod.POST, value="/login/login-facebook")
+	public LoginInfo loginFacebook(@RequestParam("fbToken") String fbToken, @RequestParam("userId") String userId, @RequestParam("username") String username, 
+								   HttpServletResponse httpResponse)
 	{
-		Long newId = startId;
+		// validate the token
+		if (!facebookTokenChecker.validateId(userId, fbToken))
+		{
+			httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return new LoginInfo("", "FAILED");
+		}
 
-		// XXX goe plan Guido
-		while(userRepository.findOne(newId) != null)
-			++newId;
-		
-		return newId;
+		// check if the user is already known
+		User 	user = userRepository.findByFacebookId(userId);
+		String	result = "OK";
+			
+		// create a new user if necessary
+		if (user == null) 
+		{
+			user = new User();
+			user.setUsername(username);
+			user.grantRole(UserRole.USER);
+			user.setFacebookId(userId);
+			userRepository.save(user);
+			result = "NEW";
+		}
+
+		// add a token to the request
+		tokenAuthenticationService.addAuthentication(httpResponse, user);
+		return new LoginInfo(user.getUsername(), result);
 	}
 
 	public static class LoginInfo
@@ -120,6 +141,9 @@ public class LoginController
 
 	@Autowired
 	private GoogleTokenChecker	googleTokenChecker;
+
+	@Autowired
+	private FacebookTokenChecker facebookTokenChecker;
 
 	@Autowired
 	private TokenAuthenticationService tokenAuthenticationService;

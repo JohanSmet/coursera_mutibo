@@ -6,6 +6,7 @@ import mutibo.repository.MutiboMovieRepository;
 import mutibo.repository.MutiboSessionRepository;
 import mutibo.repository.MutiboSetRepository;
 import mutibo.repository.MutiboSetResultRepository;
+import mutibo.repository.MutiboUserResultRepository;
 import mutibo.repository.UserRepository;
 import mutibo.security.TokenAuthenticationService;
 import mutibo.themoviedb.TmdbApi;
@@ -57,6 +58,12 @@ public class TestContext
 	public UserRepository userRepository() 
 	{
 		return Mockito.mock(UserRepository.class);
+	}
+
+	@Bean
+	public MutiboUserResultRepository userResultRepository()
+	{
+		return Mockito.mock(MutiboUserResultRepository.class);
 	}
 
 	@Bean
