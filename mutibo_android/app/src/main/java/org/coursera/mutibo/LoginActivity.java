@@ -5,9 +5,16 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphUser;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.UserRecoverableAuthException;
 import com.google.android.gms.common.ConnectionResult;
@@ -36,6 +43,10 @@ public class LoginActivity extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        uiHelper = new UiLifecycleHelper(this, statusCallback);
+        uiHelper.onCreate(savedInstanceState);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -56,6 +67,14 @@ public class LoginActivity extends Activity
         googlePlusClient.setupSignInButton((SignInButton) findViewById(R.id.sign_in_button));
     }
 
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        uiHelper.onDestroy();
+    }
+
+    @Override
     protected void onStart()
     {
         super.onStart();
@@ -66,6 +85,7 @@ public class LoginActivity extends Activity
             googlePlusClient.connect();
     }
 
+    @Override
     protected void onStop()
     {
         super.onStop();
@@ -74,6 +94,27 @@ public class LoginActivity extends Activity
 
         if (googlePlusClient != null)
             googlePlusClient.disconnect();
+    }
+
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        uiHelper.onResume();
+    }
+
+    @Override
+    public void onPause()
+    {
+        super.onPause();
+        uiHelper.onPause();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedState)
+    {
+        super.onSaveInstanceState(savedState);
+        uiHelper.onSaveInstanceState(savedState);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,10 +132,77 @@ public class LoginActivity extends Activity
     {
         Boolean handled = false;
 
-        if (googlePlusClient != null)
+        if (!handled && googlePlusClient != null)
         {
             handled = googlePlusClient.onActivityResult(requestCode, responseCode, intent);
         }
+
+        if (!handled && uiHelper != null)
+        {
+            uiHelper.onActivityResult(requestCode, responseCode, intent);
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //
+    // facebook login
+    //
+
+    private Session.StatusCallback statusCallback = new Session.StatusCallback()
+    {
+        @Override
+        public void call(final Session session, SessionState state, Exception exception)
+        {
+            if (state.isOpened())
+            {
+                Log.d("LoginActivity", "Facebook session opened");
+                new FacebookAuthTask(session).execute();
+            }
+            else if (state.isClosed())
+            {
+                Log.d("LoginActivity", "Facebook session closed");
+            }
+        }
+    };
+
+    private class FacebookAuthTask extends AsyncTask<Integer, Integer, SyncService.LoginStatus>
+    {
+        public FacebookAuthTask(Session session)
+        {
+            mSession = session;
+        }
+
+        protected SyncService.LoginStatus doInBackground(Integer... params)
+        {
+            String accessToken = mSession.getAccessToken();
+
+            Request request = Request.newMeRequest(mSession, new Request.GraphUserCallback() {
+                @Override
+                public void onCompleted(GraphUser user, Response response)
+                {
+                    if (mSession == Session.getActiveSession() && user != null)
+                    {
+                        mUserId   = user.getId();
+                        mUserName = user.getFirstName();
+                    }
+                }
+            });
+
+            Request.executeAndWait(request);
+
+            // send a login request
+            return syncServiceClient.getSyncService().loginFacebook(accessToken, mUserId, mUserName);
+        }
+
+        protected void onPostExecute(SyncService.LoginStatus result)
+        {
+            Intent f_intent = new Intent(LoginActivity.this, MenuActivity.class);
+            startActivity(f_intent);
+        }
+
+        Session mSession;
+        String  mUserId      = "";
+        String  mUserName    = "";
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -322,4 +430,8 @@ public class LoginActivity extends Activity
     private SyncServiceClient   syncServiceClient = new SyncServiceClient(this);
     private GooglePlusClient    googlePlusClient;
     private LoginAction         loginAction;
+
+    // facebook
+    private UiLifecycleHelper uiHelper;
+
 }

@@ -52,4 +52,8 @@
     <string name="leaderboard_tab_top">Top entries</string>
     <string name="leaderboard_tab_you">Your ranking</string>
 
+    <!-- facebook -->
+    <string name="facebook_app_id">***REMOVED***</string>
+    <string name="title_facebook_login">Facebook Login</string>
+
 </resources>

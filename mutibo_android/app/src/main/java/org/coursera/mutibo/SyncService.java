@@ -8,7 +8,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import org.coursera.mutibo.data.DataStore;
@@ -58,6 +57,9 @@ public class SyncService extends Service
 
         @POST("/login/login-google")
         public Response loginGoogle(@Query("googleToken") String googleToken, @Query("username") String name);
+
+        @POST("/login/login-facebook")
+        public Response loginFacebook(@Query("fbToken") String fbToken, @Query("userId") String userId, @Query("username") String name);
 
         @POST("/game/results")
         public Response postGameResult(@Body MutiboGameResult gameResult);
@@ -213,6 +215,45 @@ public class SyncService extends Service
 
         } catch (RetrofitError e) {
             Log.d(LOG_TAG, "loginGoogle", e);
+        }
+
+        return LoginStatus.LOGIN_FAILED;
+    }
+
+    LoginStatus loginFacebook(String fbToken, String userId, String name)
+    {
+        try {
+            Response response = restClient.loginFacebook(fbToken, userId, name);
+
+            if (response.getStatus() != 200)
+                return LoginStatus.LOGIN_FAILED;
+
+            // find the X-Auth-Token header
+            for (retrofit.client.Header header : response.getHeaders()) {
+                if (header.getName() != null && header.getName().equalsIgnoreCase("X-Auth-Token")) {
+                    GlobalState.setAuthToken(header.getValue());
+                    break;
+                }
+            }
+
+            // check the body of the request
+            try {
+                LoginInfo loginInfo = (LoginInfo) gsonConverter.fromBody(response.getBody(), LoginInfo.class);
+
+                GlobalState.setNickName(loginInfo.getNickName());
+
+                if (loginInfo.getStatus().equals("NEW"))
+                    return LoginStatus.LOGIN_NEW_USER;
+                else
+                    return LoginStatus.LOGIN_KNOWN_USER;
+
+            } catch (ConversionException e) {
+                Log.d(LOG_TAG, "loginFacebook", e);
+                return LoginStatus.LOGIN_FAILED;
+            }
+
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "loginFacebook", e);
         }
 
         return LoginStatus.LOGIN_FAILED;
