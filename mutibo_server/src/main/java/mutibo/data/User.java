@@ -26,14 +26,26 @@ public class User implements UserDetails
 	{
 	}
 
-	public ObjectId getId()
+	public String getId()
 	{
-		return id;
+		return id.toString();
 	}
 
-	protected void setId(ObjectId id)
+	private void setId(String id)
+	{
+		this.id = new ObjectId(id);
+	}
+	
+	@JsonIgnore
+	private void setId(ObjectId id)
 	{
 		this.id = id;
+	}
+
+	@JsonIgnore
+	public ObjectId getUserId()
+	{
+		return this.id;
 	}
 
 	@Override
@@ -69,7 +81,8 @@ public class User implements UserDetails
 	{
 		this.googleId = googleId;
 	}
-
+	
+	@JsonIgnore
 	public String getFacebookId()
 	{
 		return facebookId;
@@ -205,7 +218,7 @@ public class User implements UserDetails
   		public DBObject convert(User source) 
 		{
     		DBObject dbo = new BasicDBObject();
-    		dbo.put("_id", 			source.getId());
+    		dbo.put("_id", 			source.getUserId());
     		dbo.put("username", 	source.getUsername());
 			dbo.put("password", 	source.getPassword());
 			dbo.put("googleId", 	source.getGoogleId());

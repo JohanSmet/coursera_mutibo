@@ -62,7 +62,7 @@ public class UserController
 			user.grantRole(UserRole.USER);
 			userRepository.save(user);
 			
-			MutiboUserResult userResult = new MutiboUserResult(user.getId(), user.getUsername());
+			MutiboUserResult userResult = new MutiboUserResult(user.getUserId(), user.getUsername());
 			userResult.setDateRegistered(new Date());
 			userResult.setDateLastPlayed(new Date());
 			userResult.setPlayedGames(rand.nextInt(20));

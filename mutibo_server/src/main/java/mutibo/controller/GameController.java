@@ -40,14 +40,14 @@ public class GameController
 		}
 
 		// create the MutiboSession-record
-		MutiboSession session = new MutiboSession(currentUser.getId());
+		MutiboSession session = new MutiboSession(currentUser.getUserId());
 		session.setTimeBegin(gameResults.startTime);
 		session.setTimeEnd(gameResults.endTime);
 		
 		// process each played set
 		for (SetResult set : gameResults.setResults)
 		{
-			MutiboSetResult  setResult = new MutiboSetResult(session.getSessionId(), set.setId, currentUser.getId());
+			MutiboSetResult  setResult = new MutiboSetResult(session.getSessionId(), set.setId, currentUser.getUserId());
 			setResult.setMsTimePlayed(set.msTimePlayed);
 			setResult.setScore(set.score);
 			setResult.setRating(set.rating);
@@ -94,7 +94,7 @@ public class GameController
 			return null;
 		}
 
-		return mutiboUserResultRepository.findOne(currentUser.getId());
+		return mutiboUserResultRepository.findOne(currentUser.getUserId());
 	}
 
 	// nested types
