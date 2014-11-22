@@ -17,11 +17,11 @@
     <string name="login_failed">Sorry, incorrect username or password</string>
 
     <!-- menu -->
-    <string name="menu_welcome">Welcome, %s. Please enjoy your stay!</string>
-    <string name="menu_singleplayer">Play a single player game</string>
-    <string name="menu_multiplayer">Play a multi player game</string>
+    <string name="menu_welcome">Welcome, %s.\nPlease enjoy your stay!</string>
+    <string name="menu_singleplayer">Single player</string>
+    <string name="menu_multiplayer">Multi player</string>
     <string name="menu_leaderboards">Visit the leaderboards</string>
-    <string name="menu_howto">Rules - How to play</string>
+    <string name="menu_howto">More information - Support</string>
     <string name="menu_about">About Mutibo</string>
     <string name="menu_logout">Logout</string>
 
@@ -45,7 +45,7 @@
     <string name="gamedone_ranking">What\'s my ranking ?</string>
     <string name="gamedone_menu">Return to menu.</string>
 
-    <!-- leaderboard -->
+    <!-- leaderboard__enabled -->
     <string name="leaderboard_score">Best score: </string>
     <string name="leaderboard_more">Keep scrolling to see more entries…</string>
     <string name="leaderboard_done">That\'s all folks !</string>

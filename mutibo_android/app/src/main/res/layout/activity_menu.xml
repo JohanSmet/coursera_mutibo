@@ -13,7 +13,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="5dp"
             android:id="@+id/imageView"
             android:layout_gravity="center_horizontal"
@@ -31,6 +31,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/menu_welcome"
             android:id="@+id/txtWelcome"
+            android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
@@ -39,35 +40,55 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1"
         android:gravity="center_vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
-        <Button
+        <LinearLayout
+            android:layout_weight="1"
+            android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent">
+
+        <Button
+            android:drawableTop="@drawable/single_player"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_marginBottom="10dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="@string/menu_singleplayer"
             android:id="@+id/btnSinglePlayer"
-            android:layout_gravity="center_horizontal"
+            android:gravity="bottom|center_horizontal"
             android:onClick="btnSinglePlayer_clicked"/>
 
         <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:drawableTop="@drawable/multi_player"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_marginBottom="10dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="@string/menu_multiplayer"
             android:id="@+id/btnMultiPlayer"
-            android:layout_gravity="center_horizontal"/>
+            android:gravity="center_horizontal|bottom"/>
+
+        </LinearLayout>
 
         <Button
+            android:paddingLeft="48dp"
+            android:paddingStart="48dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:drawableLeft="@drawable/leaderboard"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/menu_leaderboards"
             android:id="@+id/btnLeaderboards"
-            android:onClick="btnLeaderboards_clicked"
-            android:layout_gravity="center_horizontal"/>
+            android:onClick="btnLeaderboards_clicked"/>
 
     </LinearLayout>
 
@@ -87,15 +108,6 @@
             android:text="@string/menu_howto"
             android:id="@+id/btnHowto"
             android:layout_gravity="center_horizontal"/>
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="@string/menu_about"
-            android:id="@+id/btnAbout"
-            android:layout_gravity="center_horizontal"
-            android:onClick="btnAbout_clicked"/>
 
         <Button
             android:layout_width="fill_parent"
