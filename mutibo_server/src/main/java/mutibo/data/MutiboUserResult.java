@@ -5,6 +5,8 @@
  */
 package mutibo.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -31,14 +33,22 @@ public class MutiboUserResult
 		this.playedGames = 0;
 	}
 
+	@JsonIgnore
 	public ObjectId getId()
 	{
 		return id;
 	}
 
+	@JsonIgnore
 	public void setId(ObjectId id)
 	{
 		this.id = id;
+	}
+
+	@JsonProperty("id")
+	public String getStringId()
+	{
+		return id.toString();
 	}
 
 	public String getNickName()

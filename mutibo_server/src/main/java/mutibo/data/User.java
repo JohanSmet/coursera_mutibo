@@ -1,6 +1,7 @@
 package mutibo.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
@@ -26,12 +27,14 @@ public class User implements UserDetails
 	{
 	}
 
+	@JsonProperty("id")
 	public String getId()
 	{
 		return id.toString();
 	}
 
-	private void setId(String id)
+	@JsonProperty("id")
+	public void setId(String id)
 	{
 		this.id = new ObjectId(id);
 	}
