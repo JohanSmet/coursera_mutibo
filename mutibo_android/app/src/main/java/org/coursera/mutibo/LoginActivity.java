@@ -1,13 +1,17 @@
 package org.coursera.mutibo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.facebook.Request;
 import com.facebook.Response;
@@ -37,30 +41,74 @@ public class LoginActivity extends Activity
         REVOKE_ACCESS_GOOGLE
     }
 
+    private static enum Authenticator
+    {
+        NONE,
+        GOOGLE_PLUS,
+        FACEBOOK;
+
+        public static Authenticator fromString (String myEnumString) {
+            try {
+                return valueOf(myEnumString);
+            } catch (Exception ex) {
+                return NONE;
+            }
+        }
+    }
+
     public final static String PARAMETER_LOGIN_ACTION = "action";
+
+    private final static String STATE_AUTO_LOGIN = "autoLogin";
+    private final static String STATE_LAST_AUTHENTICATOR = "lastAuthenticator";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        uiHelper = new UiLifecycleHelper(this, statusCallback);
-        uiHelper.onCreate(savedInstanceState);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // restore state
+        if (savedInstanceState != null)
+        {
+            mAutoLogin          = savedInstanceState.getBoolean(STATE_AUTO_LOGIN);
+            mLastAuthenticator  = (Authenticator) savedInstanceState.getSerializable(STATE_LAST_AUTHENTICATOR);
+        }
+        else
+        {
+            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+            mAutoLogin          = sharedPref.getBoolean(STATE_AUTO_LOGIN, false);
+            mLastAuthenticator  = Authenticator.fromString(sharedPref.getString(STATE_LAST_AUTHENTICATOR, Authenticator.NONE.toString()));
+        }
 
         // check for parameters
         Bundle bundle = getIntent().getExtras();
 
         if (bundle != null)
         {
-            loginAction = (LoginAction) bundle.getSerializable(PARAMETER_LOGIN_ACTION);
+            mLoginAction = (LoginAction) bundle.getSerializable(PARAMETER_LOGIN_ACTION);
         }
         else
         {
-            loginAction = LoginAction.LOGIN;
+            mLoginAction = LoginAction.LOGIN;
         }
+
+        // UI
+        CheckBox autoLogin = (CheckBox) findViewById(R.id.cbAutoLogin);
+        autoLogin.setChecked(mAutoLogin);
+        autoLogin.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                mAutoLogin = ((CheckBox) view).isChecked();
+            }
+        });
+
+        // facebook
+        uiHelper = new UiLifecycleHelper(this, statusCallback);
+        uiHelper.onCreate(savedInstanceState);
 
         // Google+
         googlePlusClient = new GooglePlusClient();
@@ -81,8 +129,13 @@ public class LoginActivity extends Activity
 
         syncServiceClient.bind();
 
-        if (googlePlusClient != null)
+        if (mAutoLogin && mLastAuthenticator == Authenticator.GOOGLE_PLUS && googlePlusClient != null)
             googlePlusClient.connect();
+
+        if (mLastAuthenticator == Authenticator.FACEBOOK && mLoginAction == LoginAction.LOGOUT)
+        {
+            Session.getActiveSession().close();
+        }
     }
 
     @Override
@@ -113,20 +166,52 @@ public class LoginActivity extends Activity
     @Override
     public void onSaveInstanceState(Bundle savedState)
     {
-        super.onSaveInstanceState(savedState);
+        // our state
+        savedState.putBoolean(STATE_AUTO_LOGIN, mAutoLogin);
+        savedState.putSerializable(STATE_LAST_AUTHENTICATOR, mLastAuthenticator);
+        storeSettings();
+
+        // facebook
         uiHelper.onSaveInstanceState(savedState);
+
+        // save the view hierarchy state
+        super.onSaveInstanceState(savedState);
+    }
+
+    private void loginSucceeded(SyncService.LoginStatus status)
+    {
+        findViewById(R.id.loginProgress).setVisibility(View.INVISIBLE);
+
+        switch (status) {
+            case LOGIN_NEW_USER:
+                startActivity(new Intent(LoginActivity.this, NewPlayerActivity.class));
+                break;
+
+            case LOGIN_KNOWN_USER:
+                startActivity(new Intent(LoginActivity.this, MenuActivity.class));
+                break;
+
+            default:
+                ((TextView) findViewById(R.id.lblLoginFailed)).setText(R.string.login_failed);
+                break;
+        }
+    }
+
+    private void storeSettings()
+    {
+        // persistence
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefEdit   = sharedPref.edit();
+
+        prefEdit.putBoolean(STATE_AUTO_LOGIN, mAutoLogin);
+        prefEdit.putString(STATE_LAST_AUTHENTICATOR, mLastAuthenticator.toString());
+        prefEdit.commit();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // events
     //
-
-    public void btnLogin_clicked(View p_view)
-    {
-        Intent f_intent = new Intent(this, MenuActivity.class);
-        startActivity(f_intent);
-    }
 
     protected void onActivityResult(int requestCode, int responseCode, Intent intent)
     {
@@ -156,11 +241,16 @@ public class LoginActivity extends Activity
             if (state.isOpened())
             {
                 Log.d("LoginActivity", "Facebook session opened");
+                findViewById(R.id.loginProgress).setVisibility(View.VISIBLE);
                 new FacebookAuthTask(session).execute();
             }
             else if (state.isClosed())
             {
                 Log.d("LoginActivity", "Facebook session closed");
+            }
+            else if (state == SessionState.OPENING)
+            {
+                findViewById(R.id.loginProgress).setVisibility(View.VISIBLE);
             }
         }
     };
@@ -196,8 +286,8 @@ public class LoginActivity extends Activity
 
         protected void onPostExecute(SyncService.LoginStatus result)
         {
-            Intent f_intent = new Intent(LoginActivity.this, MenuActivity.class);
-            startActivity(f_intent);
+            mLastAuthenticator = Authenticator.FACEBOOK;
+            loginSucceeded(result);
         }
 
         Session mSession;
@@ -263,6 +353,9 @@ public class LoginActivity extends Activity
         {
             if (view.getId() == R.id.sign_in_button && !mGoogleApiClient.isConnecting())
             {
+                findViewById(R.id.loginProgress).setVisibility(View.VISIBLE);
+
+                mLoginAction   = LoginAction.LOGIN;
                 mSignInClicked = true;
                 resolveSignInError();
             }
@@ -287,16 +380,16 @@ public class LoginActivity extends Activity
 
         public void onConnected(Bundle connectionHint)
         {
-            switch (loginAction) {
+            switch (mLoginAction) {
                 case LOGIN :
                     new GoogleAuthTask(LoginActivity.this).execute();
                     break;
 
                 case LOGOUT :
-                    if (mGoogleApiClient != null && mGoogleApiClient.isConnected())
+                    if (mLastAuthenticator == Authenticator.GOOGLE_PLUS &&  mGoogleApiClient != null && mGoogleApiClient.isConnected())
                     {
                         mSignInClicked = false;
-                        loginAction = LoginAction.LOGIN;
+                        mLoginAction = LoginAction.LOGIN;
 
                         Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
                         mGoogleApiClient.disconnect();
@@ -308,7 +401,7 @@ public class LoginActivity extends Activity
                     if (mGoogleApiClient != null && mGoogleApiClient.isConnected())
                     {
                         mSignInClicked = false;
-                        loginAction = LoginAction.LOGIN;
+                        mLoginAction = LoginAction.LOGIN;
 
                         Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
                         Plus.AccountApi.revokeAccessAndDisconnect(mGoogleApiClient)
@@ -420,16 +513,22 @@ public class LoginActivity extends Activity
 
         protected void onPostExecute(SyncService.LoginStatus result)
         {
-            Intent f_intent = new Intent(mActivity, MenuActivity.class);
-            startActivity(f_intent);
+            mLastAuthenticator = Authenticator.GOOGLE_PLUS;
+
+            loginSucceeded(result);
         }
 
         private final Activity mActivity;
     }
 
     private SyncServiceClient   syncServiceClient = new SyncServiceClient(this);
+
+    private LoginAction         mLoginAction;
+    private Authenticator       mLastAuthenticator;
+    private boolean             mAutoLogin;
+
+    // google
     private GooglePlusClient    googlePlusClient;
-    private LoginAction         loginAction;
 
     // facebook
     private UiLifecycleHelper uiHelper;

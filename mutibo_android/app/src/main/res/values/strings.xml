@@ -53,7 +53,13 @@
     <string name="leaderboard_tab_you">Your ranking</string>
 
     <!-- facebook -->
-    <string name="facebook_app_id">***REMOVED***</string>
     <string name="title_facebook_login">Facebook Login</string>
+    <string name="facebook_app_id">***REMOVED***</string>
+
+    <!-- new player -->
+    <string name="title_activity_new_player">New player</string>
+    <string name="new_player_welcome">Welcome to Mutibo !\nWe noticed it\'s your first game.\nPlease choose a nickname to identify yourself on the leaderboards.</string>
+    <string name="new_player_not_available">Sorry, nickname is already in use</string>
+    <string name="new_player_login">Let me play already !</string>
 
 </resources>

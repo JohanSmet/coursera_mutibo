@@ -17,7 +17,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+            android:value="@string/facebook_app_id" />
 
         <activity
             android:name=".LoginActivity"
@@ -41,20 +41,25 @@
 
         <activity
             android:name=".GameActivity"
-            android:label="@string/title_activity_game" >
+            android:label="@string/title_activity_game"
+            android:noHistory="true" >
         </activity>
         <activity
             android:name=".GameOverActivity"
-            android:label="@string/title_activity_game_over" >
+            android:label="@string/title_activity_game_over"
+            android:noHistory="true" >
         </activity>
         <activity
             android:name=".LeaderboardActivity"
             android:label="@string/title_activity_leaderboard" >
         </activity>
-
         <activity
             android:name="com.facebook.LoginActivity"
             android:label="@string/title_facebook_login" >
+        </activity>
+        <activity
+            android:name=".NewPlayerActivity"
+            android:label="@string/title_activity_new_player" >
         </activity>
     </application>
 

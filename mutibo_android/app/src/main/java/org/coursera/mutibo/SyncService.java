@@ -61,6 +61,9 @@ public class SyncService extends Service
         @POST("/login/login-facebook")
         public Response loginFacebook(@Query("fbToken") String fbToken, @Query("userId") String userId, @Query("username") String name);
 
+        @POST("/user/change-name")
+        public Response changeName(@Query("current") String currentName, @Query("new") String newName);
+
         @POST("/game/results")
         public Response postGameResult(@Body MutiboGameResult gameResult);
 
@@ -257,6 +260,23 @@ public class SyncService extends Service
         }
 
         return LoginStatus.LOGIN_FAILED;
+    }
+
+    public boolean changeUserName(String newName)
+    {
+        try {
+            Response response = restClient.changeName(GlobalState.getNickName(), newName);
+
+            if (response.getStatus() != 200)
+                return false;
+
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "loginFacebook", e);
+            return false;
+        }
+
+        GlobalState.setNickName(newName);
+        return true;
     }
 
     void postGameResult(MutiboGameResult gameResult)
