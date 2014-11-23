@@ -24,6 +24,7 @@
         		<th>Description</th> 
 				<th>Released</th>
         		<th>Edit</th> 
+        		<th>Release</th> 
     		</thead> 
     		<tbody> 
         	{{#decks}} 
@@ -32,6 +33,7 @@
             		<td>{{description}}</td> 
 					<td>{{released}}</td>
             		<td><a href="#" class="edit-deck" id={{deckId}}>Edit</a></td> 
+            		<td><a href="#" class="release-deck" id={{deckId}}>Release</a></td> 
         		</tr> 
         	{{/decks}} 
     		</tbody> 
@@ -113,7 +115,8 @@
 									dataType: "json",
 									url: '/deck',
 									headers: {
-     								   'X-Auth-Token' : token
+     								   'X-Auth-Token' : token,
+									   'Cacke-Control' : 'max-age=0'
    									},
 									success: function (p_data) {
 										mutibo.decks = p_data;
@@ -129,6 +132,24 @@
 				$("a.edit-deck").click(function () {
 					edit_deck(this.id);
 				});
+
+				$("a.release-deck").click(function () {
+					release_deck(this.id);
+				});
+
+			});
+		}
+
+		function release_deck(p_id) {
+			$.ajax({
+				type: 'POST',
+				url: '/deck/release/' + p_id,
+				dataType: 'json',
+				headers: {
+					'X-Auth-Token' : token
+   				},
+				success: function (data) {
+				}
 			});
 		}
 
@@ -140,7 +161,8 @@
 									url : '/sync',
 									data : { id : p_id, hash : 'nvt'},
 									headers: {
-     								   'X-Auth-Token' : token
+     								   'X-Auth-Token' : token,
+									   'Cacke-Control' : 'max-age=0'
    									},
 									success : function(p_data) {
 										mutibo.current_deck = p_data.mutiboDeck;
@@ -236,7 +258,8 @@
 								url: 'movie/find-by-name', 
 								data : {pattern : request.term}, 
 								headers: {
-     							   'X-Auth-Token' : token
+     							   'X-Auth-Token' : token,
+									'Cacke-Control' : 'max-age=0'
    								},
 								success : function (p_data) {
 									var f_array = [];
