@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 
 import org.coursera.mutibo.game.GameControl;
@@ -18,6 +19,8 @@ public class GameOverActivity extends Activity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
 
@@ -42,6 +45,7 @@ public class GameOverActivity extends Activity
     public void btnRanking_clicked(View p_view)
     {
         Intent intent = new Intent(this, LeaderboardActivity.class);
+        intent.putExtra(LeaderboardActivity.PLAYER_ARG, GlobalState.getNickName());
         startActivity(intent);
     }
 

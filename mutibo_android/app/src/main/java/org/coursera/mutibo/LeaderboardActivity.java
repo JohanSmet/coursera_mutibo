@@ -26,6 +26,8 @@ import java.util.Collection;
 
 public class LeaderboardActivity extends FragmentActivity
 {
+    public static final String PLAYER_ARG = "player";
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -70,12 +72,20 @@ public class LeaderboardActivity extends FragmentActivity
         actionBar.addTab(actionBar.newTab()
                             .setText(R.string.leaderboard_tab_top)
                             .setTabListener(tabListener)
-                        );
+        );
 
         actionBar.addTab(actionBar.newTab()
                         .setText(R.string.leaderboard_tab_you)
                         .setTabListener(tabListener)
         );
+
+        // check for parameters
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle != null && bundle.containsKey(PLAYER_ARG))
+        {
+            mViewPager.setCurrentItem(1);
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
