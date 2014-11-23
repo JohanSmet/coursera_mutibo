@@ -6,6 +6,7 @@
     </style>
 
     <style name="MovieButton" parent="@android:style/Widget.Holo.Button">
+        <item name="android:background">#FF202528</item>
         <item name="android:layout_margin">2dp</item>
     </style>
 

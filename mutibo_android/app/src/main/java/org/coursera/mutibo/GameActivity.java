@@ -1,5 +1,9 @@
 package org.coursera.mutibo;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
+import android.animation.ArgbEvaluator;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,7 +13,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,6 +53,17 @@ public class GameActivity extends Activity
         imgLives[0]   = (ImageView)     findViewById(R.id.imgLife1);
         imgLives[1]   = (ImageView)     findViewById(R.id.imgLife2);
         imgLives[2]   = (ImageView)     findViewById(R.id.imgLife3);
+
+        animAnswerCorrect   = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.answer_correct);
+        animAnswerCorrect.setEvaluator(new ArgbEvaluator());
+        animAnswerIncorrect = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.answer_incorrect);
+        animAnswerIncorrect.setEvaluator(new ArgbEvaluator());
+
+        animMovieCorrect    = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.movie_correct);
+
+        defaultBackground = btnMovies[0].getSolidColor();
+
+        displayCurrentSet(savedInstanceState == null);
     }
 
     @Override
@@ -60,7 +74,6 @@ public class GameActivity extends Activity
         // Bind to SyncService
         syncServiceClient.bind();
 
-        displayCurrentSet();
     }
 
     @Override
@@ -72,7 +85,7 @@ public class GameActivity extends Activity
         syncServiceClient.unbind();
     }
 
-    private void displayCurrentSet()
+    private void displayCurrentSet(boolean newView)
     {
         txtTotalScore.setText(getString(R.string.game_score) + Integer.toString(mGameControl.totalScore()));
 
@@ -91,35 +104,52 @@ public class GameActivity extends Activity
 
         // state dependent information
         if (mGameControl.currentGameState() == GameControl.GAME_STATE_QUESTION)
-            displayActiveSet();
+            displayActiveSet(newView);
         else
-            displayFinishedSet();
+            displayFinishedSet(newView);
     }
 
-    private void displayActiveSet()
+    private void displayActiveSet(boolean newView)
     {
         // make sure the movie buttons are enabled
         enableMovieButtons(true);
 
-        // show the game running fragment
-        GamePlayingFragment f_fragment = GamePlayingFragment.newInstance(mGameControl.currentSetDifficulty(), mGameControl.currentSetPoints(), 15);
+        for (int idx = 0; idx < 4; ++idx)
+            btnMovies[idx].setBackgroundColor(defaultBackground);
 
-        getFragmentManager().beginTransaction()
-                                .replace(R.id.frameFooter, f_fragment)
-                            .commit();
+        // show the game running fragment
+        if (newView)
+        {
+            GamePlayingFragment f_fragment = GamePlayingFragment.newInstance(mGameControl.currentSetDifficulty(), mGameControl.currentSetPoints(), 15);
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.frameFooter, f_fragment)
+                    .commit();
+        }
     }
 
-    private void displayFinishedSet()
+    private void displayFinishedSet(boolean newView)
     {
         // make sure the movie buttons are disabled
         enableMovieButtons(false);
 
-        // show the game over fragment
-        GameDoneFragment f_fragment = GameDoneFragment.newInstance(mGameControl.currentSetSuccess(), mGameControl.currentSetReason());
 
-        getFragmentManager().beginTransaction()
-                                .replace(R.id.frameFooter, f_fragment)
-                            .commit();
+        // animate the correct answer if the player choose the wrong one
+        if (mGameControl.currentSetSuccess() != GameControl.SetSuccess.SUCCESS)
+        {
+            animMovieCorrect.setTarget(btnMovies[mGameControl.currentSetCorrectAnswer()]);
+            animMovieCorrect.start();
+        }
+
+        // show the game over fragment
+        if (newView)
+        {
+            GameDoneFragment f_fragment = GameDoneFragment.newInstance(mGameControl.currentSetSuccess(), mGameControl.currentSetReason());
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.frameFooter, f_fragment)
+                    .commit();
+        }
     }
 
     private void endCurrentSet(int p_movie)
@@ -127,8 +157,15 @@ public class GameActivity extends Activity
         if (mGameControl.currentGameState() != GameControl.GAME_STATE_QUESTION)
             return;
 
-        mGameControl.answerSet(p_movie);
-        displayCurrentSet();
+        boolean result = mGameControl.answerSet(p_movie);
+
+        // animate the choice of the player
+        ObjectAnimator anim = (result) ? animAnswerCorrect : animAnswerIncorrect;
+        anim.setTarget(btnMovies[p_movie]);
+        anim.start();
+
+        // change the display
+        displayCurrentSet(true);
     }
 
     private void addPosterToButtons()
@@ -183,7 +220,7 @@ public class GameActivity extends Activity
     public void onQuestionTimeout()
     {
         mGameControl.timeoutSet();
-        displayCurrentSet();
+        displayCurrentSet(true);
     }
 
     public void onQuestionContinue(int rating)
@@ -197,7 +234,7 @@ public class GameActivity extends Activity
         }
         else
         {
-            displayCurrentSet();
+            displayCurrentSet(true);
         }
     }
 
@@ -238,6 +275,11 @@ public class GameActivity extends Activity
     private ImageView[]       imgMovies = new ImageView[4];
     private TextView[]        txtMovies = new TextView[4];
     private ImageView[]       imgLives  = new ImageView[3];
+
+    private int               defaultBackground;
+    private ObjectAnimator    animAnswerCorrect;
+    private ObjectAnimator    animAnswerIncorrect;
+    private AnimatorSet       animMovieCorrect;
 
     private SyncServiceClient   syncServiceClient = new SyncServiceClient(this);
 }

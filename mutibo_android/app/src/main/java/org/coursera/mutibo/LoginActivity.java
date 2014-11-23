@@ -34,6 +34,8 @@ import java.io.IOException;
 
 public class LoginActivity extends Activity
 {
+    private Bundle savedState;
+
     public static enum LoginAction
     {
         LOGIN,

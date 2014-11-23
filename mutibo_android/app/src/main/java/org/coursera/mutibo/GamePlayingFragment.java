@@ -16,15 +16,7 @@ public class GamePlayingFragment extends Fragment
     private static final String ARG_POINTS      = "points";
     private static final String ARG_TIMEOUT     = "timeout";
 
-
-    /**
-     * Use this factory method to create a new instance of this fragment using the provided parameters.
-     *
-     * @param p_difficulty Difficulty rating of the question
-     * @param p_points The point value of the question
-     * @param p_timeout How long does the user have to answer this question
-     * @return A new instance of fragment GamePlayingFragment.
-     */
+    private static final String STATE_TIMEOUT   = "timeout";
 
     public static GamePlayingFragment newInstance(int p_difficulty, int p_points, int p_timeout)
     {
@@ -64,11 +56,17 @@ public class GamePlayingFragment extends Fragment
         ((TextView) f_view.findViewById(R.id.txtDifficulty)).setText(String.format(getString(R.string.game_difficulty), difficultyText()));
         ((TextView) f_view.findViewById(R.id.txtPoints)).setText(String.format(getString(R.string.game_points), mPoints));
 
+        // get the correct time remaining
+        int timeRemaining = mTimeout;
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_TIMEOUT))
+            timeRemaining = savedInstanceState.getInt(STATE_TIMEOUT);
+
         mProgressBar = (ProgressBar) f_view.findViewById(R.id.progressBar);
         mProgressBar.setMax(mTimeout);
-        mProgressBar.setProgress(mTimeout);
+        mProgressBar.setProgress(timeRemaining);
 
-        mCountDownTimer = new CountDownTimer (mTimeout, 33)
+        mCountDownTimer = new CountDownTimer (timeRemaining, 33)
         {
             public void onTick(long millisUntilFinished)
             {
@@ -105,6 +103,14 @@ public class GamePlayingFragment extends Fragment
 
         mCountDownTimer.cancel();
         mListener = null;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedState)
+    {
+        super.onSaveInstanceState(savedState);
+
+        savedState.putInt(STATE_TIMEOUT, mProgressBar.getProgress());
     }
 
     private String difficultyText()

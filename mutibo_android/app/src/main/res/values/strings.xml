@@ -17,7 +17,7 @@
     <string name="login_failed">Sorry, incorrect username or password</string>
 
     <!-- menu -->
-    <string name="menu_welcome">Welcome, %s.\nPlease enjoy your stay!</string>
+    <string name="menu_welcome">Welcome, %s. Please enjoy your stay!</string>
     <string name="menu_singleplayer">Single player</string>
     <string name="menu_multiplayer">Multi player</string>
     <string name="menu_leaderboards">Visit the leaderboards</string>
@@ -36,7 +36,7 @@
     <string name="game_difficulty_hard">Hard</string>
     <string name="game_success">Correct.</string>
     <string name="game_failure">Incorrect.</string>
-    <string name="game_continue">Continue playing</string>
+    <string name="game_continue">Continue</string>
     <string name="game_rate">Please rate this set</string>
     <string name="game_timeout">You failed to answer the question in the allotted time.</string>
     <string name="gamedone_game_over">Game Over !</string>

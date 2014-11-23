@@ -14,42 +14,60 @@
         android:layout_gravity="center_horizontal"
         android:src="@drawable/small_logo"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/gamedone_game_over"
-        android:layout_gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_marginTop="32dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/gamedone_result"
-        android:layout_gravity="center_horizontal"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginTop="32dp"
-        android:id="@+id/txtResults"
-        android:gravity="center"/>
-
-    <Button
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/gamedone_another"
-        android:id="@+id/btnAnotherGame"
-        android:layout_marginTop="32dp"
-        android:layout_gravity="center_horizontal"
-        android:onClick="btnAnother_clicked"/>
+        android:layout_weight="1"
+        android:gravity="center">
 
-    <Button
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gamedone_game_over"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:gravity="center_horizontal"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gamedone_result"
+            android:layout_gravity="center_horizontal"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:id="@+id/txtResults"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal|bottom"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/gamedone_ranking"
-        android:id="@+id/btnRanking"
-        android:layout_marginTop="8dp"
-        android:layout_gravity="center_horizontal"
-        android:onClick="btnRanking_clicked"/>
+        android:layout_weight="1">
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gamedone_another"
+            android:id="@+id/btnAnotherGame"
+            android:layout_marginTop="32dp"
+            android:layout_gravity="center_horizontal"
+            android:onClick="btnAnother_clicked"/>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gamedone_ranking"
+            android:id="@+id/btnRanking"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal"
+            android:onClick="btnRanking_clicked"/>
+
+    </LinearLayout>
+    <!--
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -58,5 +76,6 @@
         android:layout_marginTop="32dp"
         android:layout_gravity="center_horizontal"
         android:onClick="btnMenu_clicked"/>
+        -->
 
 </LinearLayout>

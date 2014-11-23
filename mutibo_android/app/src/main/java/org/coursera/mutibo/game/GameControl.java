@@ -33,6 +33,7 @@ public interface GameControl
 
     public int         currentSetDifficulty();
     public int         currentSetPoints();
+    public int         currentSetCorrectAnswer();
     public MutiboMovie currentSetMovie(int index);
     public String      currentSetReason();
     public SetSuccess  currentSetSuccess();

@@ -1,0 +1,101 @@
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:minHeight="48dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:maxLines="2"
+        android:minLines="2"
+        android:id="@+id/txtSuccessReason"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/game_success"
+        android:layout_marginBottom="2dp"
+        android:layout_weight="1"
+        />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/game_rate"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:gravity="center_horizontal"
+        />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="1dp"
+        >
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/imgRating01"
+                android:src="@drawable/rating_clear"
+                android:clickable="true"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="8dp"
+                android:id="@+id/imgRating02"
+                android:src="@drawable/rating_clear"
+                android:clickable="true"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="8dp"
+                android:id="@+id/imgRating03"
+                android:src="@drawable/rating_clear"
+                android:clickable="true"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="8dp"
+                android:id="@+id/imgRating04"
+                android:src="@drawable/rating_clear"
+                android:clickable="true"/>
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="8dp"
+                android:id="@+id/imgRating05"
+                android:src="@drawable/rating_clear"
+                android:clickable="true"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnContinue"
+        android:text="@string/game_continue"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_gravity="end"
+    />
+
+</LinearLayout>

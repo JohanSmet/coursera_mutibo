@@ -158,6 +158,12 @@ public class GameControlSingle implements GameControl
     }
 
     @Override
+    public int currentSetCorrectAnswer()
+    {
+        return mBadMovieIndex;
+    }
+
+    @Override
     public MutiboMovie currentSetMovie(int index)
     {
         if (index >= 0 && index < mSetMovies.size())
@@ -204,7 +210,12 @@ public class GameControlSingle implements GameControl
         Collections.shuffle(f_movies);
 
         for (String imdbId : f_movies)
+        {
+            if (mCurrentSet.getBadMovies()[0].equals(imdbId))
+                mBadMovieIndex = mSetMovies.size();
+
             mSetMovies.add(mDataStore.getMovieById(imdbId));
+        }
 
         mPlayedSets.add(mCurrentSet.getSetId());
         mState = GAME_STATE_QUESTION;
@@ -229,6 +240,7 @@ public class GameControlSingle implements GameControl
     private Random                  mSetSeed;
     private ArrayList<MutiboMovie>  mSetMovies;
     private SetSuccess              mSuccess;
+    private int                     mBadMovieIndex;
 
     private MutiboGameResult        mGameResult;
 
