@@ -5,6 +5,8 @@ import android.animation.AnimatorSet;
 import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -210,6 +212,23 @@ public class GameActivity extends Activity
     public void btnMovie04_clicked(View p_view)
     {
         endCurrentSet(3);
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        new AlertDialog.Builder(this)
+                .setMessage(R.string.game_cancel)
+                .setCancelable(false)
+                .setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        GameActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton(R.string.dialog_no, null)
+                .show();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

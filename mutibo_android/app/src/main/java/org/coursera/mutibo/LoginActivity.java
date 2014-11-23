@@ -190,6 +190,7 @@ public class LoginActivity extends Activity
                 break;
 
             case LOGIN_KNOWN_USER:
+                finish();
                 startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                 break;
 

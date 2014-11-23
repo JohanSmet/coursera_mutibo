@@ -8,6 +8,9 @@
     <string name="title_activity_game_over">GameOverActivity</string>
     <string name="title_activity_leaderboard">Leaderboard</string>
 
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
+
     <!-- login -->
     <string name="login_welcome">Welcome, please login to play !</string>
     <string name="login_nickname">Nickname:</string>
@@ -44,6 +47,7 @@
     <string name="gamedone_another">Play another game !</string>
     <string name="gamedone_ranking">What\'s my ranking ?</string>
     <string name="gamedone_menu">Return to menu.</string>
+    <string name="game_cancel">Are you sure you want to quit the game?</string>
 
     <!-- leaderboard__enabled -->
     <string name="leaderboard_score">Best score: </string>

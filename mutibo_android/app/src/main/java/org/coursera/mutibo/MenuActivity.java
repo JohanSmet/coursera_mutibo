@@ -51,6 +51,8 @@ public class MenuActivity extends Activity {
         }
     }
 
+
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // button events
@@ -71,10 +73,13 @@ public class MenuActivity extends Activity {
         startActivity(f_intent);
     }
 
-    public void btnLogout_clicked(View p_view)
+    @Override
+    public void onBackPressed()
     {
         Intent f_intent = new Intent(this, LoginActivity.class);
         f_intent.putExtra(LoginActivity.PARAMETER_LOGIN_ACTION, LoginActivity.LoginAction.LOGOUT);
+
+        finish();
         startActivity(f_intent);
     }
 

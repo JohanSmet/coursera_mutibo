@@ -91,15 +91,6 @@
             android:id="@+id/btnHowto"
             android:layout_gravity="center_horizontal"/>
 
-        <Button
-            android:layout_weight="1"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/menu_logout"
-            android:id="@+id/btnLogout"
-            android:layout_gravity="center_horizontal"
-            android:onClick="btnLogout_clicked"/>
-
     </LinearLayout>
 
 </LinearLayout>
