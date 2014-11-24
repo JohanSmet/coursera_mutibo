@@ -67,6 +67,12 @@ public class MenuActivity extends Activity {
         startActivity(f_intent);
     }
 
+    public void btnInformation_clicked(View p_view)
+    {
+        Intent f_intent = new Intent(this, AboutActivity.class);
+        startActivity(f_intent);
+    }
+
     public void btnLeaderboards_clicked(View p_view)
     {
         Intent f_intent = new Intent(this, LeaderboardActivity.class);

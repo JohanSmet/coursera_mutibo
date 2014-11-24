@@ -61,6 +61,10 @@
             android:name=".NewPlayerActivity"
             android:label="@string/title_activity_new_player" >
         </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about" >
+        </activity>
     </application>
 
 </manifest>

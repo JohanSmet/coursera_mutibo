@@ -7,6 +7,8 @@
     <string name="title_activity_game">GameActivity</string>
     <string name="title_activity_game_over">GameOverActivity</string>
     <string name="title_activity_leaderboard">Leaderboard</string>
+    <string name="title_activity_about">About</string>
+
 
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
@@ -65,5 +67,37 @@
     <string name="new_player_welcome">Welcome to Mutibo !\nWe noticed it\'s your first game.\nPlease choose a nickname to identify yourself on the leaderboards.</string>
     <string name="new_player_not_available">Sorry, nickname is already in use</string>
     <string name="new_player_login">Let me play already !</string>
+
+    <!-- about -->
+    <string name="about_tab_howto">Howto</string>
+    <string name="about_tab_support">Support</string>
+    <string name="about_tab_credits">About</string>
+
+    <string name="about_contents_howto"><b>How to play a single player game?</b>\nStart a game by choosing "Single player" in the main menu that is shown after logging in to the application.\n
+\n<b>Objective of the game.</b>\n
+Four movies are shown at a time. Three of those have a special relationship and one does not share this relationship. The objective is to identify the movie that does not fit in with the other three.
+Touch your answer within the time time indicated by the blue bar on the bottom of the screen. You gain points by choosing the correct movie and loose a life when you choose incorrectly.\n
+\n<b>Finishing the game.</b>\n
+You start the game with three lives. The hearts on the top of the screen indicate the number of lives you have left.\n
+The game ends when you have no more remaining lives or when you have answered all available questions in one go.\n
+\n<b>How to play a multi player game?</b>\n
+Sorry, multi-player games are not available in this release. Coming soon !\n\n
+<b>Leader board</b>
+You can check how your movie knowledge holds up to other players by visiting the leader board section of the app.
+    </string>
+    <string name="about_contents_credits"><b>Mutibo - <i>A Coursera Android Capstone project</i></b>\n
+\nThis app and the accompanying server were developed as a submission to the Capstone project of the Coursera Mobile Cloud Computing with Android Specialization.\n
+This app was not made available to the general public, commercially or otherwise.\n\n
+<b>Credits.</b>
+Movie information and posters were obtained via http://www.themoviedb.org/ and its API. The server component of this product uses the TMDb API but is not endorsed or certified by TMDb.\n\n
+Icons flaticon.com under CC BY. The authors are: Freepik.\n
+Filmstrip images under CC BT. The authers are: Freepik.\n\n
+Many thanks go to the wonderful people on the Coursera forums for many of the movie-questions used in this application.
+</string>
+    <string name="about_support_delete_title">Delete account</string>
+    <string name="about_support_delete_text">Completely remove your account from the Mutibo-server.\nAny permissions granted to this app by logging in through Google+ or Facebook are revoked. No personal information from Google+ or Facebook is ever stored on the Mutibo server.</string>
+    <string name="about_support_delete_button">Remove account</string>
+    <string name="about_support_contact_title">Contacting support</string>
+    <string name="about_support_contact_text">This would be the place to list methods of contacting support and consulting a faq. For the peer review process this app shouldn\'t contain any personal information.</string>
 
 </resources>
