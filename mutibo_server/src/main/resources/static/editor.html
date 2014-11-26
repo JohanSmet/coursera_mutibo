@@ -116,7 +116,7 @@
 									url: '/deck',
 									headers: {
      								   'X-Auth-Token' : token,
-									   'Cacke-Control' : 'max-age=0'
+									   'Cache-Control' : 'max-age=0'
    									},
 									success: function (p_data) {
 										mutibo.decks = p_data;
@@ -162,7 +162,7 @@
 									data : { id : p_id, hash : 'nvt'},
 									headers: {
      								   'X-Auth-Token' : token,
-									   'Cacke-Control' : 'max-age=0'
+									   'Cache-Control' : 'max-age=0'
    									},
 									success : function(p_data) {
 										mutibo.current_deck = p_data.mutiboDeck;
@@ -259,7 +259,7 @@
 								data : {pattern : request.term}, 
 								headers: {
      							   'X-Auth-Token' : token,
-									'Cacke-Control' : 'max-age=0'
+									'Cache-Control' : 'max-age=0'
    								},
 								success : function (p_data) {
 									var f_array = [];
