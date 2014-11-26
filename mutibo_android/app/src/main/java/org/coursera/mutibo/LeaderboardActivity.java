@@ -48,7 +48,6 @@ public class LeaderboardActivity extends FragmentActivity
                     }
                 });
 
-
         // action bar
        final ActionBar actionBar = getActionBar();
 
@@ -126,12 +125,6 @@ public class LeaderboardActivity extends FragmentActivity
                 return getString(R.string.leaderboard_tab_you);
         }
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    //
-    // ListFragment
-    //
-
 
     // member variables
     LeaderboardPagerAdapter     mLeaderboardPagerAdapter;

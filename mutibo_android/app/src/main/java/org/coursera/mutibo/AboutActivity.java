@@ -2,7 +2,10 @@ package org.coursera.mutibo;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -200,6 +203,21 @@ public class AboutActivity extends FragmentActivity
                 @Override
                 public void onClick(View view)
                 {
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(R.string.about_support_delete_confirmation)
+                            .setCancelable(false)
+                            .setPositiveButton(R.string.dialog_yes, new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog, int id)
+                                {
+                                    Intent f_intent = new Intent(getActivity(), LoginActivity.class);
+                                    f_intent.putExtra(LoginActivity.PARAMETER_LOGIN_ACTION, LoginActivity.LoginAction.REVOKE);
+                                    getActivity().finish();
+                                    startActivity(f_intent);
+                                }
+                            })
+                            .setNegativeButton(R.string.dialog_no, null)
+                            .show();
                 }
             });
 

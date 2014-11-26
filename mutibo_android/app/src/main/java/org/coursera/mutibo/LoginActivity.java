@@ -13,6 +13,7 @@ import android.view.Window;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.facebook.HttpMethod;
 import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
@@ -31,6 +32,7 @@ import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.plus.model.people.Person;
 
 import java.io.IOException;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class LoginActivity extends Activity
 {
@@ -40,7 +42,7 @@ public class LoginActivity extends Activity
     {
         LOGIN,
         LOGOUT,
-        REVOKE_ACCESS_GOOGLE
+        REVOKE
     }
 
     private static enum Authenticator
@@ -137,6 +139,12 @@ public class LoginActivity extends Activity
         if (mLastAuthenticator == Authenticator.FACEBOOK && mLoginAction == LoginAction.LOGOUT)
         {
             Session.getActiveSession().close();
+            mLoginAction = LoginAction.LOGIN;
+        }
+
+        if (mLastAuthenticator == Authenticator.FACEBOOK && mLoginAction == LoginAction.REVOKE)
+        {
+            new FacebookRevokeTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
 
@@ -245,7 +253,7 @@ public class LoginActivity extends Activity
             {
                 Log.d("LoginActivity", "Facebook session opened");
                 findViewById(R.id.loginProgress).setVisibility(View.VISIBLE);
-                new FacebookAuthTask(session).execute();
+                new FacebookAuthTask(session).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
             else if (state.isClosed())
             {
@@ -296,6 +304,33 @@ public class LoginActivity extends Activity
         Session mSession;
         String  mUserId      = "";
         String  mUserName    = "";
+    }
+
+    private class FacebookRevokeTask extends AsyncTask<Integer, Integer, LoginAction>
+    {
+        protected LoginAction doInBackground(Integer... params)
+        {
+            new Request(Session.getActiveSession(),
+                    "/me/permissions",
+                    null,
+                    HttpMethod.DELETE,
+                    new Request.Callback()
+                    {
+                        public void onCompleted(Response response)
+                        {
+                            Session.getActiveSession().close();
+                            syncServiceClient.getSyncService().deleteCurrentUser();
+                        }
+                    }
+            ).executeAndWait();
+
+            return LoginAction.LOGIN;
+        }
+
+        protected void onPostExecute(LoginAction result)
+        {
+            mLoginAction = result;
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -385,7 +420,7 @@ public class LoginActivity extends Activity
         {
             switch (mLoginAction) {
                 case LOGIN :
-                    new GoogleAuthTask(LoginActivity.this).execute();
+                    new GoogleAuthTask(LoginActivity.this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                     break;
 
                 case LOGOUT :
@@ -400,7 +435,7 @@ public class LoginActivity extends Activity
                     }
                     break;
 
-                case REVOKE_ACCESS_GOOGLE :
+                case REVOKE :
                     if (mGoogleApiClient != null && mGoogleApiClient.isConnected())
                     {
                         mSignInClicked = false;
@@ -413,7 +448,7 @@ public class LoginActivity extends Activity
                                     @Override
                                     public void onResult(Status status)
                                     {
-                                        // XXX delete user data
+                                        syncServiceClient.getSyncService().deleteCurrentUser();
                                     }
                                 });
                     }

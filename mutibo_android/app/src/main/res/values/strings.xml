@@ -7,7 +7,7 @@
     <string name="title_activity_game">GameActivity</string>
     <string name="title_activity_game_over">GameOverActivity</string>
     <string name="title_activity_leaderboard">Leaderboard</string>
-    <string name="title_activity_about">About</string>
+    <string name="title_activity_about">More information - Support</string>
 
 
     <string name="dialog_yes">Yes</string>
@@ -99,5 +99,6 @@ Many thanks go to the wonderful people on the Coursera forums for many of the mo
     <string name="about_support_delete_button">Remove account</string>
     <string name="about_support_contact_title">Contacting support</string>
     <string name="about_support_contact_text">This would be the place to list methods of contacting support and consulting a faq. For the peer review process this app shouldn\'t contain any personal information.</string>
+    <string name="about_support_delete_confirmation">This operation can not be undone. Are you sure?</string>
 
 </resources>

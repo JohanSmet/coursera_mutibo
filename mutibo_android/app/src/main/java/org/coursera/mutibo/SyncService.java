@@ -64,6 +64,9 @@ public class SyncService extends Service
         @POST("/user/change-name")
         public Response changeName(@Query("current") String currentName, @Query("new") String newName);
 
+        @DELETE("/user/current")
+        public Response deleteCurrentUser();
+
         @POST("/game/results")
         public Response postGameResult(@Body MutiboGameResult gameResult);
 
@@ -271,12 +274,21 @@ public class SyncService extends Service
                 return false;
 
         } catch (RetrofitError e) {
-            Log.d(LOG_TAG, "loginFacebook", e);
+            Log.d(LOG_TAG, "changeUserName", e);
             return false;
         }
 
         GlobalState.setNickName(newName);
         return true;
+    }
+
+    public void deleteCurrentUser()
+    {
+        try {
+            Response response = restClient.deleteCurrentUser();
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "deleteCurrentUser", e);
+        }
     }
 
     void postGameResult(MutiboGameResult gameResult)
