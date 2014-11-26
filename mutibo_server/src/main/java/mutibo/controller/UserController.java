@@ -72,7 +72,7 @@ public class UserController
 			userResult.setPlayedGames(rand.nextInt(20));
 			userResult.setTotalScore(rand.nextInt(300));
 			userResult.setBestScore(rand.nextInt(30));
-			mutiboUserSetRepository.save(userResult);
+			mutiboUserResultRepository.save(userResult);
 		}
 	}
 
@@ -100,11 +100,30 @@ public class UserController
 		userRepository.save(currentUser);
 	}
 
+	@RequestMapping(method=RequestMethod.DELETE, value="/user/current")
+	public void deleteCurrentUser(HttpServletResponse httpResponse)
+	{
+		// get the currently logged in user
+		User currentUser = UserAuthentication.getLoggedInUser();
+
+		if (currentUser == null) 
+		{
+			httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
+
+		// remove cumulated results
+		mutiboUserResultRepository.delete(currentUser.getUserId());
+
+		// remove the user
+		userRepository.delete(currentUser);
+	}
+
 
 	// member variables	
 	@Autowired
 	private UserRepository userRepository;
 
 	@Autowired
-	private MutiboUserResultRepository mutiboUserSetRepository;
+	private MutiboUserResultRepository mutiboUserResultRepository;
 }
