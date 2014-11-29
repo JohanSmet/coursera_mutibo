@@ -1,6 +1,7 @@
 package mutibo;
 
 import mutibo.repository.MutiboDeckRepository;
+import mutibo.repository.MutiboMatchRepository;
 import mutibo.repository.MutiboMoviePosterRepository;
 import mutibo.repository.MutiboMovieRepository;
 import mutibo.repository.MutiboSessionRepository;
@@ -13,6 +14,7 @@ import mutibo.themoviedb.TmdbApi;
 import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.core.MongoTemplate;
 
 /**
  * @author Redacted
@@ -64,6 +66,17 @@ public class TestContext
 	public MutiboUserResultRepository userResultRepository()
 	{
 		return Mockito.mock(MutiboUserResultRepository.class);
+	}
+
+	@Bean
+	public MutiboMatchRepository mutiboMatch()
+	{
+		return Mockito.mock(MutiboMatchRepository.class);
+	}
+
+	@Bean MongoTemplate mongoTemplate()
+	{
+		return Mockito.mock(MongoTemplate.class);
 	}
 
 	@Bean
