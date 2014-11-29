@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import mutibo.themoviedb.TmdbApi;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
  * /movie controller
@@ -30,6 +31,7 @@ public class MutiboMovieControler
 	 * Retrieve a list of all known movies
 	 * @return A list of MutiboMovies
 	 */
+	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.GET, value="/movie")
 	@ResponseBody
 	public Iterable<MutiboMovie> getMovieList()
@@ -43,6 +45,7 @@ public class MutiboMovieControler
 	 * @param httpResponse
 	 * @return MutiboMovie
 	 */
+	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.GET, value="/movie/{id}")
 	public MutiboMovie getMovie(@PathVariable("id") String p_id, HttpServletResponse httpResponse)
 	{
@@ -62,6 +65,7 @@ public class MutiboMovieControler
 	 * @param pattern
 	 * @return 
 	 */
+	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.GET, value="/movie/find-by-name")
 	public Iterable<MutiboMovie> findByName(@RequestParam("pattern") String pattern)
 	{
@@ -77,6 +81,7 @@ public class MutiboMovieControler
 	 * @param id
 	 * @return MutiboMovie
 	 */
+	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.POST, value="/movie/{id}")
 	public MutiboMovie addMovie(@PathVariable("id") String id)
 	{	

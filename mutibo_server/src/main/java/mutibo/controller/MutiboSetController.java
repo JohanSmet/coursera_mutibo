@@ -11,6 +11,7 @@ import mutibo.repository.MutiboDeckRepository;
 import mutibo.repository.MutiboMovieRepository;
 import mutibo.repository.MutiboSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class MutiboSetController
 	{
 	}
 
+	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.POST, value="/set")
 	public MutiboSet addSet(@RequestBody MutiboSet p_set, HttpServletResponse httpResponse)
 	{
@@ -62,6 +64,7 @@ public class MutiboSetController
 		return setRepository.save(p_set);
 	}
 
+	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.DELETE, value="/set/{id}")
 	public MutiboSet deleteSet(@PathVariable("id") Long id, HttpServletResponse httpResponse)
 	{
@@ -78,6 +81,7 @@ public class MutiboSetController
 		return f_set;
 	}
 
+	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.GET, value="/set/{id}")
 	public MutiboSet getSet(@PathVariable("id") Long id, HttpServletResponse httpResponse)
 	{

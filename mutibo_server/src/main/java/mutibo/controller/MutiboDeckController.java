@@ -12,6 +12,7 @@ import mutibo.repository.MutiboDeckRepository;
 import mutibo.repository.MutiboMovieRepository;
 import mutibo.repository.MutiboSetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,12 +31,14 @@ public class MutiboDeckController
 	{
 	}
 
+	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.POST, value="/deck")
 	public MutiboDeck addDeck(@RequestBody MutiboDeck p_deck)
 	{
 		return deckRepository.save(p_deck);
 	}
 
+	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.GET, value="/deck/{id}")
 	public MutiboDeck getDeck(@PathVariable("id") Long id, HttpServletResponse httpResponse)
 	{
@@ -50,6 +53,7 @@ public class MutiboDeckController
 		return f_deck;
 	}
 
+	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.GET, value="/deck")
 	public Iterable<MutiboDeck> listAll()
 	{
@@ -63,6 +67,7 @@ public class MutiboDeckController
 		return deckRepository.findByReleased(true);
 	}
 
+	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.POST, value="/deck/release/{id}")
 	public MutiboDeck release(@PathVariable("id") Long id, HttpServletResponse httpResponse)
 	{
