@@ -41,7 +41,6 @@ public class SecurityContext extends WebSecurityConfigurerAdapter
 			.exceptionHandling().and()
 			.anonymous().and()
 			.servletApi().and()
-			// .headers().cacheControl().and()
 			.headers().disable()
 			.authorizeRequests()
 			
@@ -81,8 +80,6 @@ public class SecurityContext extends WebSecurityConfigurerAdapter
 	{
 		return userDetailsService;
 	}
-
-	
 
 	@Autowired
 	private UserDetailsService userDetailsService;
