@@ -1,16 +1,20 @@
 package org.coursera.mutibo.game;
 
+import android.content.Context;
+
 public class GameFactory
 {
     public final static int GAME_TYPE_SINGLEPLAYER = 1;
     public final static int GAME_TYPE_MULTIPLAYER  = 2;
 
-    public GameControl newGame(int p_type)
+    public GameControl newGame(int p_type, Context context)
     {
         mCurrentGame = null;
 
         if (p_type == GAME_TYPE_SINGLEPLAYER)
             mCurrentGame = new GameControlSingle();
+        else if (p_type == GAME_TYPE_MULTIPLAYER)
+            mCurrentGame = new GameControlMulti(context);
 
         if (mCurrentGame != null)
             mCurrentGame.startGame();

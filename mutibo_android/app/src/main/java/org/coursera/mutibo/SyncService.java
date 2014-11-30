@@ -11,6 +11,7 @@ import android.util.Log;
 import com.google.gson.GsonBuilder;
 
 import org.coursera.mutibo.data.DataStore;
+import org.coursera.mutibo.data.MultiplayerMatch;
 import org.coursera.mutibo.data.MutiboDeck;
 import org.coursera.mutibo.data.MutiboGameResult;
 import org.coursera.mutibo.data.MutiboMovie;
@@ -77,6 +78,9 @@ public class SyncService extends Service
         @GET("/game/leaderboard-player")
         @Headers("Cache-control: max-age=86400")
         public Collection<MutiboUserResult> leaderBoardPlayer(@Query("player") String player, @Query("count") int count);
+
+        @POST("/multiplayer/challenge-random")
+        public MultiplayerMatch multiplayerChallengeRandom(@Query("gcmRegistration") String gcmRegId);
     }
 
     public class SyncBinder extends Binder
@@ -317,6 +321,16 @@ public class SyncService extends Service
         }
     }
 
+    public MultiplayerMatch multiplayerChallengeRandom(String gcmRegId)
+    {
+        try {
+            return restClient.multiplayerChallengeRandom(gcmRegId);
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "multiplayerChallengeRandom", e);
+            return null;
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // helper functions
@@ -466,7 +480,7 @@ public class SyncService extends Service
     private RestClient      restClient;
     private GsonConverter   gsonConverter;
 
-    private String      serverHost    = "ivy"; // "10.0.2.2";
+    private String      serverHost    = "10.0.2.2";
     private String      serverBaseUrl = "https://" + serverHost + ":8443";
 
     private LinkedBlockingQueue<MutiboGameResult>   gameResultQueue = new LinkedBlockingQueue<MutiboGameResult>();

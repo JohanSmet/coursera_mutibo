@@ -61,7 +61,16 @@ public class MenuActivity extends Activity {
     public void btnSinglePlayer_clicked(View p_view)
     {
         // create a new single player game
-        GameFactory.getInstance().newGame(GameFactory.GAME_TYPE_SINGLEPLAYER);
+        GameFactory.getInstance().newGame(GameFactory.GAME_TYPE_SINGLEPLAYER, this);
+
+        Intent f_intent = new Intent(this, GameActivity.class);
+        startActivity(f_intent);
+    }
+
+    public void btnMultiplayer_clicked(View view)
+    {
+        // create a new single player game
+        GameFactory.getInstance().newGame(GameFactory.GAME_TYPE_MULTIPLAYER, this);
 
         Intent f_intent = new Intent(this, GameActivity.class);
         startActivity(f_intent);

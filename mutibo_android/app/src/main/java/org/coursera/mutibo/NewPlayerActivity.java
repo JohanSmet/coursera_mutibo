@@ -50,7 +50,7 @@ public class NewPlayerActivity extends Activity {
 
             protected void onPostExecute(Boolean result)
             {
-                lblFailed.setVisibility((result) ? View.VISIBLE : View.INVISIBLE);
+                lblFailed.setVisibility((result) ? View.INVISIBLE : View.VISIBLE);
 
                 if (result)
                 {

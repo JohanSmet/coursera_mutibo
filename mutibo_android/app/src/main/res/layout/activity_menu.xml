@@ -74,6 +74,7 @@
             android:paddingBottom="16dp"
             android:text="@string/menu_multiplayer"
             android:id="@+id/btnMultiPlayer"
+            android:onClick="btnMultiplayer_clicked"
             android:gravity="center_horizontal|bottom"/>
 
         </LinearLayout>
