@@ -62,7 +62,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:onClick="btnMovie01_clicked"
             android:orientation="vertical"
             android:id="@+id/btnMovie01"
             style="@style/MovieButton">
@@ -79,7 +78,6 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:scaleType="fitCenter"
-                    android:onClick="btnMovie01_clicked"
                     android:id="@+id/imgMovie01"
                     android:padding="2dp"/>
 
@@ -88,7 +86,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:gravity="center"
-                    android:onClick="btnMovie01_clicked"
                     android:id="@+id/txtMovie01"/>
             </LinearLayout>
         </LinearLayout>
@@ -97,7 +94,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:onClick="btnMovie02_clicked"
             android:orientation="vertical"
             android:id="@+id/btnMovie02"
             style="@style/MovieButton">
@@ -115,7 +111,6 @@
                     android:scaleType="fitCenter"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:onClick="btnMovie02_clicked"
                     android:id="@+id/imgMovie02"
                     />
 
@@ -124,7 +119,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:gravity="center"
-                    android:onClick="btnMovie02_clicked"
                     android:id="@+id/txtMovie02"/>
             </LinearLayout>
         </LinearLayout>
@@ -143,7 +137,6 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             style="@style/MovieButton"
-            android:onClick="btnMovie03_clicked"
             android:id="@+id/btnMovie03"
             android:orientation="vertical">
 
@@ -160,7 +153,6 @@
                     android:scaleType="fitCenter"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:onClick="btnMovie03_clicked"
                     android:id="@+id/imgMovie03"
                     />
 
@@ -169,7 +161,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:gravity="center"
-                    android:onClick="btnMovie03_clicked"
                     android:id="@+id/txtMovie03"/>
             </LinearLayout>
         </LinearLayout>
@@ -179,7 +170,6 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             style="@style/MovieButton"
-            android:onClick="btnMovie04_clicked"
             android:id="@+id/btnMovie04"
             android:orientation="vertical">
 
@@ -196,7 +186,6 @@
                     android:scaleType="fitCenter"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:onClick="btnMovie04_clicked"
                     android:id="@+id/imgMovie04"
                     />
 
@@ -205,7 +194,6 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:gravity="center"
-                    android:onClick="btnMovie04_clicked"
                     android:id="@+id/txtMovie04"/>
             </LinearLayout>
         </LinearLayout>

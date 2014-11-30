@@ -56,6 +56,24 @@ public class GameActivity extends Activity
         imgLives[1]   = (ImageView)     findViewById(R.id.imgLife2);
         imgLives[2]   = (ImageView)     findViewById(R.id.imgLife3);
 
+        for (int idx=0; idx < 4; ++idx)
+        {
+            final int finalIdx = idx;
+
+            View.OnClickListener listener = new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    endCurrentSet(finalIdx);
+                }
+            };
+
+            btnMovies[idx].setOnClickListener(listener);
+            imgMovies[idx].setOnClickListener(listener);
+            txtMovies[idx].setOnClickListener(listener);
+        }
+
         animAnswerCorrect   = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.answer_correct);
         animAnswerCorrect.setEvaluator(new ArgbEvaluator());
         animAnswerIncorrect = (ObjectAnimator) AnimatorInflater.loadAnimator(this, R.animator.answer_incorrect);
@@ -193,26 +211,6 @@ public class GameActivity extends Activity
     //
     // events
     //
-
-    public void btnMovie01_clicked(View p_view)
-    {
-        endCurrentSet(0);
-    }
-
-    public void btnMovie02_clicked(View p_view)
-    {
-        endCurrentSet(1);
-    }
-
-    public void btnMovie03_clicked(View p_view)
-    {
-        endCurrentSet(2);
-    }
-
-    public void btnMovie04_clicked(View p_view)
-    {
-        endCurrentSet(3);
-    }
 
     @Override
     public void onBackPressed()
