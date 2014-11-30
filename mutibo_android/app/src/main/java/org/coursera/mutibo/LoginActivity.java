@@ -536,7 +536,7 @@ public class LoginActivity extends Activity
                 authToken = GoogleAuthUtil.getToken(
                         mActivity,
                         googlePlusClient.getAccountName(),
-                        "audience:server:client_id:***REMOVED***");
+                        getString(R.string.google_token_scope));
             } catch (IOException e) {
                 // network error - try again later
             } catch (UserRecoverableAuthException e) {

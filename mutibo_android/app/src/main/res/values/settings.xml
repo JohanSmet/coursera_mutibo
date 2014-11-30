@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- server -->
+    <string name="server_proto">https</string>
+    <string name="server_host">10.0.2.2</string>
+    <string name="server_port">8443</string>
+
+    <!-- facebook -->
+    <string name="facebook_app_id">***REMOVED***</string>
+
+    <!-- google -->
+    <string name="google_token_scope">audience:server:client_id:***REMOVED***</string>
+</resources>

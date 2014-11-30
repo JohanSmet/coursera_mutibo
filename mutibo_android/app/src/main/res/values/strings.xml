@@ -8,6 +8,7 @@
     <string name="title_activity_game_over">GameOverActivity</string>
     <string name="title_activity_leaderboard">Leaderboard</string>
     <string name="title_activity_about">More information - Support</string>
+    <string name="title_facebook_login">Facebook Login</string>
 
 
     <string name="dialog_yes">Yes</string>
@@ -57,10 +58,6 @@
     <string name="leaderboard_done">That\'s all folks !</string>
     <string name="leaderboard_tab_top">Top entries</string>
     <string name="leaderboard_tab_you">Your ranking</string>
-
-    <!-- facebook -->
-    <string name="title_facebook_login">Facebook Login</string>
-    <string name="facebook_app_id">***REMOVED***</string>
 
     <!-- new player -->
     <string name="title_activity_new_player">New player</string>

@@ -104,13 +104,16 @@ public class SyncService extends Service
 
         if (restClient == null)
         {
+            String serverHost    = getString(R.string.server_host);
+            String serverBaseUrl = getString(R.string.server_proto) + "://" + serverHost + ":" + getString(R.string.server_port);
+
             gsonConverter = new GsonConverter(new GsonBuilder()
                                                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                                                 .create()
             );
 
             restClient = new RestAdapter.Builder()
-                                .setEndpoint(this.serverBaseUrl)
+                                .setEndpoint(serverBaseUrl)
                                 .setConverter(gsonConverter)
                                 .setClient(new OkClient(OkHttpBuilder.getSelfSignedOkHttpClient(this, serverHost)))
                                 .setRequestInterceptor(new RequestInterceptor()
@@ -479,9 +482,6 @@ public class SyncService extends Service
     private IBinder         binder = new SyncBinder();
     private RestClient      restClient;
     private GsonConverter   gsonConverter;
-
-    private String      serverHost    = "10.0.2.2";
-    private String      serverBaseUrl = "https://" + serverHost + ":8443";
 
     private LinkedBlockingQueue<MutiboGameResult>   gameResultQueue = new LinkedBlockingQueue<MutiboGameResult>();
     private GameResultPostThread                    gameResultThread;
