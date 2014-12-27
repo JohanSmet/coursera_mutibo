@@ -6,8 +6,9 @@
     <string name="server_port">8443</string>
 
     <!-- facebook -->
-    <string name="facebook_app_id">***REMOVED***</string>
+    <!-- <string name="facebook_app_id">PRIVATE</string>-->
 
     <!-- google -->
-    <string name="google_token_scope">audience:server:client_id:***REMOVED***</string>
+    <!-- <string name="google_token_scope">PRIVATE</string>-->
+
 </resources>

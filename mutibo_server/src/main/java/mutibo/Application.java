@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -18,7 +19,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @Import({WebAppContext.class, PersistenceContext.class, SecurityContext.class})
 @EnableAutoConfiguration
-@PropertySource("classpath:application.properties")
+@PropertySources({
+	@PropertySource("classpath:application.properties"),
+	@PropertySource("classpath:application_private.properties")
+})
 @EnableScheduling
 @ComponentScan(basePackages = {"mutibo.themoviedb", "mutibo.background"})
 public class Application 
