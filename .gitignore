@@ -1,0 +1,6 @@
+/mutibo_server/.nb-gradle/private/
+/mutibo_server/build/
+/mutibo_server/.gradle
+/mutibo_server/.nb-gradle
+/mutibo_server/src/main/resources/application_private.properties
+/mutibo_android/app/src/main/res/values/settings_private.xml
