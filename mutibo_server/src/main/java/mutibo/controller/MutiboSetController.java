@@ -5,6 +5,7 @@
  */
 package mutibo.controller;
 
+import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import mutibo.data.MutiboSet;
 import mutibo.repository.MutiboDeckRepository;
@@ -32,14 +33,14 @@ public class MutiboSetController
 
 	@PreAuthorize ("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method=RequestMethod.POST, value="/set")
-	public MutiboSet addSet(@RequestBody MutiboSet p_set, HttpServletResponse httpResponse)
+	public MutiboSet addSet(@RequestBody MutiboSet p_set, HttpServletResponse httpResponse) throws IOException
 	{
 		// all the referenced movies must exist
 		for (String f_movie_id : p_set.getGoodMovies())
 		{
 			if (movieRepository.findOne(f_movie_id) == null) 
 			{
-				httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST, "Movie not found (" + f_movie_id + ")");
+				httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "Movie not found (" + f_movie_id + ")");
 				return null;
 			}
 		}
@@ -49,7 +50,7 @@ public class MutiboSetController
 		{
 			if (movieRepository.findOne(f_movie_id) == null) 
 			{
-				httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST, "Movie not found (" + f_movie_id + ")");
+				httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "Movie not found (" + f_movie_id + ")");
 				return null;
 			}
 		}
@@ -57,7 +58,7 @@ public class MutiboSetController
 		// the deck must exists 
 		if (deckRepository.findOne(p_set.getDeckId()) == null)
 		{
-			httpResponse.setStatus(HttpServletResponse.SC_BAD_REQUEST, "Deck not found (" + p_set.getDeckId().toString() + ")");
+			httpResponse.sendError(HttpServletResponse.SC_BAD_REQUEST, "Deck not found (" + p_set.getDeckId().toString() + ")");
 			return null;
 		}
 
