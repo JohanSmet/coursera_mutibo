@@ -95,10 +95,10 @@ public class LeaderboardFragment extends ListFragment
     }
 
     @Override
-    public void onDetach()
+    public void onStop()
     {
-        super.onDetach();
         syncServiceClient.unbind();
+        super.onStop();
     }
 
     // nested classes

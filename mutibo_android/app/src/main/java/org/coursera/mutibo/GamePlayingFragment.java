@@ -97,12 +97,12 @@ public class GamePlayingFragment extends Fragment
     }
 
     @Override
-    public void onDetach()
+    public void onStop()
     {
-        super.onDetach();
-
         mCountDownTimer.cancel();
         mListener = null;
+
+        super.onStop();
     }
 
     @Override

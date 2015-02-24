@@ -128,10 +128,10 @@ public class GameDoneFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
-    public void onDetach()
+    public void onStop()
     {
-        super.onDetach();
         mListener = null;
+        super.onStop();
     }
 
     /**
