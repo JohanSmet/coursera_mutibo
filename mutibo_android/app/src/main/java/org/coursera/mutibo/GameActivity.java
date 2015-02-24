@@ -13,6 +13,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -36,6 +38,7 @@ public class GameActivity extends Activity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
 
         txtTotalScore = (TextView) findViewById(R.id.txtTotalScore);
 
@@ -83,6 +86,9 @@ public class GameActivity extends Activity
 
         defaultBackground = btnMovies[0].getSolidColor();
 
+        if (mGameControl.isMultiPlayer())
+            scoreDialog = new ScoreDialog();
+
         displayCurrentSet(savedInstanceState == null);
     }
 
@@ -91,9 +97,11 @@ public class GameActivity extends Activity
     {
         super.onStart();
 
-        // Bind to SyncService
+        // bind to SyncService
         syncServiceClient.bind();
 
+        // listen to events from the game controller
+        mGameControl.registerStateCallback(new GameStateChangedCallback(new Handler()));
     }
 
     @Override
@@ -101,8 +109,11 @@ public class GameActivity extends Activity
     {
         super.onStop();
 
-        // Unbind from the service
+        // unbind from the service
         syncServiceClient.unbind();
+
+        // stop listening to events from the game controller
+        mGameControl.registerStateCallback(null);
     }
 
     private void displayCurrentSet(boolean newView)
@@ -222,6 +233,7 @@ public class GameActivity extends Activity
                 {
                     public void onClick(DialogInterface dialog, int id)
                     {
+                        mGameControl.cancelGame();
                         GameActivity.super.onBackPressed();
                     }
                 })
@@ -244,21 +256,48 @@ public class GameActivity extends Activity
     {
         mGameControl.continueGame(rating);
 
-        if (mGameControl.currentGameState() == GameControl.GAME_STATE_FINISHED)
-        {
-            syncServiceClient.getSyncService().postGameResult(mGameControl.gameResult());
-            startActivity(new Intent(this, GameOverActivity.class));
-        }
-        else
-        {
-            displayCurrentSet(true);
-        }
+        if (scoreDialog != null)
+            scoreDialog.show();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // nested classes
     //
+
+    private class GameStateChangedCallback extends ResultReceiver
+    {
+        public GameStateChangedCallback(Handler handler)
+        {
+            super(handler);
+        }
+
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData)
+        {
+            if (resultCode == GameControl.GAME_STATE_QUESTION) {
+                if (scoreDialog != null)
+                    scoreDialog.hide();
+                displayCurrentSet(true);
+            } else if (resultCode == GameControl.GAME_STATE_ANSWERED && resultData != null && scoreDialog != null) {
+                scoreDialog.initDialog( resultData.getString("player_one", ""),
+                                        resultData.getString("player_two", ""));
+            } else if (resultCode == GameControl.GAME_STATE_FINISHED || resultCode == GameControl.GAME_STATE_CANCELLED) {
+                // go to the end of game activity
+                Intent intent = new Intent(GameActivity.this, GameOverActivity.class);
+                if (resultData != null)
+                    intent.putExtras(resultData);
+
+                startActivity(intent);
+            } else if (resultCode == GameControl.GAME_EVENT_SCORE_UPDATE && resultData != null && scoreDialog != null) {
+                scoreDialog.setScore(resultData.getString("player",""),
+                                     Integer.parseInt(resultData.getString("score", "0")),
+                                     Integer.parseInt(resultData.getString("lives", "0")));
+            } else if (resultCode == GameControl.GAME_EVENT_QUESTION_COUNTDOWN && resultData != null && scoreDialog != null) {
+                scoreDialog.setCountdown(resultData.getLong("COUNTDOWN", 0));
+            }
+        }
+    }
 
     private class DownloadPosterTask extends AsyncTask<Integer, Integer, Drawable>
     {
@@ -280,14 +319,68 @@ public class GameActivity extends Activity
         private Integer mIndex;
     }
 
+    private class ScoreDialog
+    {
+        ScoreDialog()
+        {
+            View view = GameActivity.this.getLayoutInflater().inflate(R.layout.dialog_multiplayer_score, null);
+
+            mDialog = new AlertDialog.Builder(GameActivity.this)
+                            .setView(view)
+                            .setOnCancelListener(new DialogInterface.OnCancelListener() {
+                                public void onCancel(DialogInterface dialog) {
+                                    GameActivity.this.onBackPressed();
+                                }
+                            })
+                            .create();
+            mDialog.setCanceledOnTouchOutside(false);
+
+            scoreFragment = (MultiplayerScoreFragment) getFragmentManager().findFragmentById(R.id.scoreFragment);
+
+            lblStatus = (TextView) view.findViewById(R.id.txtStatus);
+        }
+
+        public void show()
+        {
+            mDialog.show();
+        }
+
+        public void hide()
+        {
+            mDialog.hide();
+        }
+
+        public void initDialog(String playerOne, String playerTwo)
+        {
+            scoreFragment.initPlayer(0, playerOne);
+            scoreFragment.initPlayer(1, playerTwo);
+            lblStatus.setText(R.string.multi_status);
+        }
+
+        public void setScore(String playerName, int score, int lives)
+        {
+            scoreFragment.setScore(playerName, score, lives);
+        }
+
+        public void setCountdown(long countdown)
+        {
+            lblStatus.setText(String.format(getString(R.string.multi_starting), countdown));
+        }
+
+        // member variables
+        private AlertDialog                 mDialog;
+        private MultiplayerScoreFragment    scoreFragment;
+        private TextView                    lblStatus;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //
     // member variables
     //
 
-    private GameControl mGameControl = GameFactory.getInstance().currentGame();
-    private TextView    txtTotalScore;
+    private GameControl       mGameControl = GameFactory.getInstance().currentGame();
 
+    private TextView          txtTotalScore;
     private LinearLayout[]    btnMovies = new LinearLayout[4];
     private ImageView[]       imgMovies = new ImageView[4];
     private TextView[]        txtMovies = new TextView[4];
@@ -298,5 +391,7 @@ public class GameActivity extends Activity
     private ObjectAnimator    animAnswerIncorrect;
     private AnimatorSet       animMovieCorrect;
 
-    private SyncServiceClient   syncServiceClient = new SyncServiceClient(this);
+    private ScoreDialog       scoreDialog = null;
+
+    private SyncServiceClient syncServiceClient = new SyncServiceClient(this);
 }

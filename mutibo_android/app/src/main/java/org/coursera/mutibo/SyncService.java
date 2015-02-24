@@ -81,6 +81,12 @@ public class SyncService extends Service
 
         @POST("/multiplayer/challenge-random")
         public MultiplayerMatch multiplayerChallengeRandom(@Query("gcmRegistration") String gcmRegId);
+
+        @POST("/multiplayer/game-cancel")
+        public Response multiplayerGameCancel(@Query("matchId") String matchId);
+
+        @POST("/multiplayer/game-update")
+        public Long multiplayerGameUpdate(@Query("matchId") String matchId, @Query("setId") Long setId, @Query("score") int score);
     }
 
     public class SyncBinder extends Binder
@@ -298,7 +304,7 @@ public class SyncService extends Service
         }
     }
 
-    void postGameResult(MutiboGameResult gameResult)
+    public void postGameResult(MutiboGameResult gameResult)
     {
         // store the game result in a queue to be sent to the server when we're online and logged in
         gameResultQueue.add(gameResult);
@@ -331,6 +337,25 @@ public class SyncService extends Service
         } catch (RetrofitError e) {
             Log.d(LOG_TAG, "multiplayerChallengeRandom", e);
             return null;
+        }
+    }
+
+    public void multiplayerGameCancel(String matchId)
+    {
+        try {
+           restClient.multiplayerGameCancel(matchId);
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "multiplayerGameCancel", e);
+        }
+    }
+
+    public Long multiplayerGameUpdate(String matchId, Long setId, int score)
+    {
+        try {
+            return restClient.multiplayerGameUpdate(matchId, setId, score);
+        } catch (RetrofitError e) {
+            Log.d(LOG_TAG, "multiplayerGameUpdate", e);
+            return 0L;
         }
     }
 

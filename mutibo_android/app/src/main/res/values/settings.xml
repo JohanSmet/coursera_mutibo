@@ -2,7 +2,8 @@
 <resources>
     <!-- server -->
     <string name="server_proto">https</string>
-    <string name="server_host">10.0.2.2</string>
+    <!--<string name="server_host">10.0.2.2</string>-->
+    <string name="server_host">192.168.200.63</string>
     <string name="server_port">8443</string>
 
     <!-- facebook -->

@@ -64,7 +64,6 @@
             android:onClick="btnSinglePlayer_clicked"/>
 
         <Button
-            android:enabled="false"
             android:drawableTop="@drawable/multi_player"
             android:layout_weight="1"
             android:layout_height="fill_parent"

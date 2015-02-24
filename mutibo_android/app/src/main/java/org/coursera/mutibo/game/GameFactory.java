@@ -12,7 +12,7 @@ public class GameFactory
         mCurrentGame = null;
 
         if (p_type == GAME_TYPE_SINGLEPLAYER)
-            mCurrentGame = new GameControlSingle();
+            mCurrentGame = new GameControlSingle(context);
         else if (p_type == GAME_TYPE_MULTIPLAYER)
             mCurrentGame = new GameControlMulti(context);
 
@@ -34,5 +34,5 @@ public class GameFactory
 
     // member variables
     private static GameFactory mInstance    = new GameFactory();
-    private GameControl mCurrentGame = null;
+    private GameControl mCurrentGame        = null;
 }

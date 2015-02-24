@@ -9,14 +9,18 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.ResultReceiver;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 
+import org.coursera.mutibo.GlobalState;
 import org.coursera.mutibo.SyncServiceClient;
 import org.coursera.mutibo.data.DataStore;
+import org.coursera.mutibo.data.MultiplayerMatch;
 import org.coursera.mutibo.data.MutiboGameResult;
 import org.coursera.mutibo.data.MutiboMovie;
 import org.coursera.mutibo.data.MutiboSet;
@@ -28,8 +32,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
-public class GameControlMulti implements GameControl
+public class GameControlMulti extends GameControlCommon
 {
     private static final String LOG_TAG = "GameControlMulti";
 
@@ -37,14 +42,22 @@ public class GameControlMulti implements GameControl
     {
         this.mScore      = 0;
         this.mNumCorrect = 0;
-        this.mState      = GAME_STATE_FINISHED;
         this.mSetMovies  = new ArrayList<MutiboMovie>();
         this.mSuccess    = GameControl.SetSuccess.UNKNOWN;
         this.mGameResult = new MutiboGameResult();
+        this.mPlayerId   = 1;
         this.mContext    = context;
+
+        this.stateCallback     = null;
 
         this.syncServiceClient = new SyncServiceClient(mContext);
         this.syncServiceClient.bind();
+    }
+
+    @Override
+    public boolean  isMultiPlayer()
+    {
+        return true;
     }
 
     @Override
@@ -53,7 +66,12 @@ public class GameControlMulti implements GameControl
         this.mScore      = 0;
         this.mNumCorrect = 0;
         this.mLives      = 3;
-        this.mState      = GAME_STATE_STARTED;
+        changeGameState(GAME_STATE_AWAITING_OPPONENT, null);
+
+        // initialize the GameResult object that will eventually be sent to the server
+        mGameResult.setStartTime(new Date());
+        mGameResult.setEndTime(null);
+        mGameResult.clearSetResults();
 
         registerForPlayServices();
         startGcmReceiver();
@@ -62,6 +80,27 @@ public class GameControlMulti implements GameControl
     @Override
     public void endGame()
     {
+        // post the final result to the server
+        mGameResult.setEndTime(new Date());
+        syncServiceClient.getSyncService().postGameResult(mGameResult);
+
+        // cleanup
+        stopGcmReceiver();
+        syncServiceClient.unbind();
+    }
+
+    @Override
+    public void cancelGame()
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+            syncServiceClient.getSyncService().multiplayerGameCancel(getMatchId());
+            syncServiceClient.unbind();
+            }
+        }).start();
+
+        // cleanup
         stopGcmReceiver();
     }
 
@@ -90,7 +129,6 @@ public class GameControlMulti implements GameControl
             this.mScore +=  this.mCurrentSet.getPoints();
         }
 
-
         // change state of the game
         updateGameState();
 
@@ -115,12 +153,21 @@ public class GameControlMulti implements GameControl
 
         if (mSuccess == GameControl.SetSuccess.SUCCESS)
             setResult.setScore(this.mCurrentSet.getPoints());
-    }
 
-    @Override
-    public int currentGameState()
-    {
-        return mState;
+        mGameResult.addSetResult(setResult);
+
+        // wait for other player to finish this set
+        changeGameState(GameControl.GAME_STATE_AWAITING_OPPONENT);
+
+        // ask for next set to play from server (in the background)
+        new AsyncTask<Long, Long, Long>() {
+            protected Long doInBackground(Long... params) {
+                return syncServiceClient.getSyncService().multiplayerGameUpdate(mCurrentMatch.getMatchId(), params[0], params[1].intValue());
+            }
+            protected void onPostExecute(Long result) {
+                setNextSet(result);
+            }
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, setResult.getSetId(), Long.valueOf((long) setResult.getScore()));
     }
 
     @Override
@@ -139,12 +186,6 @@ public class GameControlMulti implements GameControl
     public int remainingLives()
     {
         return mLives;
-    }
-
-    @Override
-    public MutiboGameResult gameResult()
-    {
-        return mGameResult;
     }
 
     @Override
@@ -195,8 +236,66 @@ public class GameControlMulti implements GameControl
         return this.mSuccess;
     }
 
+    public String getOpponentName()
+    {
+        return mPlayerNames[mOpponentId];
+    }
+
+    public String getMatchId()
+    {
+        return mCurrentMatch.getMatchId();
+    }
+
     private void updateGameState()
     {
+        Bundle extra = new Bundle();
+        extra.putString("player_one", mPlayerNames[0]);
+        extra.putString("player_two", mPlayerNames[1]);
+        changeGameState(GAME_STATE_ANSWERED, extra);
+    }
+
+    private void setNextSet(Long id)
+    {
+        mCurrentSet = mDataStore.getSetById(id);
+
+        // put the movies of the set in a random order
+        mSetMovies.clear();
+
+        ArrayList<String> f_movies = new ArrayList<String>();
+        Collections.addAll(f_movies, mCurrentSet.getGoodMovies());
+        Collections.addAll(f_movies, mCurrentSet.getBadMovies());
+        Collections.shuffle(f_movies);
+
+        for (String imdbId : f_movies)
+        {
+            if (mCurrentSet.getBadMovies()[0].equals(imdbId))
+                mBadMovieIndex = mSetMovies.size();
+
+            mSetMovies.add(mDataStore.getMovieById(imdbId));
+        }
+    }
+
+    private void startQuestionCountdown()
+    {
+        // countdown
+        mCountdownTimer = new CountDownTimer(6000, 1000)
+        {
+            @Override
+            public void onTick(long l)
+            {
+                if (stateCallback != null) {
+                    Bundle data = new Bundle();
+                    data.putLong("COUNTDOWN", l / 1000);
+                    sendEvent(GAME_EVENT_QUESTION_COUNTDOWN, data);
+                }
+            }
+
+            @Override
+            public void onFinish()
+            {
+                changeGameState(GAME_STATE_QUESTION, null);
+            }
+        }.start();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -214,15 +313,47 @@ public class GameControlMulti implements GameControl
         @Override
         public void onReceive(Context context, Intent intent)
         {
+            // do not start processing message before match initialization is complete
+            try {
+                mInitLatch.await();
+            } catch (InterruptedException e) {
+                Log.e(LOG_TAG, "mInitLatch.await interrupted", e);
+            }
+
             Bundle extras = intent.getExtras();
 
-            if (!extras.isEmpty())
-            {
+            if (!extras.isEmpty()) {
                 String messageType = mGcm.getMessageType(intent);
 
                 if (GoogleCloudMessaging.MESSAGE_TYPE_MESSAGE.equals(messageType)) {
-                    Log.i(LOG_TAG, extras.toString());
+                    handle_message(extras);
                 }
+            }
+        }
+
+        private void handle_message(Bundle extras)
+        {
+            Log.i(LOG_TAG, extras.toString());
+
+            // TODO: ignore messages that aren't for the current match
+
+            String  msgType = extras.getString("type", "UNKNOWN");
+
+            if (msgType.equals("OPPONENT_READY")) {
+                mPlayerNames[0] = extras.getString("player_one");
+                mPlayerNames[1] = extras.getString("player_two");
+                changeGameState(GAME_STATE_STARTED, extras);
+                startQuestionCountdown();
+            } else if (msgType.equals("OPPONENT_SCORE")) {
+                changeGameState(GAME_STATE_SCORE);
+                sendEvent(GAME_EVENT_SCORE_UPDATE, extras);
+            } else if (msgType.equals("CONTINUE_GAME")) {
+                startQuestionCountdown();
+            } else if (msgType.equals("END_GAME")) {
+                endGame();
+                changeGameState(GAME_STATE_FINISHED, extras);
+            } else if (msgType.equals("OPPONENT_QUIT")) {
+                changeGameState(GAME_STATE_CANCELLED, extras);
             }
         }
     };
@@ -262,6 +393,8 @@ public class GameControlMulti implements GameControl
 
         mGcm        = GoogleCloudMessaging.getInstance(mContext);
         mGcmRegId   = getRegistrationId(mContext);
+        mInitLatch  = new CountDownLatch(1);
+
         registerInBackground();
 
         return true;
@@ -277,7 +410,7 @@ public class GameControlMulti implements GameControl
                 String msg = "";
 
                 // register for Google Cloud Message if it wasn't done before
-                //if (mGcmRegId.isEmpty())
+                // if (mGcmRegId.isEmpty())
                 {
                     try {
                         if (mGcm == null) {
@@ -295,7 +428,26 @@ public class GameControlMulti implements GameControl
                 }
 
                 // start the multiplayer match
-                syncServiceClient.getSyncService().multiplayerChallengeRandom(mGcmRegId);
+                mCurrentMatch = syncServiceClient.getSyncService().multiplayerChallengeRandom(mGcmRegId);
+
+                // process opponent information
+                if (mCurrentMatch.isOpponentReady()) {
+                    mPlayerId   = 1;
+                    mOpponentId = 0;
+                } else {
+                    mPlayerId   = 0;
+                    mOpponentId = 1;
+                }
+
+                // player names
+                mPlayerNames[mPlayerId]   = GlobalState.getNickName();
+                mPlayerNames[mOpponentId] = mCurrentMatch.getOpponentName();
+
+                // get set to play
+                setNextSet(mCurrentMatch.getSetId());
+
+                // match initialization complete
+                mInitLatch.countDown();
 
                 return msg;
             }
@@ -369,7 +521,11 @@ public class GameControlMulti implements GameControl
     private int                     mScore;
     private int                     mNumCorrect;
     private int                     mLives;
-    private int                     mState;
+
+    private int                     mPlayerId;
+    private int                     mOpponentId;
+    private String[]                mPlayerNames = new String[2];
+    private MultiplayerMatch        mCurrentMatch = null;
 
     private MutiboSet               mCurrentSet;
     private ArrayList<MutiboMovie>  mSetMovies;
@@ -377,12 +533,14 @@ public class GameControlMulti implements GameControl
     private int                     mBadMovieIndex;
 
     private MutiboGameResult        mGameResult;
+    private CountDownTimer          mCountdownTimer = null;
 
     private DataStore mDataStore = DataStore.getInstance();
     private Context   mContext;
 
     private GoogleCloudMessaging    mGcm;
     private String                  mGcmRegId;
+    private CountDownLatch          mInitLatch;
 
     private SyncServiceClient       syncServiceClient;
 }

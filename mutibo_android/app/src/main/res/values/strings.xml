@@ -9,8 +9,7 @@
     <string name="title_activity_leaderboard">Leaderboard</string>
     <string name="title_activity_about">More information - Support</string>
     <string name="title_facebook_login">Facebook Login</string>
-
-
+    <string name="title_activity_game_awaiting_opponent">Awaiting Opponent</string>
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
 
@@ -44,13 +43,22 @@
     <string name="game_failure">Incorrect.</string>
     <string name="game_continue">Continue</string>
     <string name="game_rate">Please rate this set</string>
+    <string name="game_waiting">...</string>
     <string name="game_timeout">You failed to answer the question in the allotted time.</string>
+    <string name="game_cancel">Are you sure you want to quit the game?</string>
     <string name="gamedone_game_over">Game Over !</string>
     <string name="gamedone_result">Congratulations !\nYou got %1$d questions correct and earned %2$d points.</string>
+    <string name="gamedone_cancelled">Your opponent quit the game prematurely.</string>
     <string name="gamedone_another">Play another game !</string>
     <string name="gamedone_ranking">What\'s my ranking ?</string>
     <string name="gamedone_menu">Return to menu.</string>
-    <string name="game_cancel">Are you sure you want to quit the game?</string>
+
+    <!-- game_awaiting_opponent -->
+    <string name="game_await_starting">Starting multi-player game</string>
+    <string name="game_await_opponent_unknown">Waiting for an opponent...</string>
+    <string name="game_await_opponent">Your opponent is %1$s !</string>
+    <string name="game_await_countdown">The game will start in</string>
+    <string name="game_await_cancel">Are you sure you want to cancel your multi-player challenge?</string>
 
     <!-- leaderboard__enabled -->
     <string name="leaderboard_score">Best score: </string>
@@ -69,7 +77,6 @@
     <string name="about_tab_howto">Howto</string>
     <string name="about_tab_support">Support</string>
     <string name="about_tab_credits">About</string>
-
     <string name="about_contents_howto"><b>How to play a single player game?</b>\nStart a game by choosing "Single player" in the main menu that is shown after logging in to the application.\n
 \n<b>Objective of the game.</b>\n
 Four movies are shown at a time. Three of those have a special relationship and one does not share this relationship. The objective is to identify the movie that does not fit in with the other three.
@@ -78,24 +85,28 @@ Touch your answer within the time time indicated by the blue bar on the bottom o
 You start the game with three lives. The hearts on the top of the screen indicate the number of lives you have left.\n
 The game ends when you have no more remaining lives or when you have answered all available questions in one go.\n
 \n<b>How to play a multi player game?</b>\n
-Sorry, multi-player games are not available in this release. Coming soon !\n\n
-<b>Leader board</b>
-You can check how your movie knowledge holds up to other players by visiting the leader board section of the app.
-    </string>
+Sorry, multi-player games are not available in this release. Coming soon !\n\n <b>Leader board</b> You can check how your movie knowledge holds up to other players by visiting the leader board section of the app.</string>
     <string name="about_contents_credits"><b>Mutibo - <i>A Coursera Android Capstone project</i></b>\n
 \nThis app and the accompanying server were developed as a submission to the Capstone project of the Coursera Mobile Cloud Computing with Android Specialization.\n
-This app was not made available to the general public, commercially or otherwise.\n\n
-<b>Credits.</b>
-Movie information and posters were obtained via http://www.themoviedb.org/ and its API. The server component of this product uses the TMDb API but is not endorsed or certified by TMDb.\n\n
-Icons flaticon.com under CC BY. The authors are: Freepik.\n
-Filmstrip images under CC BT. The authers are: Freepik.\n\n
-Many thanks go to the wonderful people on the Coursera forums for many of the movie-questions used in this application.
-</string>
+This app was not made available to the general public, commercially or otherwise.\n\n <b>Credits.</b> Movie information and posters were obtained via http://www.themoviedb.org/ and its API. The server component of this product uses the TMDb API but is not endorsed or certified by TMDb.\n\n
+Menu icons from flaticon.com under CC BY. The authors are: Freepik.\n
+Crown icon from flaticon.com under CC BY. The authors are: Icons8.\n
+Filmstrip images under CC BY. The authors are: Freepik.\n\n
+Many thanks go to the wonderful people on the Coursera forums for many of the movie-questions used in this application.</string>
     <string name="about_support_delete_title">Delete account</string>
     <string name="about_support_delete_text">Completely remove your account from the Mutibo-server.\nAny permissions granted to this app by logging in through Google+ or Facebook are revoked. No personal information from Google+ or Facebook is ever stored on the Mutibo server.</string>
     <string name="about_support_delete_button">Remove account</string>
     <string name="about_support_contact_title">Contacting support</string>
     <string name="about_support_contact_text">This would be the place to list methods of contacting support and consulting a faq. For the peer review process this app shouldn\'t contain any personal information.</string>
     <string name="about_support_delete_confirmation">This operation can not be undone. Are you sure?</string>
+
+    <!-- multi-player score dialog -->
+    <string name="multi_title_header">GAME SCORE</string>
+    <string name="multi_title_player">Player</string>
+    <string name="multi_title_score">Score</string>
+    <string name="multi_title_lives">Lives</string>
+    <string name="multi_status">Waiting for opponent...</string>
+    <string name="multi_starting">Next question in: %d</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

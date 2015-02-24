@@ -1,5 +1,8 @@
 package org.coursera.mutibo.game;
 
+import android.content.Context;
+
+import org.coursera.mutibo.SyncServiceClient;
 import org.coursera.mutibo.data.DataStore;
 import org.coursera.mutibo.data.MutiboGameResult;
 import org.coursera.mutibo.data.MutiboMovie;
@@ -7,24 +10,31 @@ import org.coursera.mutibo.data.MutiboSet;
 import org.coursera.mutibo.data.MutiboSetResult;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
 
-public class GameControlSingle implements GameControl
+public class GameControlSingle extends GameControlCommon
 {
-    public GameControlSingle()
+    public GameControlSingle(Context context)
     {
         this.mScore      = 0;
         this.mNumCorrect = 0;
-        this.mState      = GAME_STATE_FINISHED;
         this.mPlayedSets = new HashSet<Long>();
         this.mSetSeed    = null;
         this.mSetMovies  = new ArrayList<MutiboMovie>();
         this.mSuccess    = SetSuccess.UNKNOWN;
         this.mGameResult = new MutiboGameResult();
+
+        this.syncServiceClient = new SyncServiceClient(context);
+        this.syncServiceClient.bind();
+    }
+
+    @Override
+    public boolean  isMultiPlayer()
+    {
+        return false;
     }
 
     @Override
@@ -33,7 +43,7 @@ public class GameControlSingle implements GameControl
         this.mScore      = 0;
         this.mNumCorrect = 0;
         this.mLives      = 3;
-        this.mState      = GAME_STATE_STARTED;
+        changeGameState(GAME_STATE_STARTED);
 
         this.mPlayedSets.clear();
         this.mSetSeed = new Random();
@@ -50,6 +60,14 @@ public class GameControlSingle implements GameControl
     public void endGame()
     {
         mGameResult.setEndTime(new Date());
+        syncServiceClient.getSyncService().postGameResult(mGameResult);
+        syncServiceClient.unbind();
+    }
+
+    @Override
+    public void cancelGame()
+    {
+        syncServiceClient.unbind();
     }
 
     @Override
@@ -77,9 +95,8 @@ public class GameControlSingle implements GameControl
             this.mScore +=  this.mCurrentSet.getPoints();
         }
 
-
-        // change state of the game
-        updateGameState();
+        // change state of the game to answered
+        changeGameState(GAME_STATE_ANSWERED);
 
         return this.mSuccess == SetSuccess.SUCCESS;
     }
@@ -89,8 +106,7 @@ public class GameControlSingle implements GameControl
     {
         --this.mLives;
         this.mSuccess = SetSuccess.TIMEOUT;
-
-        updateGameState();
+        changeGameState(GAME_STATE_ANSWERED);
     }
 
     @Override
@@ -105,14 +121,13 @@ public class GameControlSingle implements GameControl
 
         mGameResult.addSetResult(setResult);
 
-        if (this.mState == GAME_STATE_ANSWERED)
+        // proceed to the next question if the game isn't finished
+        if (this.mLives == 0 || mPlayedSets.size() == mDataStore.countSets()) {
+            endGame();
+            changeGameState(GAME_STATE_FINISHED);
+        }
+        else
             chooseNextSet();
-    }
-
-    @Override
-    public int currentGameState()
-    {
-        return mState;
     }
 
     @Override
@@ -131,12 +146,6 @@ public class GameControlSingle implements GameControl
     public int remainingLives()
     {
         return mLives;
-    }
-
-    @Override
-    public MutiboGameResult gameResult()
-    {
-        return mGameResult;
     }
 
     @Override
@@ -187,6 +196,8 @@ public class GameControlSingle implements GameControl
         return this.mSuccess;
     }
 
+
+
     private void chooseNextSet()
     {
         // don't try if all sets have been played
@@ -218,22 +229,13 @@ public class GameControlSingle implements GameControl
         }
 
         mPlayedSets.add(mCurrentSet.getSetId());
-        mState = GAME_STATE_QUESTION;
-    }
-
-    private void updateGameState()
-    {
-        if (this.mLives == 0 || mPlayedSets.size() == mDataStore.countSets())
-            this.mState = GAME_STATE_FINISHED;
-        else
-            this.mState = GAME_STATE_ANSWERED;
+        changeGameState(GAME_STATE_QUESTION);
     }
 
     // member variables
     private int                     mScore;
     private int                     mNumCorrect;
     private int                     mLives;
-    private int                     mState;
 
     private MutiboSet               mCurrentSet;
     private HashSet<Long>           mPlayedSets;
@@ -245,4 +247,5 @@ public class GameControlSingle implements GameControl
     private MutiboGameResult        mGameResult;
 
     private DataStore               mDataStore = DataStore.getInstance();
+    private SyncServiceClient       syncServiceClient;
 }
