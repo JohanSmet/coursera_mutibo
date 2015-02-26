@@ -293,7 +293,10 @@ public class GameControlMulti extends GameControlCommon
             @Override
             public void onFinish()
             {
-                changeGameState(GAME_STATE_QUESTION, null);
+                Bundle  extras = new Bundle();
+                extras.putString("player_one", mPlayerNames[0]);
+                extras.putString("player_two", mPlayerNames[1]);
+                changeGameState(GAME_STATE_QUESTION, extras);
             }
         }.start();
     }

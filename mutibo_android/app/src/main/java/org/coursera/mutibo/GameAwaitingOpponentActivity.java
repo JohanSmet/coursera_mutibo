@@ -50,6 +50,7 @@ public class GameAwaitingOpponentActivity extends Activity
                 }
                 else if (resultCode == GameControl.GAME_STATE_QUESTION) {
                     Intent f_intent = new Intent(GameAwaitingOpponentActivity.this, GameActivity.class);
+                    f_intent.putExtras(resultData);
                     startActivity(f_intent);
                 }
             }

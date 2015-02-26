@@ -6,6 +6,8 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -38,7 +40,6 @@ public class GameActivity extends Activity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
 
         txtTotalScore = (TextView) findViewById(R.id.txtTotalScore);
 
@@ -86,8 +87,15 @@ public class GameActivity extends Activity
 
         defaultBackground = btnMovies[0].getSolidColor();
 
-        if (mGameControl.isMultiPlayer())
+        if (mGameControl.isMultiPlayer() && savedInstanceState != null) {
+            scoreDialog = (ScoreDialog) getFragmentManager().findFragmentByTag("scoreDialog");
+        }
+
+        if (mGameControl.isMultiPlayer() && scoreDialog == null) {
+            Bundle extras = getIntent().getExtras();
             scoreDialog = new ScoreDialog();
+            scoreDialog.setArguments(extras);
+        }
 
         displayCurrentSet(savedInstanceState == null);
     }
@@ -163,7 +171,6 @@ public class GameActivity extends Activity
     {
         // make sure the movie buttons are disabled
         enableMovieButtons(false);
-
 
         // animate the correct answer if the player choose the wrong one
         if (mGameControl.currentSetSuccess() != GameControl.SetSuccess.SUCCESS)
@@ -256,8 +263,9 @@ public class GameActivity extends Activity
     {
         mGameControl.continueGame(rating);
 
-        if (scoreDialog != null)
-            scoreDialog.show();
+        if (mGameControl.isMultiPlayer()) {
+            scoreDialog.show(getFragmentManager(), "scoreDialog");
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -277,7 +285,7 @@ public class GameActivity extends Activity
         {
             if (resultCode == GameControl.GAME_STATE_QUESTION) {
                 if (scoreDialog != null)
-                    scoreDialog.hide();
+                    scoreDialog.dismiss();
                 displayCurrentSet(true);
             } else if (resultCode == GameControl.GAME_STATE_ANSWERED && resultData != null && scoreDialog != null) {
                 scoreDialog.initDialog( resultData.getString("player_one", ""),
@@ -319,56 +327,145 @@ public class GameActivity extends Activity
         private Integer mIndex;
     }
 
-    private class ScoreDialog
+    public static class ScoreDialog extends DialogFragment
     {
-        ScoreDialog()
+        public ScoreDialog()
         {
-            View view = GameActivity.this.getLayoutInflater().inflate(R.layout.dialog_multiplayer_score, null);
-
-            mDialog = new AlertDialog.Builder(GameActivity.this)
-                            .setView(view)
-                            .setOnCancelListener(new DialogInterface.OnCancelListener() {
-                                public void onCancel(DialogInterface dialog) {
-                                    GameActivity.this.onBackPressed();
-                                }
-                            })
-                            .create();
-            mDialog.setCanceledOnTouchOutside(false);
-
-            scoreFragment = (MultiplayerScoreFragment) getFragmentManager().findFragmentById(R.id.scoreFragment);
-
-            lblStatus = (TextView) view.findViewById(R.id.txtStatus);
+            playerData[0] = new PlayerData();
+            playerData[1] = new PlayerData();
         }
 
-        public void show()
+        @Override
+        public void onCreate(Bundle savedInstanceState)
         {
-            mDialog.show();
+            super.onCreate(savedInstanceState);
+
+            if (savedInstanceState == null)
+            {
+                // new instance
+                playerData[0].mPlayerName = getArguments().getString("player_one", "???");
+                playerData[1].mPlayerName = getArguments().getString("player_two", "???");
+            }
+            else
+            {
+                // restored instance
+                for (int idx = 0; idx < playerData.length; ++idx)
+                {
+                    String suffix = "_" + Integer.toString(idx);
+
+                    playerData[idx].mPlayerName = savedInstanceState.getString("player" + suffix);
+                    playerData[idx].mScore      = savedInstanceState.getInt("score" + suffix);
+                    playerData[idx].mLives      = savedInstanceState.getInt("lives" + suffix);
+                    playerData[idx].mRecvd      = savedInstanceState.getBoolean("recvd" + suffix);
+                }
+            }
         }
 
-        public void hide()
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState)
         {
-            mDialog.hide();
+            // create the dialog only once
+            if (mDialog == null) {
+                View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_multiplayer_score, null);
+
+                mDialog = new AlertDialog.Builder(getActivity())
+                        .setView(view)
+                        .create();
+                mDialog.setCanceledOnTouchOutside(false);
+
+                scoreFragment = (MultiplayerScoreFragment) getFragmentManager().findFragmentById(R.id.scoreFragment);
+                lblStatus = (TextView) view.findViewById(R.id.txtStatus);
+            }
+
+            // initialize the view
+            lblStatus.setText(R.string.multi_status);
+
+            for (int idx = 0; idx < playerData.length; ++idx)
+            {
+                synchronized (playerData[idx])
+                {
+                    scoreFragment.initPlayer(idx, playerData[idx].mPlayerName);
+
+                    if (playerData[idx].mRecvd)
+                        scoreFragment.setScore(playerData[idx].mPlayerName, playerData[idx].mScore, playerData[idx].mLives);
+                }
+            }
+
+            return mDialog;
+        }
+
+        @Override
+        public void onSaveInstanceState(Bundle savedState)
+        {
+            super.onSaveInstanceState(savedState);
+
+            for (int idx = 0; idx < playerData.length; ++idx)
+            {
+                String suffix = "_" + Integer.toString(idx);
+
+                savedState.putString("player" + suffix, playerData[idx].mPlayerName);
+                savedState.putInt("score" + suffix,     playerData[idx].mScore);
+                savedState.putInt("lives" + suffix,     playerData[idx].mLives);
+                savedState.putBoolean("recvd" + suffix, playerData[idx].mRecvd);
+            }
+        }
+
+        @Override
+        public void onCancel(DialogInterface dialog)
+        {
+            getActivity().onBackPressed();
+            super.onCancel(dialog);
         }
 
         public void initDialog(String playerOne, String playerTwo)
         {
-            scoreFragment.initPlayer(0, playerOne);
-            scoreFragment.initPlayer(1, playerTwo);
-            lblStatus.setText(R.string.multi_status);
+            playerData[0].mPlayerName = playerOne;
+            playerData[0].mScore      = 0;
+            playerData[0].mLives      = 0;
+            playerData[0].mRecvd      = false;
+
+            playerData[1].mPlayerName = playerTwo;
+            playerData[1].mScore      = 0;
+            playerData[1].mLives      = 0;
+            playerData[1].mRecvd      = false;
         }
 
         public void setScore(String playerName, int score, int lives)
         {
-            scoreFragment.setScore(playerName, score, lives);
+            for (PlayerData player : playerData)
+            {
+                synchronized (player)
+                {
+                    if (player.mPlayerName.equals(playerName))
+                    {
+                        player.mScore = score;
+                        player.mLives = lives;
+                        player.mRecvd = true;
+                    }
+                }
+            }
+
+            if (scoreFragment != null)
+                scoreFragment.setScore(playerName, score, lives);
         }
 
         public void setCountdown(long countdown)
         {
-            lblStatus.setText(String.format(getString(R.string.multi_starting), countdown));
+            if (lblStatus != null)
+                lblStatus.setText(String.format(getString(R.string.multi_starting), countdown));
+        }
+
+        private class PlayerData
+        {
+            String      mPlayerName;
+            int         mScore;
+            int         mLives;
+            boolean     mRecvd;
         }
 
         // member variables
-        private AlertDialog                 mDialog;
+        private Dialog                      mDialog = null;
+        private PlayerData[]                playerData = new PlayerData[2];
         private MultiplayerScoreFragment    scoreFragment;
         private TextView                    lblStatus;
     }
