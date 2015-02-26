@@ -73,9 +73,9 @@ public class MultiplayerScoreFragment extends Fragment
 
             for (int f_idx=lives; f_idx < 3; ++f_idx)
                 mControls[player].imgLives[f_idx].setImageResource(R.drawable.broken_heart);
-        }
 
-        mControls[player].pnlLives.setVisibility(View.VISIBLE);
+            mControls[player].pnlLives.setVisibility(View.VISIBLE);
+        }
     }
 
     public void setWinner(int idx)

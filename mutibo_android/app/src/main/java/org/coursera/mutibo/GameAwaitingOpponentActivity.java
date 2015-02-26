@@ -93,14 +93,7 @@ public class GameAwaitingOpponentActivity extends Activity
                 {
                     public void onClick(DialogInterface dialog, int id)
                     {
-/*                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                syncServiceClient.getSyncService().multiplayerGameCancel(((GameControlMulti) mGameControl).getMatchId());
-                            }
-                        }).start();*/
                         mGameControl.cancelGame();
-
                         GameAwaitingOpponentActivity.super.onBackPressed();
                     }
                 })
