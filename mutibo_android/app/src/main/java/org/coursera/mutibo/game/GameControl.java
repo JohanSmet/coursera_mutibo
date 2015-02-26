@@ -11,7 +11,6 @@ public interface GameControl
     public static final int GAME_STATE_STARTED              = 1;
     public static final int GAME_STATE_QUESTION             = 2;
     public static final int GAME_STATE_ANSWERED             = 3;
-    public static final int GAME_STATE_SCORE                = 4;
     public static final int GAME_STATE_FINISHED             = 5;
     public static final int GAME_STATE_CANCELLED            = 6;
 

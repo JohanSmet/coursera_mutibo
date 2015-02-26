@@ -93,8 +93,7 @@ public class GameActivity extends Activity
 
         if (mGameControl.isMultiPlayer() && scoreDialog == null) {
             Bundle extras = getIntent().getExtras();
-            scoreDialog = new ScoreDialog();
-            scoreDialog.setArguments(extras);
+            scoreDialog = new ScoreDialog(extras.getString("player_one", "???"), extras.getString("player_two","???"));
         }
 
         displayCurrentSet(savedInstanceState == null);
@@ -287,9 +286,6 @@ public class GameActivity extends Activity
                 if (scoreDialog != null)
                     scoreDialog.dismiss();
                 displayCurrentSet(true);
-            } else if (resultCode == GameControl.GAME_STATE_ANSWERED && resultData != null && scoreDialog != null) {
-                scoreDialog.initDialog( resultData.getString("player_one", ""),
-                                        resultData.getString("player_two", ""));
             } else if (resultCode == GameControl.GAME_STATE_FINISHED || resultCode == GameControl.GAME_STATE_CANCELLED) {
                 // go to the end of game activity
                 Intent intent = new Intent(GameActivity.this, GameOverActivity.class);
@@ -335,18 +331,21 @@ public class GameActivity extends Activity
             playerData[1] = new PlayerData();
         }
 
+        public ScoreDialog(String playerOne, String playerTwo)
+        {
+            playerData[0] = new PlayerData();
+            playerData[1] = new PlayerData();
+
+            playerData[0].mPlayerName = playerOne;
+            playerData[1].mPlayerName = playerTwo;
+        }
+
         @Override
         public void onCreate(Bundle savedInstanceState)
         {
             super.onCreate(savedInstanceState);
 
-            if (savedInstanceState == null)
-            {
-                // new instance
-                playerData[0].mPlayerName = getArguments().getString("player_one", "???");
-                playerData[1].mPlayerName = getArguments().getString("player_two", "???");
-            }
-            else
+            if (savedInstanceState != null)
             {
                 // restored instance
                 for (int idx = 0; idx < playerData.length; ++idx)
@@ -417,17 +416,12 @@ public class GameActivity extends Activity
             super.onCancel(dialog);
         }
 
-        public void initDialog(String playerOne, String playerTwo)
+        @Override
+        public void onDismiss(DialogInterface dialog)
         {
-            playerData[0].mPlayerName = playerOne;
-            playerData[0].mScore      = 0;
-            playerData[0].mLives      = 0;
             playerData[0].mRecvd      = false;
-
-            playerData[1].mPlayerName = playerTwo;
-            playerData[1].mScore      = 0;
-            playerData[1].mLives      = 0;
             playerData[1].mRecvd      = false;
+            super.onDismiss(dialog);
         }
 
         public void setScore(String playerName, int score, int lives)

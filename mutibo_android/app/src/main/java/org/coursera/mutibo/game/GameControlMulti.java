@@ -348,7 +348,6 @@ public class GameControlMulti extends GameControlCommon
                 changeGameState(GAME_STATE_STARTED, extras);
                 startQuestionCountdown();
             } else if (msgType.equals("OPPONENT_SCORE")) {
-                changeGameState(GAME_STATE_SCORE);
                 sendEvent(GAME_EVENT_SCORE_UPDATE, extras);
             } else if (msgType.equals("CONTINUE_GAME")) {
                 startQuestionCountdown();
