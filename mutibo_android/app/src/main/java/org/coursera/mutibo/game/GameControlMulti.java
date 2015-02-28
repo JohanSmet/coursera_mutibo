@@ -37,6 +37,9 @@ public class GameControlMulti extends GameControlCommon
 
     public GameControlMulti(Context context)
     {
+        // parent constructor (2 players)
+        super(2);
+
         this.mScore      = 0;
         this.mNumCorrect = 0;
         this.mSetMovies  = new ArrayList<MutiboMovie>();
@@ -113,7 +116,6 @@ public class GameControlMulti extends GameControlCommon
         }
 
         this.mSuccess = (correctGuess) ? GameControl.SetSuccess.SUCCESS : GameControl.SetSuccess.FAILURE;
-
 
         // consequences of a guess
         if (this.mSuccess != GameControl.SetSuccess.SUCCESS)
@@ -235,7 +237,7 @@ public class GameControlMulti extends GameControlCommon
 
     public String getOpponentName()
     {
-        return mPlayerNames[mOpponentId];
+        return mPlayerScore[mOpponentId].mPlayerName;
     }
 
     public String getMatchId()
@@ -246,9 +248,7 @@ public class GameControlMulti extends GameControlCommon
     private void updateGameState()
     {
         Bundle extra = new Bundle();
-        extra.putString("player_one", mPlayerNames[0]);
-        extra.putString("player_two", mPlayerNames[1]);
-        changeGameState(GAME_STATE_ANSWERED, extra);
+        changeGameState(GAME_STATE_ANSWERED);
     }
 
     private void setNextSet(Long id)
@@ -291,13 +291,12 @@ public class GameControlMulti extends GameControlCommon
             public void onFinish()
             {
                 setNextSet(mNextSet);
-                Bundle  extras = new Bundle();
-                extras.putString("player_one", mPlayerNames[0]);
-                extras.putString("player_two", mPlayerNames[1]);
-                changeGameState(GAME_STATE_QUESTION, extras);
+                changeGameState(GAME_STATE_QUESTION);
             }
         }.start();
     }
+
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //
@@ -341,13 +340,17 @@ public class GameControlMulti extends GameControlCommon
             String  msgType = extras.getString("type", "UNKNOWN");
 
             if (msgType.equals("OPPONENT_READY")) {
-                mPlayerNames[0] = extras.getString("player_one");
-                mPlayerNames[1] = extras.getString("player_two");
+                mPlayerScore[0].mPlayerName = extras.getString("player_one");
+                mPlayerScore[1].mPlayerName = extras.getString("player_two");
                 changeGameState(GAME_STATE_STARTED, extras);
                 startQuestionCountdown();
             } else if (msgType.equals("OPPONENT_SCORE")) {
+                updatePlayerScore(  extras.getString("player",""),
+                                    Integer.parseInt(extras.getString("score", "0")),
+                                    Integer.parseInt(extras.getString("lives", "0")));
                 sendEvent(GAME_EVENT_SCORE_UPDATE, extras);
             } else if (msgType.equals("CONTINUE_GAME")) {
+                resetPlayerScores();
                 startQuestionCountdown();
             } else if (msgType.equals("END_GAME")) {
                 endGame();
@@ -440,8 +443,8 @@ public class GameControlMulti extends GameControlCommon
                 }
 
                 // player names
-                mPlayerNames[mPlayerId]   = GlobalState.getNickName();
-                mPlayerNames[mOpponentId] = mCurrentMatch.getOpponentName();
+                mPlayerScore[mPlayerId].mPlayerName   = GlobalState.getNickName();
+                mPlayerScore[mOpponentId].mPlayerName = mCurrentMatch.getOpponentName();
 
                 // get set to play
                 mNextSet = mCurrentMatch.getSetId();
@@ -524,7 +527,6 @@ public class GameControlMulti extends GameControlCommon
 
     private int                     mPlayerId;
     private int                     mOpponentId;
-    private String[]                mPlayerNames = new String[2];
     private MultiplayerMatch        mCurrentMatch = null;
 
     private MutiboSet               mCurrentSet;

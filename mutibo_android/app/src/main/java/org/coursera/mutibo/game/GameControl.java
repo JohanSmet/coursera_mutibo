@@ -25,6 +25,14 @@ public interface GameControl
         TIMEOUT
     }
 
+    public class PlayerScore
+    {
+        public String      mPlayerName;
+        public int         mScore;
+        public int         mLives;
+        public boolean     mUpToDate;
+    }
+
     public boolean  isMultiPlayer();
 
     public void     startGame();
@@ -38,6 +46,9 @@ public interface GameControl
     public int      totalScore();
     public int      numCorrectQuestions();
     public int      remainingLives();
+
+    public PlayerScore playerScore(int idx);
+    public int         playerCount();
 
     public int         currentSetDifficulty();
     public int         currentSetPoints();

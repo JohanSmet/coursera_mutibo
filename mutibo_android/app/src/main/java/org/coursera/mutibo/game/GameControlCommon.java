@@ -5,10 +5,19 @@ import android.os.ResultReceiver;
 
 public abstract class GameControlCommon implements GameControl
 {
-    public GameControlCommon()
+    public GameControlCommon(int playerCount)
     {
-        this.mState      = GAME_STATE_FINISHED;
+        this.mState       = GAME_STATE_FINISHED;
+
+        this.mPlayerScore = new PlayerScore[playerCount];
+
+        for (int idx = 0; idx < playerCount; ++idx)
+            this.mPlayerScore[idx] = new PlayerScore();
     }
+
+    //
+    // state management
+    //
 
     @Override
     public void registerStateCallback(ResultReceiver receiver)
@@ -38,6 +47,10 @@ public abstract class GameControlCommon implements GameControl
             stateCallback.send(newState, extras);
     }
 
+    //
+    // events
+    //
+
     protected void sendEvent(int eventCode)
     {
         sendEvent(eventCode, (Bundle) null);
@@ -50,10 +63,55 @@ public abstract class GameControlCommon implements GameControl
     }
 
     //
+    // player score
+    //
+
+    protected PlayerScore playerScoreByName(String playerName)
+    {
+        for (PlayerScore player : mPlayerScore)
+        {
+            if (player.mPlayerName.equals(playerName))
+                return player;
+        }
+
+        return null;
+    }
+
+    public int playerCount()
+    {
+        return this.mPlayerScore.length;
+    }
+
+    public PlayerScore playerScore(int idx)
+    {
+        if (idx < 0 || idx >= this.mPlayerScore.length)
+            return null;
+
+        return this.mPlayerScore[idx];
+    }
+
+    protected void updatePlayerScore(String playerName, int score, int lives)
+    {
+        PlayerScore playerScore = playerScoreByName(playerName);
+
+        playerScore.mScore    = score;
+        playerScore.mLives    = lives;
+        playerScore.mUpToDate = true;
+    }
+
+    protected void resetPlayerScores()
+    {
+        for (PlayerScore player : mPlayerScore)
+            player.mUpToDate = false;
+    }
+
+
+    //
     // member variables
     //
 
     protected ResultReceiver    stateCallback;
-
     private int                 mState;
+
+    protected PlayerScore[]     mPlayerScore;
 }

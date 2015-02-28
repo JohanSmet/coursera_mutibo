@@ -19,6 +19,8 @@ public class GameControlSingle extends GameControlCommon
 {
     public GameControlSingle(Context context)
     {
+        super(1);
+
         this.mScore      = 0;
         this.mNumCorrect = 0;
         this.mPlayedSets = new HashSet<Long>();
