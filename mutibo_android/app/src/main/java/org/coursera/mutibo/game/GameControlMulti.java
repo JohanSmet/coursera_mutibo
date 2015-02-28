@@ -10,7 +10,6 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.ResultReceiver;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -30,8 +29,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 public class GameControlMulti extends GameControlCommon
@@ -165,7 +162,7 @@ public class GameControlMulti extends GameControlCommon
                 return syncServiceClient.getSyncService().multiplayerGameUpdate(mCurrentMatch.getMatchId(), params[0], params[1].intValue());
             }
             protected void onPostExecute(Long result) {
-                setNextSet(result);
+                mNextSet = result;
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, setResult.getSetId(), Long.valueOf((long) setResult.getScore()));
     }
@@ -278,7 +275,7 @@ public class GameControlMulti extends GameControlCommon
     private void startQuestionCountdown()
     {
         // countdown
-        mCountdownTimer = new CountDownTimer(6000, 1000)
+        new CountDownTimer(6000, 1000)
         {
             @Override
             public void onTick(long l)
@@ -293,6 +290,7 @@ public class GameControlMulti extends GameControlCommon
             @Override
             public void onFinish()
             {
+                setNextSet(mNextSet);
                 Bundle  extras = new Bundle();
                 extras.putString("player_one", mPlayerNames[0]);
                 extras.putString("player_two", mPlayerNames[1]);
@@ -446,7 +444,7 @@ public class GameControlMulti extends GameControlCommon
                 mPlayerNames[mOpponentId] = mCurrentMatch.getOpponentName();
 
                 // get set to play
-                setNextSet(mCurrentMatch.getSetId());
+                mNextSet = mCurrentMatch.getSetId();
 
                 // match initialization complete
                 mInitLatch.countDown();
@@ -533,9 +531,9 @@ public class GameControlMulti extends GameControlCommon
     private ArrayList<MutiboMovie>  mSetMovies;
     private GameControl.SetSuccess  mSuccess;
     private int                     mBadMovieIndex;
+    private Long                    mNextSet;
 
     private MutiboGameResult        mGameResult;
-    private CountDownTimer          mCountdownTimer = null;
 
     private DataStore mDataStore = DataStore.getInstance();
     private Context   mContext;
