@@ -421,7 +421,7 @@ public class GameControlMulti extends GameControlCommon
                 String msg = "";
 
                 // register for Google Cloud Message if it wasn't done before
-                // if (mGcmRegId.isEmpty())
+                if (mGcmRegId.isEmpty())
                 {
                     try {
                         if (mGcm == null) {
