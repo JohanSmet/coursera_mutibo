@@ -13,7 +13,7 @@ public class GameStarter
     public static void launchGame(int type, Context context)
     {
         // create a new multiplayer player game
-        GameControl game = GameFactory.getInstance().newGame(type, context);
+        GameControl game = GameFactory.getInstance().newGame(type, context.getApplicationContext());
 
         // launch correct activity
         Intent intent = new Intent(context, (game.currentGameState() == GameControl.GAME_STATE_AWAITING_OPPONENT) ? GameAwaitingOpponentActivity.class : GameActivity.class);
