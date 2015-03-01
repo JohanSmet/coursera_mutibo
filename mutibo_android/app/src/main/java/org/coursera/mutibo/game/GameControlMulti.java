@@ -166,7 +166,7 @@ public class GameControlMulti extends GameControlCommon
             protected void onPostExecute(Long result) {
                 mNextSet = result;
             }
-        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, setResult.getSetId(), Long.valueOf((long) setResult.getScore()));
+        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, setResult.getSetId(), Long.valueOf(setResult.getScore()));
     }
 
     @Override
@@ -247,7 +247,6 @@ public class GameControlMulti extends GameControlCommon
 
     private void updateGameState()
     {
-        Bundle extra = new Bundle();
         changeGameState(GAME_STATE_ANSWERED);
     }
 
@@ -436,11 +435,11 @@ public class GameControlMulti extends GameControlCommon
 
                 // process opponent information
                 if (mCurrentMatch.isOpponentReady()) {
-                    mPlayerId   = 1;
-                    mOpponentId = 0;
+                    mPlayerId   = PLAYER_TWO;
+                    mOpponentId = PLAYER_ONE;
                 } else {
-                    mPlayerId   = 0;
-                    mOpponentId = 1;
+                    mPlayerId   = PLAYER_ONE;
+                    mOpponentId = PLAYER_TWO;
                 }
 
                 // player names
