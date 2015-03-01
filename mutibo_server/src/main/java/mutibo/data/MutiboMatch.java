@@ -33,6 +33,7 @@ public class MutiboMatch
 		gcmRegIds		= new String[] {gcmRegId, null};
 		score			= new int[] {0,0};
 		lives			= new int[] {3,3};
+		correct			= new int[] {0,0};
 		nextSet			= 0L;
 		playedSets		= new ArrayList<>();
 		state			= STATE_WAITING;
@@ -60,6 +61,8 @@ public class MutiboMatch
 		// decrement remaining lives if player didn't score on this question
 		if (playerScore <= 0)
 			--lives[playerIdx];
+		else
+			++correct[playerIdx];
 
 		// game ends when a player has no more lives left
 		if (lives[playerIdx] <= 0)
@@ -159,6 +162,21 @@ public class MutiboMatch
 		this.lives = lives;
 	}
 
+	public int[] getCorrect()
+	{
+		return correct;
+	}
+
+	public int getCorrect(int player)
+	{
+		return correct[player];
+	}
+
+	public void setCorrect(int[] correct)
+	{
+		this.correct = correct;
+	}
+
 	public Long getNextSet()
 	{
 		return nextSet;
@@ -223,6 +241,7 @@ public class MutiboMatch
 	private String[]		gcmRegIds;
 	private int[]			score;
 	private int[]			lives;
+	private int[]			correct;
 	private Long			nextSet;
 	private List<Long>		playedSets;
 	private int				waitingPlayers;

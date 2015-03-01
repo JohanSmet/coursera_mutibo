@@ -29,6 +29,7 @@ public interface GameControl
     {
         public String      mPlayerName;
         public int         mScore;
+        public int         mCorrect;
         public int         mLives;
         public boolean     mUpToDate;
     }

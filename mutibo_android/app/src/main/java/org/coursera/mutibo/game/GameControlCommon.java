@@ -90,12 +90,13 @@ public abstract class GameControlCommon implements GameControl
         return this.mPlayerScore[idx];
     }
 
-    protected void updatePlayerScore(String playerName, int score, int lives)
+    protected void updatePlayerScore(String playerName, int score, int lives, int correct)
     {
         PlayerScore playerScore = playerScoreByName(playerName);
 
         playerScore.mScore    = score;
         playerScore.mLives    = lives;
+        playerScore.mCorrect  = correct;
         playerScore.mUpToDate = true;
     }
 

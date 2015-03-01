@@ -347,7 +347,8 @@ public class GameControlMulti extends GameControlCommon
             } else if (msgType.equals("OPPONENT_SCORE")) {
                 updatePlayerScore(  extras.getString("player",""),
                                     Integer.parseInt(extras.getString("score", "0")),
-                                    Integer.parseInt(extras.getString("lives", "0")));
+                                    Integer.parseInt(extras.getString("lives", "0")),
+                                    Integer.parseInt(extras.getString("correct", "0")));
                 sendEvent(GAME_EVENT_SCORE_UPDATE, extras);
             } else if (msgType.equals("CONTINUE_GAME")) {
                 resetPlayerScores();

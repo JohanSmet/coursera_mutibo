@@ -183,6 +183,7 @@ public class MultiplayerController
 				payload.put("player", currentUser.getUsername());
 				payload.put("score",  Integer.toString(mutiboMatch.getScore(playerIdx)));
 				payload.put("lives",  Integer.toString(mutiboMatch.getLives(playerIdx)));
+				payload.put("correct",Integer.toString(mutiboMatch.getCorrect(playerIdx)));
 				payload.put("matchId",mutiboMatch.getId());
 				googleCloudMessenger.sendMessage(mutiboMatch.getGcmRegIds(), "OPPONENT_SCORE", payload);
 				
@@ -204,9 +205,11 @@ public class MultiplayerController
 				payload.put("player_one", getPlayerName(mutiboMatch.getPlayers()[0]));
 				payload.put("score_one",  Integer.toString(mutiboMatch.getScore(0)));
 				payload.put("lives_one",  Integer.toString(mutiboMatch.getLives(0)));
+				payload.put("correct_one",Integer.toString(mutiboMatch.getCorrect(0)));
 				payload.put("player_two", getPlayerName(mutiboMatch.getPlayers()[1]));
 				payload.put("score_two",  Integer.toString(mutiboMatch.getScore(1)));
 				payload.put("lives_two",  Integer.toString(mutiboMatch.getLives(1)));
+				payload.put("correct_two",Integer.toString(mutiboMatch.getCorrect(1)));
 				googleCloudMessenger.sendMessage(mutiboMatch.getGcmRegIds(), "END_GAME", payload);
 			} else {
 				googleCloudMessenger.sendMessage(mutiboMatch.getGcmRegIds(), "CONTINUE_GAME", payload);
