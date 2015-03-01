@@ -46,6 +46,8 @@
             android:drawableTop="@drawable/single_player"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:text="@string/menu_singleplayer"
             android:id="@+id/btnSinglePlayer"
             android:gravity="bottom|center_horizontal"
@@ -57,15 +59,18 @@
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
             android:text="@string/menu_multiplayer"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
             android:id="@+id/btnMultiPlayer"
             android:gravity="center_horizontal|bottom"/>
 
         <Button
             android:layout_weight="1"
-            android:drawableTop="@drawable/leaderboard"
+            android:drawableTop="@drawable/leaderboard_big"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="@string/menu_leaderboards"
+            android:paddingTop="16dp"
             android:id="@+id/btnLeaderboards"
             android:onClick="btnLeaderboards_clicked"
             android:gravity="center_horizontal|bottom"/>
