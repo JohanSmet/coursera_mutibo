@@ -2,7 +2,6 @@ package org.coursera.mutibo.game;
 
 import android.os.ResultReceiver;
 
-import org.coursera.mutibo.data.MutiboGameResult;
 import org.coursera.mutibo.data.MutiboMovie;
 
 public interface GameControl

@@ -12,7 +12,6 @@ import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import org.coursera.mutibo.R;
 import org.coursera.mutibo.data.MutiboUserResult;
 
 import java.util.ArrayList;

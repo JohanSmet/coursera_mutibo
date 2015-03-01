@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import org.coursera.mutibo.game.GameControl;
 import org.coursera.mutibo.game.GameFactory;
 import org.coursera.mutibo.util.GameStarter;
 

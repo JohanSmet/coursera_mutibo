@@ -2,26 +2,12 @@ package org.coursera.mutibo;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
-
-import org.coursera.mutibo.data.MutiboUserResult;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 
 public class LeaderboardActivity extends FragmentActivity
