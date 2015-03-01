@@ -71,6 +71,8 @@ public class GameControlSingle extends GameControlCommon
     @Override
     public boolean answerSet(int index)
     {
+        mPlayerAnswer = index;
+
         // check for success
         boolean correctGuess = false;
 
@@ -80,7 +82,6 @@ public class GameControlSingle extends GameControlCommon
         }
 
         this.mSuccess = (correctGuess) ? SetSuccess.SUCCESS : SetSuccess.FAILURE;
-
 
         // consequences of a guess
         PlayerScore playerScore = playerScore(PLAYER_ONE);
@@ -99,6 +100,12 @@ public class GameControlSingle extends GameControlCommon
         changeGameState(GAME_STATE_ANSWERED);
 
         return this.mSuccess == SetSuccess.SUCCESS;
+    }
+
+    @Override
+    public int playerAnswer()
+    {
+        return mPlayerAnswer;
     }
 
     @Override
@@ -239,6 +246,7 @@ public class GameControlSingle extends GameControlCommon
     private ArrayList<MutiboMovie>  mSetMovies;
     private SetSuccess              mSuccess;
     private int                     mBadMovieIndex;
+    private int                     mPlayerAnswer;
 
     private MutiboGameResult        mGameResult;
 

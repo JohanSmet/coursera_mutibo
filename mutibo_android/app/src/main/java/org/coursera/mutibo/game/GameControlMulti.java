@@ -107,6 +107,8 @@ public class GameControlMulti extends GameControlCommon
     @Override
     public boolean answerSet(int index)
     {
+        mPlayerAnswer = index;
+
         // check for success
         boolean correctGuess = false;
 
@@ -132,6 +134,12 @@ public class GameControlMulti extends GameControlCommon
         updateGameState();
 
         return this.mSuccess == GameControl.SetSuccess.SUCCESS;
+    }
+
+    @Override
+    public int playerAnswer()
+    {
+        return mPlayerAnswer;
     }
 
     @Override
@@ -534,6 +542,7 @@ public class GameControlMulti extends GameControlCommon
     private GameControl.SetSuccess  mSuccess;
     private int                     mBadMovieIndex;
     private Long                    mNextSet;
+    private int                     mPlayerAnswer;
 
     private MutiboGameResult        mGameResult;
 

@@ -47,6 +47,7 @@ public interface GameControl
     public void     timeoutSet();
     public void     continueGame(int rating);
     public int      currentGameState();
+    public int      playerAnswer();
 
     public int      totalScore();
     public int      numCorrectQuestions();

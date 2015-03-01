@@ -170,11 +170,20 @@ public class GameActivity extends Activity
         // make sure the movie buttons are disabled
         enableMovieButtons(false);
 
-        // animate the correct answer if the player choose the wrong one
-        if (mGameControl.currentSetSuccess() != GameControl.SetSuccess.SUCCESS)
+        // animate the correct answer if the player choose the wrong one (except when trigger by a configuration change)
+        if (newView && mGameControl.currentSetSuccess() != GameControl.SetSuccess.SUCCESS)
         {
             animMovieCorrect.setTarget(btnMovies[mGameControl.currentSetCorrectAnswer()]);
             animMovieCorrect.start();
+        }
+
+        // set the correct backgrounds when triggered by a configuration change
+        if (!newView)
+        {
+            int playerAnswer = mGameControl.playerAnswer();
+            int color        = (mGameControl.currentSetSuccess() == GameControl.SetSuccess.SUCCESS) ? 0xff00c000 : 0xffc00000;
+
+            btnMovies[playerAnswer].setBackgroundColor(color);
         }
 
         // show the game over fragment

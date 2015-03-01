@@ -17,6 +17,8 @@ public class GameDoneFragment extends Fragment implements View.OnClickListener
     private static final String ARG_SUCCESS = "success";
     private static final String ARG_REASON  = "reason";
 
+    private static final String STATE_RATING = "rating";
+
     public static GameDoneFragment newInstance(GameControl.SetSuccess p_success, String p_reason)
     {
         GameDoneFragment fragment = new GameDoneFragment();
@@ -69,7 +71,17 @@ public class GameDoneFragment extends Fragment implements View.OnClickListener
         for (ImageView img : imgRating)
             img.setOnClickListener(this);
 
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_RATING))
+            setRating(savedInstanceState.getInt(STATE_RATING));
+
         return f_view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedState)
+    {
+        super.onSaveInstanceState(savedState);
+        savedState.putInt(STATE_RATING, mRating);
     }
 
     @Override
