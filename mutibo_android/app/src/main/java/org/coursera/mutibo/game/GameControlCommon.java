@@ -106,6 +106,15 @@ public abstract class GameControlCommon implements GameControl
             player.mUpToDate = false;
     }
 
+    protected void clearPlayerScores()
+    {
+        for (PlayerScore player : mPlayerScore) {
+            player.mLives = 3;
+            player.mScore = 0;
+            player.mCorrect = 0;
+        }
+    }
+
 
     //
     // member variables

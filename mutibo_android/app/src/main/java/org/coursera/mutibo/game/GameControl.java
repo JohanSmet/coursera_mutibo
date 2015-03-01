@@ -17,6 +17,10 @@ public interface GameControl
     public static final int GAME_EVENT_QUESTION_COUNTDOWN   = 101;
     public static final int GAME_EVENT_SCORE_UPDATE         = 102;
 
+    public static final int PLAYER_ONE                      = 0;
+    public static final int PLAYER_TWO                      = 1;
+
+
     public enum SetSuccess
     {
         UNKNOWN,

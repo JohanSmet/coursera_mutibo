@@ -21,8 +21,6 @@ public class GameControlSingle extends GameControlCommon
     {
         super(1);
 
-        this.mScore      = 0;
-        this.mNumCorrect = 0;
         this.mPlayedSets = new HashSet<Long>();
         this.mSetSeed    = null;
         this.mSetMovies  = new ArrayList<MutiboMovie>();
@@ -42,9 +40,7 @@ public class GameControlSingle extends GameControlCommon
     @Override
     public void startGame()
     {
-        this.mScore      = 0;
-        this.mNumCorrect = 0;
-        this.mLives      = 3;
+        clearPlayerScores();
         changeGameState(GAME_STATE_STARTED);
 
         this.mPlayedSets.clear();
@@ -87,14 +83,16 @@ public class GameControlSingle extends GameControlCommon
 
 
         // consequences of a guess
+        PlayerScore playerScore = playerScore(PLAYER_ONE);
+
         if (this.mSuccess != SetSuccess.SUCCESS)
         {
-            --this.mLives;
+            --playerScore.mLives;
         }
         else
         {
-            ++this.mNumCorrect;
-            this.mScore +=  this.mCurrentSet.getPoints();
+            ++playerScore.mCorrect;
+            playerScore.mScore +=  this.mCurrentSet.getPoints();
         }
 
         // change state of the game to answered
@@ -106,7 +104,7 @@ public class GameControlSingle extends GameControlCommon
     @Override
     public void timeoutSet()
     {
-        --this.mLives;
+        --playerScore(PLAYER_ONE).mLives;
         this.mSuccess = SetSuccess.TIMEOUT;
         changeGameState(GAME_STATE_ANSWERED);
     }
@@ -124,7 +122,7 @@ public class GameControlSingle extends GameControlCommon
         mGameResult.addSetResult(setResult);
 
         // proceed to the next question if the game isn't finished
-        if (this.mLives == 0 || mPlayedSets.size() == mDataStore.countSets()) {
+        if (playerScore(PLAYER_ONE).mLives == 0 || mPlayedSets.size() == mDataStore.countSets()) {
             endGame();
             changeGameState(GAME_STATE_FINISHED);
         }
@@ -135,19 +133,19 @@ public class GameControlSingle extends GameControlCommon
     @Override
     public int  totalScore()
     {
-        return this.mScore;
+        return playerScore(PLAYER_ONE).mScore;
     }
 
     @Override
     public int  numCorrectQuestions()
     {
-        return this.mNumCorrect;
+        return playerScore(PLAYER_ONE).mCorrect;
     }
 
     @Override
     public int remainingLives()
     {
-        return mLives;
+        return playerScore(PLAYER_ONE).mLives;
     }
 
     @Override
@@ -235,10 +233,6 @@ public class GameControlSingle extends GameControlCommon
     }
 
     // member variables
-    private int                     mScore;
-    private int                     mNumCorrect;
-    private int                     mLives;
-
     private MutiboSet               mCurrentSet;
     private HashSet<Long>           mPlayedSets;
     private Random                  mSetSeed;
