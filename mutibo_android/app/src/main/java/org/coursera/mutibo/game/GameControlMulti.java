@@ -364,6 +364,7 @@ public class GameControlMulti extends GameControlCommon
                 endGame();
                 changeGameState(GAME_STATE_FINISHED, extras);
             } else if (msgType.equals("OPPONENT_QUIT")) {
+                cancelGame();
                 changeGameState(GAME_STATE_CANCELLED, extras);
             }
         }
