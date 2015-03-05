@@ -11,14 +11,10 @@ import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletCon
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-/**
- * Configuration of the WebApp part 
- * @author Redacted
- */
 
 @Configuration
 @ComponentScan(basePackages = {"mutibo.google", "mutibo.facebook", "mutibo.controller"})
@@ -52,6 +48,7 @@ public class WebAppContext extends WebMvcConfigurerAdapter/* extends WebMvcAutoC
 	}
 	// setup HTTPS on port 8443
 	@Bean
+	@Profile("https")
     EmbeddedServletContainerCustomizer containerCustomizer(
             @Value("${keystore.file:src/main/resources/private/keystore}") String keystoreFile,
             @Value("${keystore.pass:changeit}") final String keystorePass) throws Exception 
