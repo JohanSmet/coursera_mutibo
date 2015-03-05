@@ -4,11 +4,11 @@ import com.mongodb.Mongo;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Resource;
 import mutibo.data.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
+import org.springframework.data.authentication.UserCredentials;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.core.convert.CustomConversions;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
@@ -21,21 +21,34 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @EnableMongoRepositories(basePackages = "mutibo.repository")
 public class PersistenceContext extends AbstractMongoConfiguration
 {
-	private static final String PROPERTY_NAME_DATABASE_HOST = "db.host";
+	@Value("${db.host}")
+	private String confHost;
 
-	@Resource
-	private Environment environment;
+	@Value("${db.user}")
+	private String confUser;
+
+	@Value("${db.passwd}")
+	private String confPasswd;
+
+	@Value("${db.database}")
+	private String confDatabase;
 
 	@Override
   	public String getDatabaseName() 
 	{
-    	return "mutibo";
+    	return confDatabase;
+	}
+
+	@Override
+	public UserCredentials getUserCredentials()
+	{
+		return new UserCredentials(confUser, confPasswd);
 	}
 
 	@Override
   	public @Bean Mongo mongo() throws UnknownHostException
 	{
-    	return new Mongo(environment.getRequiredProperty(PROPERTY_NAME_DATABASE_HOST));
+    	return new Mongo(confHost);
   	}
 
 	@Bean
