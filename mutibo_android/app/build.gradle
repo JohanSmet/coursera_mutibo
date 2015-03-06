@@ -26,6 +26,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        local {
+            applicationId "org.coursera.mutibo"
+            versionName "1.0-local"
+        }
+        rhcloud {
+            applicationId "org.coursera.mutibo"
+            versionName "1.0-rhcloud"
+        }
+    }
 }
 
 dependencies {
