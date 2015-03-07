@@ -130,6 +130,11 @@ public class GameControlMulti extends GameControlCommon
             this.mScore +=  this.mCurrentSet.getPoints();
         }
 
+        mPlayerScore[mPlayerId].mScore      = this.mScore;
+        mPlayerScore[mPlayerId].mLives      = this.mLives;
+        mPlayerScore[mPlayerId].mCorrect    = this.mNumCorrect;
+        mPlayerScore[mPlayerId].mUpToDate   = true;
+
         // change state of the game
         updateGameState();
 
