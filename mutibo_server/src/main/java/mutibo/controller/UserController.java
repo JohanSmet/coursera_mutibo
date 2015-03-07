@@ -15,6 +15,10 @@ import mutibo.repository.MutiboUserResultRepository;
 import mutibo.repository.UserRepository;
 import mutibo.security.UserAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -95,9 +99,10 @@ public class UserController
 			return;
 		}
 
-		// save the changes
-		currentUser.setUsername(newName);
-		userRepository.save(currentUser);
+		// save the changes (without overwriting other fields)
+		mongoTemplate.updateFirst(Query.query(Criteria.where("id").is(currentUser.getId())), 
+								  Update.update("username", newName),
+								  User.class);
 	}
 
 	@RequestMapping(method=RequestMethod.DELETE, value="/user/current")
@@ -126,4 +131,7 @@ public class UserController
 
 	@Autowired
 	private MutiboUserResultRepository mutiboUserResultRepository;
+
+	@Autowired
+	MongoTemplate 			mongoTemplate;
 }
