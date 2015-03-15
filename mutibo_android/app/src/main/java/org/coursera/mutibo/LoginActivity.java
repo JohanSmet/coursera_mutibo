@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.HttpMethod;
 import com.facebook.Request;
@@ -31,11 +31,11 @@ import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
 import org.coursera.mutibo.util.DebugLog;
+
 import java.io.IOException;
 
 public class LoginActivity extends Activity
 {
-
     public static enum LoginAction
     {
         LOGIN,
@@ -64,6 +64,7 @@ public class LoginActivity extends Activity
     private final static String STATE_LAST_AUTHENTICATOR = "lastAuthenticator";
 
     private static final String LOG_TAG = "LoginActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -216,7 +217,8 @@ public class LoginActivity extends Activity
                 break;
 
             default:
-                ((TextView) findViewById(R.id.lblLoginFailed)).setText(R.string.login_failed);
+                Toast toast = Toast.makeText(this, R.string.login_failed, Toast.LENGTH_LONG);
+                toast.show();
                 break;
         }
     }

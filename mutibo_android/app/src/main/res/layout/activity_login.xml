@@ -62,16 +62,6 @@
             android:layout_marginBottom="10dp"
             />
 
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/login_failed"
-            android:id="@+id/lblLoginFailed"
-            android:gravity="center_horizontal"
-            android:visibility="invisible"/>
-
     </LinearLayout>
 
     <CheckBox

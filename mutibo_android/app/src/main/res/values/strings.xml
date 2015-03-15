@@ -19,7 +19,7 @@
     <string name="login_password">Password:</string>
     <string name="login_auto">Login automatically in the future</string>
     <string name="login_button">Login</string>
-    <string name="login_failed">Sorry, incorrect username or password</string>
+    <string name="login_failed">Sorry, login failed. Try again later...</string>
 
     <!-- menu -->
     <string name="menu_welcome">Welcome, %s. Please enjoy your stay!</string>
