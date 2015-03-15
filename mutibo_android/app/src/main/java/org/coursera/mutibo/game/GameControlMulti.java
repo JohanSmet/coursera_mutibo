@@ -287,7 +287,7 @@ public class GameControlMulti extends GameControlCommon
     private void startQuestionCountdown()
     {
         // countdown
-        new CountDownTimer(6000, 1000)
+        new CountDownTimer(5000, 1000)
         {
             @Override
             public void onTick(long l)
@@ -427,7 +427,7 @@ public class GameControlMulti extends GameControlCommon
                 String msg = "";
 
                 // register for Google Cloud Message if it wasn't done before
-                if (mGcmRegId.isEmpty())
+                // if (mGcmRegId.isEmpty())
                 {
                     try {
                         if (mGcm == null) {
