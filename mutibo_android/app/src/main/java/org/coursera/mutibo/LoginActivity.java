@@ -587,8 +587,8 @@ public class LoginActivity extends Activity
 
     private LoginAction         mLoginAction;
     private Authenticator       mLastAuthenticator;
-    private boolean             mAutoLogin;
-    private boolean             mDoAutoLogin;
+    private boolean             mAutoLogin      = true;
+    private boolean             mDoAutoLogin    = true;
 
     // google
     private GooglePlusClient    googlePlusClient;
