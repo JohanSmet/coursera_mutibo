@@ -7,7 +7,6 @@ import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.CheckBox;
@@ -31,11 +30,11 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
+import org.coursera.mutibo.util.DebugLog;
 import java.io.IOException;
 
 public class LoginActivity extends Activity
 {
-    private Bundle savedState;
 
     public static enum LoginAction
     {
@@ -64,6 +63,7 @@ public class LoginActivity extends Activity
     private final static String STATE_AUTO_LOGIN = "autoLogin";
     private final static String STATE_LAST_AUTHENTICATOR = "lastAuthenticator";
 
+    private static final String LOG_TAG = "LoginActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -73,29 +73,31 @@ public class LoginActivity extends Activity
         setContentView(R.layout.activity_login);
 
         // restore state
-        if (savedInstanceState != null)
-        {
+        if (savedInstanceState != null) {
+            DebugLog.d(LOG_TAG, "restoring state from savedInstanceState");
             mAutoLogin          = savedInstanceState.getBoolean(STATE_AUTO_LOGIN);
             mLastAuthenticator  = (Authenticator) savedInstanceState.getSerializable(STATE_LAST_AUTHENTICATOR);
-        }
-        else
-        {
+            mDoAutoLogin        = false;
+        } else {
+            DebugLog.d(LOG_TAG, "restoring state from preferences");
             SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
             mAutoLogin          = sharedPref.getBoolean(STATE_AUTO_LOGIN, false);
             mLastAuthenticator  = Authenticator.fromString(sharedPref.getString(STATE_LAST_AUTHENTICATOR, Authenticator.NONE.toString()));
+            mDoAutoLogin        = true;
         }
 
         // check for parameters
         Bundle bundle = getIntent().getExtras();
 
-        if (bundle != null)
-        {
+        if (bundle != null && bundle.containsKey(PARAMETER_LOGIN_ACTION)) {
             mLoginAction = (LoginAction) bundle.getSerializable(PARAMETER_LOGIN_ACTION);
-        }
-        else
-        {
+        } else {
             mLoginAction = LoginAction.LOGIN;
         }
+
+        DebugLog.d(LOG_TAG, "onCreate() : mAutoLogin = [" + mAutoLogin + "] " +
+                                         "mLastAuthenticator = [" + mLastAuthenticator + "] " +
+                                         "mLoginAction = [" + mLoginAction + "]");
 
         // UI
         CheckBox autoLogin = (CheckBox) findViewById(R.id.cbAutoLogin);
@@ -108,6 +110,9 @@ public class LoginActivity extends Activity
                 mAutoLogin = ((CheckBox) view).isChecked();
             }
         });
+
+        if (savedInstanceState != null)
+            DebugLog.d(LOG_TAG, "saveInstanceState - ", savedInstanceState);
 
         // facebook
         uiHelper = new UiLifecycleHelper(this, statusCallback);
@@ -132,17 +137,26 @@ public class LoginActivity extends Activity
 
         syncServiceClient.bind();
 
-        if (mAutoLogin && mLastAuthenticator == Authenticator.GOOGLE_PLUS && googlePlusClient != null)
-            googlePlusClient.connect();
+        if (mAutoLogin && mDoAutoLogin && mLastAuthenticator == Authenticator.GOOGLE_PLUS && googlePlusClient != null && mLoginAction == LoginAction.LOGIN) {
+            DebugLog.d(LOG_TAG, "onStart : Google+ - resolveSignInError");
+            googlePlusClient.resolveSignInError();
+        }
+
+        if (mLastAuthenticator == Authenticator.GOOGLE_PLUS && googlePlusClient != null && mLoginAction == LoginAction.LOGOUT) {
+            DebugLog.d(LOG_TAG, "onStart : Google+ - disconnect");
+            googlePlusClient.disconnect();
+        }
 
         if (mLastAuthenticator == Authenticator.FACEBOOK && mLoginAction == LoginAction.LOGOUT)
         {
+            DebugLog.d(LOG_TAG, "onStart : Facebook - disconnect");
             Session.getActiveSession().close();
             mLoginAction = LoginAction.LOGIN;
         }
 
         if (mLastAuthenticator == Authenticator.FACEBOOK && mLoginAction == LoginAction.REVOKE)
         {
+            DebugLog.d(LOG_TAG, "onStart : Facebook - revoke");
             new FacebookRevokeTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         }
     }
@@ -153,9 +167,6 @@ public class LoginActivity extends Activity
         super.onStop();
 
         syncServiceClient.unbind();
-
-        if (googlePlusClient != null)
-            googlePlusClient.disconnect();
     }
 
     @Override
@@ -175,6 +186,8 @@ public class LoginActivity extends Activity
     @Override
     public void onSaveInstanceState(Bundle savedState)
     {
+        DebugLog.d(LOG_TAG, "onSaveInstanceState");
+
         // our state
         savedState.putBoolean(STATE_AUTO_LOGIN, mAutoLogin);
         savedState.putSerializable(STATE_LAST_AUTHENTICATOR, mLastAuthenticator);
@@ -190,6 +203,7 @@ public class LoginActivity extends Activity
     private void loginSucceeded(SyncService.LoginStatus status)
     {
         findViewById(R.id.loginProgress).setVisibility(View.INVISIBLE);
+        storeSettings();
 
         switch (status) {
             case LOGIN_NEW_USER:
@@ -209,6 +223,8 @@ public class LoginActivity extends Activity
 
     private void storeSettings()
     {
+        DebugLog.d(LOG_TAG, "storeSettings");
+
         // persistence
         SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor prefEdit   = sharedPref.edit();
@@ -250,13 +266,13 @@ public class LoginActivity extends Activity
         {
             if (state.isOpened())
             {
-                Log.d("LoginActivity", "Facebook session opened");
+                DebugLog.d("LoginActivity", "Facebook session opened");
                 findViewById(R.id.loginProgress).setVisibility(View.VISIBLE);
                 new FacebookAuthTask(session).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
             else if (state.isClosed())
             {
-                Log.d("LoginActivity", "Facebook session closed");
+                DebugLog.d("LoginActivity", "Facebook session closed");
             }
             else if (state == SessionState.OPENING)
             {
@@ -297,6 +313,10 @@ public class LoginActivity extends Activity
         protected void onPostExecute(SyncService.LoginStatus result)
         {
             mLastAuthenticator = Authenticator.FACEBOOK;
+
+            if (result == SyncService.LoginStatus.LOGIN_FAILED)
+                Session.getActiveSession().close();
+
             loginSucceeded(result);
         }
 
@@ -552,6 +572,9 @@ public class LoginActivity extends Activity
         {
             mLastAuthenticator = Authenticator.GOOGLE_PLUS;
 
+            if (result == SyncService.LoginStatus.LOGIN_FAILED)
+                googlePlusClient.disconnect();
+
             loginSucceeded(result);
         }
 
@@ -563,6 +586,7 @@ public class LoginActivity extends Activity
     private LoginAction         mLoginAction;
     private Authenticator       mLastAuthenticator;
     private boolean             mAutoLogin;
+    private boolean             mDoAutoLogin;
 
     // google
     private GooglePlusClient    googlePlusClient;
