@@ -306,6 +306,8 @@ public class LoginActivity extends Activity
                 }
             });
 
+            Bundle bundle = request.getParameters();
+            bundle.putString("fields", "id,first_name,last_name");
             Request.executeAndWait(request);
 
             // send a login request
